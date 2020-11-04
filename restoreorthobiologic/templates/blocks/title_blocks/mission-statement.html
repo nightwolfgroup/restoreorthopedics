@@ -1,0 +1,40 @@
+<section class="container my-lg-2 pt-5 pb-2">{% load static %}
+    <div class="row align-items-center">
+        <div class="col-lg-5 py-3 py-lg-0">
+            <h1>{{ self.title }}</h1>
+            <h2 class="h3">{{ self.subtitle }}</h2>
+            <div class="py-4"><p class="cs-callout">{{ self.blockquote }}</p></div>
+        </div>
+        <div class="col-xl-6 col-lg-7 offset-xl-1">
+            <div class="py-5" style="min-height: 543px;">
+                <div class="d-none d-lg-block position-absolute bg-no-repeat bg-position-center h-100" style="top: 0; left: -45px; width: 646px; background-image: url({% static 'img/svg/bg-shape-about.svg' %});"></div>
+                <div class="row no-gutters mx-n2 pt-lg-4">
+                    <div class="col-sm-4 px-2 mb-3">
+                        {% for item in self.mission_card|slice:":2" %}
+                            <div class="card card-body py-5 border-0 box-shadow-lg text-center mb-3">
+                                <i class="{{ item.icon }} text-{{ item.icon_color }} h1 mb-3"></i>
+                                <h3 class="h5 mb-0">{{ item.text }}</h3>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="col-sm-4 px-2 mb-3">
+                        {% for item in self.mission_card|slice:"2:4" %}
+                            <div class="card card-body py-5 border-0 box-shadow-lg text-center mb-3">
+                                <i class="{{ item.icon }} text-{{ item.icon_color }} h1 mb-3"></i>
+                                <h3 class="h5 mb-0">{{ item.text }}</h3>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="col-sm-4 px-2 mb-3">
+                        {% for item in self.mission_card|slice:"4:6" %}
+                            <div class="card card-body py-5 border-0 box-shadow-lg text-center mb-3">
+                                <i class="{{ item.icon }} text-{{ item.icon_color }} h1 mb-3"></i>
+                                <h3 class="h5 mb-0">{{ item.text }}</h3>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,20 @@
+<section class="jarallax bg-gradient py-5" data-jarallax data-speed="0.25">{% load wagtailcore_tags %}
+    <span class="bg-overlay bg-gradient" style="opacity: .85;"></span>
+    <div class="container bg-overlay-content">
+        <div class="row justify-content-center py-md-5">
+            <div class="col-lg-6 col-md-8 text-center">
+                <h1 class="text-light">{{ self.title }}</h1>
+                <div class="text-light font-size-lg">{{ self.subtitle|richtext }}</div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="container bg-overlay-content" style="margin-top: -75px;">
+    <div class="bg-light rounded-lg box-shadow-lg py-5 py-md-6 px-4 px-md-0">
+        <div class="row align-items-center py-3 py-md-0">
+            <div class="col-xl-6 col-lg-5 col-md-4 text-center">
+                <h2 class="pb-3 pb-md-0 text-primary">{{ self.card_title }}</h2></div>
+            <div class="col-xl-5 col-lg-6 col-md-7 text-center text-md-left font-size-lg text-main">{{ self.card_text }}</div>
+        </div>
+    </div>
+</section>

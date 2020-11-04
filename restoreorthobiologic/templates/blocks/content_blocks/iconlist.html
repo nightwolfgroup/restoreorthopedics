@@ -1,0 +1,21 @@
+<section class="container pt-5 pb-4 mt-3 mt-md-0 mb-md-3 pb-md-5 pt-md-7" id="conditions-treated">{% load static wagtailcore_tags wagtailimages_tags %}
+    <h2 class="text-center mb-5" id="conditions-treated">{{ self.title }}</h2>
+    <div class="row">
+        {% for item in self.item %}
+            <div class="col-sm-6 col-md-4">
+                <div class="mx-auto mb-5 text-center" style="max-width: 280px;">
+                    {% image item.icon width-112 as icon %}
+                    <img class="mb-3" width="112" src="{{ icon.url }}" alt="{{ icon.alt }}"/>
+                    <h3 class="h5">{{ item.title }}</h3>
+                    <ul class="list-unstyled font-size-sm">
+                        {% for item in item.list %}
+                            <li class="d-flex align-items-center">
+                                <i class="fe-check-circle font-size-lg text-primary mr-2"></i><span>{{ item.item }}</span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</section>

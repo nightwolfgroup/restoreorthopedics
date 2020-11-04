@@ -1,0 +1,7 @@
+<div class="col-md-4 form-group">
+    {{ field.label_tag }}
+    {{ field }}
+    {% if field.help_text %}<small class="form-text text-muted">{{ field.help_text }}</small>{% endif %}
+    {% if field.invalid_feedback %}<div class="invalid-feedback">{{ field.invalid_feedback }}</div>{% endif %}
+    {% if field.valid_feedback %}<div class="valid-feedback">{{ field.valid_feedback }}</div>{% endif %}
+</div>

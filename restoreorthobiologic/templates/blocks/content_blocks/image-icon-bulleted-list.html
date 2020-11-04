@@ -1,0 +1,26 @@
+<section class="row no-gutters mt-3">{% load wagtailimages_tags %}{% image self.image max-1100x792 as cover_image %}
+    <div class="col-md-6 bg-size-cover py-7" style="background-image: url({{ cover_image.url }});">
+        <div class="py-6"></div>
+    </div>
+    <div class="col-md-6 px-3 pr-xl-0 pl-lg-5 pl-xl-7">
+        <div class="ml-sm-4 my-2 py-5 my-sm-0 py-sm-6 py-md-7" style="max-width: 495px;">
+            <h2 class="mb-4">{{ self.title }}</h2>
+            <p class="mb-5">{{ self.subtitle }}</p>
+            {% for item in self.list_items %}
+                <div class="media mb-grid-gutter">
+                    <picture>
+                        {% image item.icon width-47 format-webp as image_webp %}
+                        <source srcset="{{ image_webp.url }}" type="image/webp">
+                        {% image item.icon width-47 format-png as image_png %}
+                        <source srcset="{{ image_png.url }}" type="image/png">
+                        {% image item.icon width-47 format-png %}
+                    </picture>
+                    <div class="media-body pl-4">
+                        <h3 class="h6 mb-2">{{ item.title }}</h3>
+                        <p class="font-size-sm mb-0">{{ item.subtitle }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>

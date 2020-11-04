@@ -1,0 +1,20 @@
+<section class="container my-3 py-5 my-md-0 py-md-7">{% load static %}
+    <div class="row justify-content-center">
+        <div class="col-md-11 col-lg-9 col-xl-8">
+            <h2 class="text-center mb-5">{{ self.title }}</h2>
+            <div class="cs-carousel">
+                <div class="cs-carousel-inner" data-carousel-options="{&quot;nav&quot;: false, &quot;controls&quot;: false, &quot;gutter&quot;: 20}">
+                    {% for testimonial in self.testimonials %}
+                        <blockquote class="blockquote text-center">
+                            <p class="lead text-heading font-weight-medium">{{ testimonial.testimonial.quote }}</p>
+                            <p class="text-center"> - {{ testimonial.testimonial.name }}</p>
+                        </blockquote>
+                    {% endfor %}
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</section>{% block extra_js %}
+    <script src="{% static 'vendor/tiny-slider/dist/min/tiny-slider.js' %}"></script>{% endblock %}

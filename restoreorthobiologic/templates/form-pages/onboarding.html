@@ -1,0 +1,1243 @@
+{% extends 'base.html' %}{% load static %}{% block title %}{{ page_title }}{% endblock %}{% block description %}{{ page_description }}{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'vendor/flatpickr/dist/flatpickr.min.css' %}">
+{% endblock %}
+{% block content %}
+    <section class="jarallax bg-gradient py-1" data-jarallax data-speed="0.25">
+        <div class="jarallax-img"></div>
+        <div class="container py-4 py-sm-4 text-center">
+            <div class="py-md-4">
+                <h1 class="text-light pb-1">New Patient Onboarding</h1>
+            </div>
+        </div>
+        <div class="cs-shape cs-shape-bottom cs-shape-curve bg-light">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 185.4">
+                <path fill="currentColor" d="M3000,0v185.4H0V0c496.4,115.6,996.4,173.4,1500,173.4S2503.6,115.6,3000,0z"></path>
+            </svg>
+        </div>
+    </section>
+    <div class="container mb-3 mt-3">
+        <div class="row justify-content-center">
+            <div class="col-lg-12 py-4">
+                {% include 'partials/_alerts.html' %}
+                <p class="py-2 text-dark">Welcome to our office! We are excited to help you on your journey in returning to your healthy and active lifestyle! For your convenience, we are now allowing patients to submit their information prior to
+                    their visit. By filling out the form below, your information will be sent to our office, preventing the need for filling out paperwork on the day of your appointment.</p>
+                <form method="POST" class="needs-validation" novalidate>
+                    {% csrf_token %}
+                    <div class="card bg-faded-dark">
+                        <div class="card-body">
+                            <h2 class="card-title">Demographic Information</h2>
+                            <div class="row">
+                                <div class="col-sm-4 form-group">
+                                    <label class="form-label" for="first_name">First name<sup class="text-danger ml-1">*</sup></label>
+                                    <input type="text" id="first_name" name="first_name" placeholder="Enter your first name" class="form-control" required>
+                                    <div class="invalid-feedback">Please enter your first name.</div>
+                                </div>
+                                <div class="col-sm-4 form-group">
+                                    <label class="form-label" for="middle_name">Middle name<sup class="text-danger ml-1">*</sup></label>
+                                    <input type="text" id="middle_name" name="middle_name" placeholder="Enter your middle name" class="form-control" required>
+                                    <div class="invalid-feedback">Please enter your middle name.</div>
+                                </div>
+                                <div class="col-sm-4 form-group">
+                                    <label class="form-label" for="last_name">Last name<sup class="text-danger ml-1">*</sup></label> <input type="text" id="last_name" name="last_name" placeholder="Enter your last name" class="form-control" required>
+                                    <div class="invalid-feedback">Please enter your last name.</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4 form-group">
+                                    <label class="form-label" for="date_of_birth">Date of Birth<sup class="text-danger ml-1">*</sup></label>
+                                    <div class="input-group-overlay">
+                                        <label class="sr-only" for="date_of_birth">Date of Birth</label>
+                                        <input type="text" id="date_of_birth" name="date_of_birth" placeholder="Date of Birth" class="form-control appended-form-control cs-date-picker" oninput="calculateAge()" data-datepicker-options='{"altInput": true, "altFormat": "F j, Y", "dateFormat": "m-d-Y"}' required>
+                                        <div class="input-group-append-overlay"><span class="input-group-text"><i class="fe-calendar"></i></span></div>
+                                    </div>
+                                    <div class="invalid-feedback">Please provide your date of birth.</div>
+                                </div>
+
+                                <div class="col-sm-2 form-group">
+                                    <label class="form-label" for="age-input">Age</label> <input class="form-control" type="text" id="age-input" placeholder="Age" name="age" readonly>
+                                </div>
+
+                                <div class="col-sm-6 form-group">
+                                    <label class="form-label" for="marital-status">Marital Status<sup class="text-danger ml-1">*</sup></label><select class="form-control custom-select" id="marital-status" name="marital_status" required>
+                                    <option value="">Choose option...</option>
+                                    <option value="Single">Single</option>
+                                    <option value="Married">Married</option>
+                                    <option value="Widowed">Widowed</option>
+                                    <option value="Divorced">Divorced</option>
+                                    <option value="Separated">Separated</option>
+                                    <option value="Domestic Partnership">Domestic Partnership</option>
+                                </select>
+                                    <div class="invalid-feedback">Please indicate your marital status.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4 form-group">
+                                    <label class="form-label" for="gender">Gender<sup class="text-danger ml-1">*</sup></label> <select class="form-control custom-select" id="gender" name="gender" oninput="genderPronoun()" required>
+                                    <option value="">Choose option...</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                    <div class="invalid-feedback">Please choose your gender.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                                <div id="pronoun" hidden>
+                                    <input name="he_or_she" id="he_or_she" type="text"> <input name="him_or_her" id="him_or_her" type="text"> <input name="his_or_her" id="his_or_her" type="text">
+                                </div>
+                                <div class="col-sm-4 form-group">
+                                    <label class="form-label" for="race">Race<sup class="text-danger ml-1">*</sup></label> <select class="form-control custom-select" id="race" name="race" required>
+                                    <option value="">Choose option...</option>
+                                    <option value="American Indian/Alaska Native">American Indian/Alaska Native</option>
+                                    <option value="Asian">Asian</option>
+                                    <option value="African American">African American</option>
+                                    <option value="Native Hawaiian">Native Hawaiian</option>
+                                    <option value="White">White</option>
+                                    <option value="Other Race">Other Race</option>
+                                </select>
+                                    <div class="invalid-feedback">Please choose your race.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                                <div class="col-sm-4 form-group">
+                                    <label class="form-label" for="ethnicity">Ethnicity<sup class="text-danger ml-1">*</sup></label> <select class="form-control custom-select" id="ethnicity" name="ethnicity" required>
+                                    <option value="">Choose option...</option>
+                                    <option value="Hispanic/Latino">Hispanic/Latino</option>
+                                    <option value="Not Hispanic/Latino">Not Hispanic/Latino</option>
+                                </select>
+                                    <div class="invalid-feedback">Please choose your ethnicity.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 form-group">
+                                    <label class="form-label" for="employment-status">Employment Status<sup class="text-danger ml-1">*</sup></label><select class="form-control custom-select" id="employment-status" name="employment_status" required>
+                                    <option value="">Choose option...</option>
+                                    <option value="Employed, Full-Time">Employed, Full-Time</option>
+                                    <option value="Employed, Part-Time">Employed, Part-Time</option>
+                                    <option value="Unemployed">Unemployed</option>
+                                    <option value="Retired">Retired</option>
+                                    <option value="Student">Student</option>
+                                </select>
+                                    <div class="invalid-feedback">Please indicate your employment status.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                                <div class="col-sm-6 form-group">
+                                    <label class="form-label" for="occupation">Occupation<sup class="text-danger ml-1">*</sup></label>
+                                    <input class="form-control" type="text" id="occupation" placeholder="Enter your occupation" name="occupation" required> <small class="form-text pt-0 mt-0 pl-3">If retired, please indicate prior occupation</small>
+                                    <div class="invalid-feedback">Please enter your occupation.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- CONTACT INFORMATION -->
+                    <div class="card mt-5 bg-faded-dark">
+                        <div class="card-body">
+                            <h2 class="card-title">Contact Information</h2>
+                            <div class="row">
+                                <div class="col-sm-4 form-group">
+                                    <label class="form-label" for="cell-phone">Primary Phone Number<sup class="text-danger ml-1">*</sup></label>
+                                    <input class="form-control" type="text" id="cell-phone" name="cell_phone" data-format="custom" data-delimiter="-" data-blocks="3 3 4" placeholder="555-555-5555" required maxlength="12" minlength="12">
+                                    <small class="form-text pt-0 mt-0">May we leave a voicemail?<sup class="text-danger ml-1">*</sup></small>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input class="custom-control-input" type="radio" id="cell-vm-yes" name="cell_vmail" value="Yes" required> <label class="custom-control-label" for="cell-vm-yes">Yes</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input class="custom-control-input" type="radio" id="cell-vm-no" name="cell_vmail" value="No"> <label class="custom-control-label" for="cell-vm-no">No</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 form-group">
+                                    <label class="form-label" for="home-phone">Secondary Phone Number</label>
+                                    <input class="form-control" type="text" id="home-phone" name="home_phone" data-format="custom" data-delimiter="-" data-blocks="3 3 4" placeholder="555-555-5555"> <small class="form-text pt-0 mt-0">May we leave a
+                                    voicemail?</small>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input class="custom-control-input" type="radio" id="home-vm-yes" name="home_phone_vmail" value="Yes"> <label class="custom-control-label" for="home-vm-yes">Yes</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input class="custom-control-input" type="radio" id="home-vm-no" name="home_phone_vmail" value="No"> <label class="custom-control-label" for="home-vm-no">No</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 form-group">
+                                    <label class="form-label" for="com-email">Email address</label> <input class="form-control" type="email" id="com-email" name="email" placeholder="email@example.com">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4 form-group">
+                                    <label class="form-label" for="mailing_address">Mailing Address<sup class="text-danger ml-1">*</sup></label>
+                                    <input class="form-control" type="text" id="mailing_address" placeholder="Enter your mailing address" name="mailing_address" required oninput="physicalAddressSame()">
+                                    <div class="invalid-feedback">Please enter your mailing address.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                                <div class="col-sm-4 form-group">
+                                    <label class="form-label" for="mailing_city">City<sup class="text-danger ml-1">*</sup></label>
+                                    <input class="form-control" type="text" id="mailing_city" placeholder="City" name="mailing_city" required oninput="physicalAddressSame()">
+                                    <div class="invalid-feedback">Please enter your city.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                                <div class="col-sm-2 form-group">
+                                    <label class="form-label" for="mailing_state">State<sup class="text-danger ml-1">*</sup></label><select class="form-control custom-select" id="mailing_state" name="mailing_state" required oninput="physicalAddressSame()">
+                                    <option value="">State</option>
+                                    <option value="AL">Alabama</option>
+                                    <option value="AK">Alaska</option>
+                                    <option value="AZ">Arizona</option>
+                                    <option value="AR">Arkansas</option>
+                                    <option value="CA">California</option>
+                                    <option value="CO">Colorado</option>
+                                    <option value="CT">Connecticut</option>
+                                    <option value="DE">Delaware</option>
+                                    <option value="FL">Florida</option>
+                                    <option value="GA">Georgia</option>
+                                    <option value="HI">Hawaii</option>
+                                    <option value="ID">Idaho</option>
+                                    <option value="IL">Illinois</option>
+                                    <option value="IN">Indiana</option>
+                                    <option value="IA">Iowa</option>
+                                    <option value="KS">Kansas</option>
+                                    <option value="KY">Kentucky</option>
+                                    <option value="LA">Louisiana</option>
+                                    <option value="ME">Maine</option>
+                                    <option value="MD">Maryland</option>
+                                    <option value="MA">Massachusetts</option>
+                                    <option value="MI">Michigan</option>
+                                    <option value="MN">Minnesota</option>
+                                    <option value="MS">Mississippi</option>
+                                    <option value="MO">Missouri</option>
+                                    <option value="MT">Montana</option>
+                                    <option value="NE">Nebraska</option>
+                                    <option value="NV">Nevada</option>
+                                    <option value="NH">New Hampshire</option>
+                                    <option value="NJ">New Jersey</option>
+                                    <option value="NM">New Mexico</option>
+                                    <option value="NY">New York</option>
+                                    <option value="NC">North Carolina</option>
+                                    <option value="ND">North Dakota</option>
+                                    <option value="OH">Ohio</option>
+                                    <option value="OK">Oklahoma</option>
+                                    <option value="OR">Oregon</option>
+                                    <option value="PA">Pennsylvania</option>
+                                    <option value="RI">Rhode Island</option>
+                                    <option value="SC">South Carolina</option>
+                                    <option value="SD">South Dakota</option>
+                                    <option value="TN">Tennessee</option>
+                                    <option value="TX">Texas</option>
+                                    <option value="UT">Utah</option>
+                                    <option value="VT">Vermont</option>
+                                    <option value="VA">Virginia</option>
+                                    <option value="WA">Washington</option>
+                                    <option value="WV">West Virginia</option>
+                                    <option value="WI">Wisconsin</option>
+                                    <option value="WY">Wyoming</option>
+                                </select>
+                                    <div class="invalid-feedback">Please select your state.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                                <div class="col-sm-2 form-group">
+                                    <label class="form-label" for="mailing_zip">Zip Code<sup class="text-danger ml-1">*</sup></label>
+                                    <input class="form-control" type="text" id="mailing_zip" placeholder="Zip" name="mailing_zip" maxlength="5" minlength="5" required oninput="physicalAddressSame()">
+                                    <div class="invalid-feedback">Please enter your zip code.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input class="custom-control-input" type="checkbox" id="address_same_check" oninput="physicalAddressSame()"> <label class="custom-control-label" for="address_same_check">Same as mailing address</label>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4 form-group">
+                                    <label class="form-label" for="street_address">Street Address</label> <input class="form-control" type="text" id="street_address" placeholder="Enter your street address" name="street_address">
+                                </div>
+                                <div class="col-sm-4 form-group">
+                                    <label class="form-label" for="street_city">City</label> <input class="form-control" type="text" id="street_city" placeholder="City" name="street_city">
+                                </div>
+                                <div class="col-sm-2 form-group">
+                                    <label class="form-label" for="street_state">State</label><select class="form-control custom-select" id="street_state" name="street_state">
+                                    <option value="">State</option>
+                                    <option value="AL">Alabama</option>
+                                    <option value="AK">Alaska</option>
+                                    <option value="AZ">Arizona</option>
+                                    <option value="AR">Arkansas</option>
+                                    <option value="CA">California</option>
+                                    <option value="CO">Colorado</option>
+                                    <option value="CT">Connecticut</option>
+                                    <option value="DE">Delaware</option>
+                                    <option value="FL">Florida</option>
+                                    <option value="GA">Georgia</option>
+                                    <option value="HI">Hawaii</option>
+                                    <option value="ID">Idaho</option>
+                                    <option value="IL">Illinois</option>
+                                    <option value="IN">Indiana</option>
+                                    <option value="IA">Iowa</option>
+                                    <option value="KS">Kansas</option>
+                                    <option value="KY">Kentucky</option>
+                                    <option value="LA">Louisiana</option>
+                                    <option value="ME">Maine</option>
+                                    <option value="MD">Maryland</option>
+                                    <option value="MA">Massachusetts</option>
+                                    <option value="MI">Michigan</option>
+                                    <option value="MN">Minnesota</option>
+                                    <option value="MS">Mississippi</option>
+                                    <option value="MO">Missouri</option>
+                                    <option value="MT">Montana</option>
+                                    <option value="NE">Nebraska</option>
+                                    <option value="NV">Nevada</option>
+                                    <option value="NH">New Hampshire</option>
+                                    <option value="NJ">New Jersey</option>
+                                    <option value="NM">New Mexico</option>
+                                    <option value="NY">New York</option>
+                                    <option value="NC">North Carolina</option>
+                                    <option value="ND">North Dakota</option>
+                                    <option value="OH">Ohio</option>
+                                    <option value="OK">Oklahoma</option>
+                                    <option value="OR">Oregon</option>
+                                    <option value="PA">Pennsylvania</option>
+                                    <option value="RI">Rhode Island</option>
+                                    <option value="SC">South Carolina</option>
+                                    <option value="SD">South Dakota</option>
+                                    <option value="TN">Tennessee</option>
+                                    <option value="TX">Texas</option>
+                                    <option value="UT">Utah</option>
+                                    <option value="VT">Vermont</option>
+                                    <option value="VA">Virginia</option>
+                                    <option value="WA">Washington</option>
+                                    <option value="WV">West Virginia</option>
+                                    <option value="WI">Wisconsin</option>
+                                    <option value="WY">Wyoming</option>
+                                </select>
+                                </div>
+                                <div class="col-sm-2 form-group">
+                                    <label class="form-label" for="street_zip">Zip Code</label> <input class="form-control" type="text" id="street_zip" placeholder="Zip" name="street_zip" maxlength="5" minlength="5">
+                                </div>
+                            </div>
+                            <h3>Emergency Contact</h3>
+                            <div class="row">
+                                <div class="col-sm-4 form-group">
+                                    <label class="form-label" for="em-contact-fn">Emergency Contact's First Name<sup class="text-danger ml-1">*</sup></label>
+                                    <input class="form-control" type="text" id="em-contact-fn" name="emer_contact_firstname" placeholder="First name" required>
+                                    <div class="invalid-feedback">Please enter your emergency contact's first name.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                                <div class="col-sm-4 form-group">
+                                    <label class="form-label" for="em-contact-ln">Emergency Contact's Last Name<sup class="text-danger ml-1">*</sup></label>
+                                    <input class="form-control" type="text" id="em-contact-ln" name="emer_contact_lastname" placeholder="Last name" required>
+                                    <div class="invalid-feedback">Please enter your emergency contact's last name.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                                <div class="col-sm-4 form-group">
+                                    <label class="form-label" for="em-contact-relationship">Relation to Contact<sup class="text-danger ml-1">*</sup></label>
+                                    <input class="form-control" type="text" id="em-contact-relationship" placeholder="Relationship" name="emer_contact_relation" required>
+                                    <div class="invalid-feedback">Please enter your relationship with your emergency contact.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                                <div class="col-sm-6 form-group">
+                                    <label class="form-label" for="em-contact-cell-phone">Primary Phone Number<sup class="text-danger ml-1">*</sup></label>
+                                    <input class="form-control" type="text" id="em-contact-cell-phone" data-format="custom" name="emer_contact_cell_ph" data-delimiter="-" data-blocks="3 3 4" placeholder="555-555-5555" required>
+                                </div>
+                                <div class="col-sm-6 form-group">
+                                    <label class="form-label" for="em-contact-home-phone">Secondary Phone Number</label>
+                                    <input class="form-control" type="text" id="em-contact-home-phone" data-format="custom" name="emer_contact_home_ph" data-delimiter="-" data-blocks="3 3 4" placeholder="555-555-5555">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- INSURANCE INFORMATION -->
+                    <div class="card mt-5 bg-faded-dark">
+                        <div class="card-body">
+                            <h2 class="card-title">Insurance Information</h2>
+                            <h3 class="h5">Will you (the patient) be responsible for the bill?<sup class="text-danger ml-1">*</sup></h3>
+                            <div class="custom-control custom-radio custom-control-inline pb-3">
+                                <input class="custom-control-input" type="radio" id="resp_pty_self_radio_yes" name="resp_pty_self_radio" value="Yes" oninput="selfResponsible()" required>
+                                <label class="custom-control-label" for="resp_pty_self_radio_yes">Yes (I, the patient, am responsible for the bill)</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline pb-3">
+                                <input class="custom-control-input" type="radio" id="resp_pty_self_radio_no" name="resp_pty_self_radio" value="No" oninput="selfResponsible()"> <label class="custom-control-label" for="resp_pty_self_radio_no">No
+                                (Someone else is responsible for the bill)</label>
+                            </div>
+                            <div class="row" id="resp_pty" hidden>
+                                <div class="col-sm-6 form-group">
+                                    <label class="form-label" for="resp_pty_name">Name<sup class="text-danger ml-1">*</sup></label>
+                                    <input class="form-control" type="text" id="resp_pty_name" placeholder="Enter responsible party name" name="resp_pty_name" required>
+                                    <div class="invalid-feedback">Please enter responsible party name.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+
+                                <div class="col-sm-6 form-group">
+                                    <label class="form-label" for="resp_pty_dob">Date of Birth<sup class="text-danger ml-1">*</sup></label>
+                                    <div class="input-group-overlay">
+                                        <label class="sr-only" for="resp_pty_dob">Date of Birth</label>
+                                        <input class="form-control appended-form-control cs-date-picker" name="resp_pty_dob" id="resp_pty_dob" required type="text" placeholder="Date of Birth" data-datepicker-options='{"altInput": true, "altFormat": "F j, Y", "dateFormat": "m-d-Y"}'>
+                                        <div class="input-group-append-overlay"><span class="input-group-text"><i class="fe-calendar"></i></span></div>
+                                    </div>
+                                    <div class="invalid-feedback">Please a date of birth.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+
+                                <div class="col-sm-6 form-group">
+                                    <label class="form-label" for="resp_pty_cell_ph">Primary Phone Number<sup class="text-danger ml-1">*</sup></label>
+                                    <input class="form-control" type="text" id="resp_pty_cell_ph" data-format="custom" name="resp_pty_cell_ph" data-delimiter="-" data-blocks="3 3 4" placeholder="555-555-5555" required>
+                                </div>
+                                <div class="col-sm-6 form-group">
+                                    <label class="form-label" for="resp_pty_home_ph">Secondary Phone Number</label>
+                                    <input class="form-control" type="text" id="resp_pty_home_ph" data-format="custom" name="resp_pty_home_ph" data-delimiter="-" data-blocks="3 3 4" placeholder="555-555-5555">
+                                </div>
+                            </div>
+                            <h3 class="h5">Do you have healthcare insurance?<sup class="text-danger ml-1">*</sup></h3>
+                            <div class="custom-control custom-radio custom-control-inline pb-3">
+                                <input class="custom-control-input" type="radio" id="insurance_radio_yes" name="insurance_yes_no" value="Yes" oninput="haveInsurance()" required> <label class="custom-control-label" for="insurance_radio_yes">Yes, I
+                                have healthcare insurance</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline pb-3">
+                                <input class="custom-control-input" type="radio" id="insurance_radio_no" name="insurance_yes_no" value="No" oninput="haveInsurance()"> <label class="custom-control-label" for="insurance_radio_no">No, I do not have
+                                healthcare insurance</label>
+                            </div>
+                            <div class="row" id="primary_insurance" hidden>
+                                <h4 class="col-sm-12">Primary Insurance</h4>
+                                <div class="col-sm-6 form-group">
+                                    <label class="form-label" for="p_ins_name">Carrier Name</label> <input class="form-control" type="text" id="p_ins_name" placeholder="Enter insurance carrier name" name="p_ins_name">
+                                    <div class="invalid-feedback">Please enter insurance carrier name.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                                <div class="col-sm-6 form-group">
+                                    <label class="form-label" for="p_ins_policy">Policy Number</label> <input class="form-control" type="text" id="p_ins_policy" placeholder="Enter insurance policy number" name="p_ins_policy">
+                                    <div class="invalid-feedback">Please enter insurance policy number.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                                <div class="col-sm-6 form-group">
+                                    <label class="form-label" for="p_ins_group_number">Group Number</label> <input class="form-control" type="text" id="p_ins_group_number" placeholder="Enter insurance group number" name="p_ins_group_number">
+                                    <div class="invalid-feedback">Please enter insurance group number.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                                <div class="col-sm-6 form-group">
+                                    <label class="form-label" for="p_ins_group_name">Group Name</label> <input class="form-control" type="text" id="p_ins_group_name" placeholder="Enter insurance group name" name="p_ins_group_name">
+                                    <div class="invalid-feedback">Please enter insurance group name.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                            </div>
+                            <div id="secondary_insurance_radio" hidden>
+                                <h3 class="h5">Do you have secondary healthcare insurance?<sup class="text-danger ml-1">*</sup></h3>
+                                <div class="custom-control custom-radio custom-control-inline pb-3">
+                                    <input class="custom-control-input" type="radio" id="insurance_secondary_radio_yes" name="insurance_secondary_radio" value="Yes" oninput="haveSecondaryInsurance()">
+                                    <label class="custom-control-label" for="insurance_secondary_radio_yes">Yes, I have secondary healthcare insurance</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline pb-3">
+                                    <input class="custom-control-input" type="radio" id="insurance_secondary_radio_no" name="insurance_secondary_radio" value="No" oninput="haveSecondaryInsurance()">
+                                    <label class="custom-control-label" for="insurance_secondary_radio_no">No, I do not have secondary healthcare insurance</label>
+                                </div>
+                            </div>
+                            <div class="row" id="secondary_insurance" hidden>
+                                <h4 class="col-sm-12">Secondary Insurance</h4>
+                                <div class="col-sm-6 form-group">
+                                    <label class="form-label" for="s_ins_name">Carrier Name</label> <input class="form-control" type="text" id="s_ins_name" placeholder="Enter insurance carrier name" name="s_ins_name">
+                                    <div class="invalid-feedback">Please enter insurance carrier name.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                                <div class="col-sm-6 form-group">
+                                    <label class="form-label" for="s_ins_policy">Policy Number</label> <input class="form-control" type="text" id="s_ins_policy" placeholder="Enter insurance policy number" name="s_ins_policy">
+                                    <div class="invalid-feedback">Please enter insurance policy number.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                                <div class="col-sm-6 form-group">
+                                    <label class="form-label" for="s_ins_group_number">Group Number</label> <input class="form-control" type="text" id="s_ins_group_number" placeholder="Enter insurance group number" name="s_ins_group_number">
+                                    <div class="invalid-feedback">Please enter insurance group number.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                                <div class="col-sm-6 form-group">
+                                    <label class="form-label" for="s_ins_group_name">Group Name</label> <input class="form-control" type="text" id="s_ins_group_name" placeholder="Enter insurance group name" name="s_ins_group_name">
+                                    <div class="invalid-feedback">Please enter insurance group name.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- MEDICAL HISTORY -->
+                    <div class="card mt-5 bg-faded-dark">
+                        <div class="card-body">
+                            <h2 class="card-title">Past Medical History</h2>
+                            <div class="row">
+                                <div class="col-sm-6 form-group">
+                                    <label class="form-label" for="pcp">Primary Care Provider<sup class="text-danger ml-1">*</sup></label>
+                                    <input class="form-control" type="text" id="pcp" placeholder="Enter the name of your primary care provider." name="primary_care" required> <small class="form-text pt-0 mt-0 pl-3">If none, type "none"</small>
+                                    <div class="invalid-feedback">Please enter the name of your primary care provider.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                                <div class="col-sm-6 form-group">
+                                    <label class="form-label" for="preferred-pharmacy">Preferred Pharmacy<sup class="text-danger ml-1">*</sup></label>
+                                    <input class="form-control" type="text" id="preferred-pharmacy" placeholder="Enter your preferred pharmacy." name="rx_name" required> <small class="form-text pt-0 mt-0 pl-3">If none, type "none"</small>
+                                    <div class="invalid-feedback">Please enter preferred pharmacy.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                            </div>
+                            <h3>Conditions</h3>
+                            <p>Please check the box next to any condition which you currently have or have had in the past.</p>
+                            <div class="row pb-3">
+                                <div class="col-sm-3">
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" id="anemia" name="pmh_anemia" value="Anemia,"> <label class="custom-control-label" for="anemia">Anemia</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" id="anxiety" name="pmh_anxiety" value="Anxiety,"> <label class="custom-control-label" for="anxiety">Anxiety</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" id="arthritis" name="pmh_arthritis" value="Arthritis,"> <label class="custom-control-label" for="arthritis">Arthritis</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" id="asthma" name="pmh_asthma" value="Asthma,"> <label class="custom-control-label" for="asthma">Asthma</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" id="bleeding-disorder" name="pmh_bleeding_disorder" value="Bleeding Disorder,"> <label class="custom-control-label" for="bleeding-disorder">Bleeding
+                                        Disorder</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" id="blood-clots" name="pmh_blood_clots" value="Blood Clots,"> <label class="custom-control-label" for="blood-clots">Blood Clots</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" id="cancer" name="pmh_cancer" value="Cancer,"> <label class="custom-control-label" for="cancer">Cancer</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" id="coronary-artery-disease" name="pmh_cad" value="Coronary Artery Disease,"> <label class="custom-control-label" for="coronary-artery-disease">Coronary
+                                        Artery Disease</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" id="depression" name="pmh_depression" value="Depression,"> <label class="custom-control-label" for="depression">Depression</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" id="diabetes" name="pmh_diabetes" value="Diabetes,"> <label class="custom-control-label" for="diabetes">Diabetes</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" id="gerd-reflux" name="pmh_gerd" value="GERD/Reflux,"> <label class="custom-control-label" for="gerd-reflux">GERD/Reflux</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" id="gout" name="pmh_gout" value="Gout,"> <label class="custom-control-label" for="gout">Gout</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" id="hiv-aids" name="pmh_hiv" value="HIV/AIDS,"> <label class="custom-control-label" for="hiv-aids">HIV/AIDS</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" id="heart-attack" name="pmh_ami" value="Heart Attack,"> <label class="custom-control-label" for="heart-attack">Heart Attack</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" id="heart-problems" name="pmh_hp" value="Heart Problems,"> <label class="custom-control-label" for="heart-problems">Heart Problems</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" id="hepatitis" name="pmh_hep" value="Hepatitis,"> <label class="custom-control-label" for="hepatitis">Hepatitis</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" id="hernia" name="pmh_hernia" value="Hernia,"> <label class="custom-control-label" for="hernia">Hernia</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" id="hyperlipidemia" name="pmh_hl" value="Hyperlipidemia,"> <label class="custom-control-label" for="hyperlipidemia">High Cholesterol</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" id="hypertension" name="pmh_ht" value="Hypertension,"> <label class="custom-control-label" for="hypertension">High Blood Pressure</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" id="kidney-disease" name="pmh_kd" value="Kidney Disease,"> <label class="custom-control-label" for="kidney-disease">Kidney Disease</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" id="leg-foot-ulcers" name="pmh_lf_ulcer" value="Leg/Foot Ulcers,"> <label class="custom-control-label" for="leg-foot-ulcers">Leg/Foot Ulcers</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" id="liver-disease" name="pmh_liver_disease" value="Liver Disease,"> <label class="custom-control-label" for="liver-disease">Liver Disease</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" id="lung-disease" name="pmh_lung_disease" value="Lung Disease,"> <label class="custom-control-label" for="lung-disease">Lung Disease</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" id="migraines" name="pmh_migraines" value="Migraines,"> <label class="custom-control-label" for="migraines">Migraines</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" id="osteoporosis" name="pmh_op" value="Osteoporosis,"> <label class="custom-control-label" for="osteoporosis">Osteoporosis</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" id="pacemaker" name="pmh_pacemaker" value="Pacemaker,"> <label class="custom-control-label" for="pacemaker">Pacemaker</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" id="pvd" name="pmh_pvd" value="Peripheral Vascular Disease,"> <label class="custom-control-label" for="pvd">Peripheral Vascular Disease</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" id="pulmonary-embolism" name="pmh_pe" value="Pulmonary Embolism,"> <label class="custom-control-label" for="pulmonary-embolism">Pulmonary Embolism</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" id="rheumatoid-arthritis" name="pmh_ra" value="Rheumatoid Arthritis,"> <label class="custom-control-label" for="rheumatoid-arthritis">Rheumatoid
+                                        Arthritis</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" id="seizures-epilepsy" name="pmh_se" value="Seizures/Epilepsy,"> <label class="custom-control-label" for="seizures-epilepsy">Seizures/Epilepsy</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" id="stroke" name="pmh_cva" value="Stroke,"> <label class="custom-control-label" for="stroke">Stroke</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" id="thyroid-problems" name="pmh_tp" value="Thyroid Problems,"> <label class="custom-control-label" for="thyroid-problems">Thyroid Problems</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" id="tuberculosis" name="pmh_tub" value="Tuberculosis,"> <label class="custom-control-label" for="tuberculosis">Tuberculosis</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" id="ulcers" name="pmh_ulcer" value="Ulcers,"> <label class="custom-control-label" for="ulcers">Ulcers</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" id="urinary-tract-infections" name="pmh_uti" value="Urinary Tract Infections,"> <label class="custom-control-label" for="urinary-tract-infections">Urinary
+                                        Tract Infection</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <h3>Surgical History</h3>
+                            <div class="input-group pb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text font-weight-medium">Have You Ever Had Surgery?<sup class="text-danger ml-1">*</sup></span>
+                                </div>
+                                <label for="surgery_yes_no" class="sr-only">Have You Ever Had Surgery?</label> <select class="form-control custom-select" id="surgery_yes_no" oninput="hadSurgery()" required>
+                                <option value="">Choose one...</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                            </div>
+                            <div class="form-group" id="srg_list_input" hidden>
+                                <label class="form-label" for="srg_list">Please list the all surgical procedures you have had, including the approximate date.<sup class="text-danger ml-1">*</sup></label>
+                                <textarea class="form-control" id="srg_list" rows="6" placeholder="List your surgical procedures here." name="srg_list"></textarea>
+                                <div class="invalid-feedback">Please indicate your surgical history.</div>
+                                <div class="valid-feedback">Looks good!</div>
+                            </div>
+                            <h3>Medications</h3>
+                            <div class="input-group pb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text font-weight-medium">Do You Take Any Medications?<sup class="text-danger ml-1">*</sup></span>
+                                </div>
+                                <label for="medication_yes_no" class="sr-only">Do you take any medications?</label> <select class="form-control custom-select" id="medication_yes_no" oninput="takesMedication()" required>
+                                <option value="">Choose one...</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                            </div>
+                            <div class="form-group" id="med_list_input" hidden>
+                                <label class="form-label" for="med_list">Please list the names of all medications you are taking, including the dosage.<sup class="text-danger ml-1">*</sup></label>
+                                <textarea class="form-control" id="med_list" rows="6" placeholder="List your medications here." name="med_list"></textarea>
+                                <div class="invalid-feedback">Please indicate your medications.</div>
+                                <div class="valid-feedback">Looks good!</div>
+                            </div>
+                            <h3>Allergies</h3>
+                            <div class="input-group pb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text font-weight-medium">Do you have any allergies?<sup class="text-danger ml-1">*</sup></span>
+                                </div>
+                                <label for="allergies_yes_no" class="sr-only">Do you have any allergies?</label> <select class="form-control custom-select" id="allergies_yes_no" oninput="hasAllergies()" required>
+                                <option value="">Choose one...</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                            </div>
+                            <div class="form-group" id="alg_list_input" hidden>
+                                <label class="form-label" for="alg_list">Please list your known allergies, including your reaction.<sup class="text-danger ml-1">*</sup></label>
+                                <textarea class="form-control" id="alg_list" rows="6" placeholder="List your allergies here. Include medications, and or foods. Please indicate your reaction." name="alg_list"></textarea>
+                                <div class="invalid-feedback">Please indicate your allergies.</div>
+                                <div class="valid-feedback">Looks good!</div>
+                            </div>
+                            <h3>Family History</h3>
+                            <p>Please list any family members who have or had the following conditions.</p>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-primary" type="button">Blood Clots</button>
+                                </div>
+                                <label for="fam_hx_bc" class="sr-only">Does anyone in your family have a history of blood clots?</label>
+                                <input class="form-control" type="text" placeholder="Grandfather, Grandmother, Father, Mother, Brother, Sister, etc." name="fam_hx_bc" id="fam_hx_bc">
+                            </div>
+                            <div class="input-group pt-2">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-primary" type="button">High Blood Pressure</button>
+                                </div>
+                                <label for="fam_hx_htn" class="sr-only">Does anyone in your family have a history of high blood pressure?</label>
+                                <input class="form-control" type="text" placeholder="Grandfather, Grandmother, Father, Mother, Brother, Sister, etc." name="fam_hx_htn" id="fam_hx_htn">
+                            </div>
+                            <div class="input-group pt-2">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-primary" type="button">Stroke</button>
+                                </div>
+                                <label for="fam_hx_cva" class="sr-only">Does anyone in your family have a history of stroke?</label>
+                                <input class="form-control" type="text" placeholder="Grandfather, Grandmother, Father, Mother, Brother, Sister, etc." name="fam_hx_cva" id="fam_hx_cva">
+                            </div>
+                            <div class="input-group pt-2">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-primary" type="button">Diabetes</button>
+                                </div>
+                                <label for="fam_hx_dm" class="sr-only">Does anyone in your family have a history of diabetes?</label>
+                                <input class="form-control" type="text" placeholder="Grandfather, Grandmother, Father, Mother, Brother, Sister, etc." name="fam_hx_dm" id="fam_hx_dm">
+                            </div>
+                            <div class="input-group pt-2">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-primary" type="button">Circulation Problems</button>
+                                </div>
+                                <label for="fam_hx_cp" class="sr-only">Does anyone in your family have a history of circulation problems?</label>
+                                <input class="form-control" type="text" placeholder="Grandfather, Grandmother, Father, Mother, Brother, Sister, etc." name="fam_hx_cp" id="fam_hx_cp">
+                            </div>
+                            <div class="input-group pt-2">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-primary" type="button">Cancer</button>
+                                </div>
+                                <label for="fam_hx_cx" class="sr-only">Does anyone in your family have a history of cancer?</label>
+                                <input class="form-control" type="text" placeholder="Grandfather, Grandmother, Father, Mother, Brother, Sister, etc." name="fam_hx_cx" id="fam_hx_cx">
+                            </div>
+                            <div class="input-group pt-2">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-primary" type="button">Thyroid Problems</button>
+                                </div>
+                                <label for="fam_hx_tp" class="sr-only">Does anyone in your family have a history of thyroid problems?</label>
+                                <input class="form-control" type="text" placeholder="Grandfather, Grandmother, Father, Mother, Brother, Sister, etc." name="fam_hx_tp" id="fam_hx_tp">
+                            </div>
+                            <div class="input-group pt-2">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-primary" type="button">Heart Problems</button>
+                                </div>
+                                <label for="fam_hx_hp" class="sr-only">Does anyone in your family have a history of heart problems?</label>
+                                <input class="form-control" type="text" placeholder="Grandfather, Grandmother, Father, Mother, Brother, Sister, etc." name="fam_hx_hp" id="fam_hx_hp">
+                            </div>
+                            <div class="input-group pt-2">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-primary" type="button">Lung Problems</button>
+                                </div>
+                                <label for="fam_hx_lp" class="sr-only">Does anyone in your family have a history of lung problems?</label>
+                                <input class="form-control" type="text" placeholder="Grandfather, Grandmother, Father, Mother, Brother, Sister, etc." name="fam_hx_lp" id="fam_hx_lp">
+                            </div>
+                            <div class="input-group pt-2">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-primary" type="button">Osteoarthritis</button>
+                                </div>
+                                <label for="fam_hx_oa" class="sr-only">Does anyone in your family have a history of osteoarthritis?</label>
+                                <input class="form-control" type="text" placeholder="Grandfather, Grandmother, Father, Mother, Brother, Sister, etc." name="fam_hx_oa" id="fam_hx_oa">
+                            </div>
+                            <div class="input-group pt-2">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-primary" type="button">Arthritis</button>
+                                </div>
+                                <label for="fam_hx_arth" class="sr-only">Does anyone in your family have a history of arthritis?</label>
+                                <input class="form-control" type="text" placeholder="Grandfather, Grandmother, Father, Mother, Brother, Sister, etc." name="fam_hx_arth" id="fam_hx_arth">
+                            </div>
+                            <div class="input-group pt-2 pb-3">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-primary" type="button">Other</button>
+                                </div>
+                                <label for="fam_hx_oth" class="sr-only">Does anyone in your family have any other family history?</label>
+                                <input class="form-control" type="text" placeholder="Grandfather, Grandmother, Father, Mother, Brother, Sister, etc." name="fam_hx_oth" id="fam_hx_oth">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- SOCIAL HISTORY -->
+                    <div class="card mt-5 bg-faded-dark">
+                        <div class="card-body">
+                            <h2 class="card-title">Social History</h2>
+                            <div class="row">
+                                <div class="col-sm-6 form-group">
+                                    <label class="form-label" for="hand_dominance">Hand Dominance<sup class="text-danger ml-1">*</sup></label> <select class="form-control custom-select" id="hand_dominance" name="hand_dominance" required>
+                                    <option value="">Choose option...</option>
+                                    <option value="Right">Right</option>
+                                    <option value="Left">Left</option>
+                                    <option value="Ambidextrous">Ambidextrous</option>
+                                </select> <small class="form-text pl-3">Why do we ask this?
+                                    <i class="fe-info" data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="It is important to know your hand dominance as Dr. DeMers takes into consideration how much help you may need if you are unable to use your dominant hand."></i></small>
+                                    <div class="invalid-feedback">Please choose your hand dominance.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                                <div class="col-sm-6 form-group">
+                                    <label class="form-label" for="exercise_level">Exercise Level<sup class="text-danger ml-1">*</sup></label> <select class="form-control custom-select" id="exercise_level" name="exercise_level" required>
+                                    <option value="">Choose option...</option>
+                                    <option value="None">None</option>
+                                    <option value="Occasional">Occasional</option>
+                                    <option value="Moderate">Moderate</option>
+                                    <option value="Heavy">Heavy</option>
+                                </select>
+                                    <div class="invalid-feedback">Please indicate your exercise level.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 form-group">
+                                    <label class="form-label" for="living_arr">Living Arrangements<sup class="text-danger ml-1">*</sup></label> <select class="form-control custom-select" id="living_arr" name="living_arr" required>
+                                    <option value="">Choose option...</option>
+                                    <option value="Alone">I Live Alone</option>
+                                    <option value="With Spouse">I Live With My Spouse</option>
+                                    <option value="With Others">I Live With Others</option>
+                                </select> <small class="form-text pl-3">Why do we ask this?
+                                    <i class="fe-info" data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Your living arrangements allow Dr. DeMers to know if you will have assistance at home after a procedure."></i></small>
+                                    <div class="invalid-feedback">Please indicate your living arrangements.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                                <div class="col-sm-6 form-group">
+                                    <label class="form-label" for="home_level">Home Type<sup class="text-danger ml-1">*</sup></label> <select class="form-control custom-select" id="home_level" name="home_level" required>
+                                    <option value="">Choose option...</option>
+                                    <option value="Single Level">Single-Level Home</option>
+                                    <option value="Multi-Level">Multi-Level Home</option>
+                                </select> <small class="form-text pl-3">Why do we ask this?
+                                    <i class="fe-info" data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="It is important to know if you will be required to walk up stairs in your home after a procedure, this information will allow Dr. DeMers to determine if we need to make accommodations for you."></i></small>
+                                    <div class="invalid-feedback">Please indicate your home type.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4 form-group">
+                                    <label class="form-label" for="caffeine">Caffeine Use<sup class="text-danger ml-1">*</sup></label> <select class="form-control custom-select" id="caffeine" name="caffeine" required>
+                                    <option value="">Choose option...</option>
+                                    <option value="Daily">Yes, Daily</option>
+                                    <option value="Occasional">Yes, Occasionally</option>
+                                    <option value="None">None</option>
+                                </select>
+                                    <div class="invalid-feedback">Please indicate your caffeine use.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                                <div class="col-sm-4 form-group">
+                                    <label class="form-label" for="alcohol">Alcohol Use<sup class="text-danger ml-1">*</sup></label> <select class="form-control custom-select" id="alcohol" name="alcohol" required>
+                                    <option value="">Choose option...</option>
+                                    <option value="None">None</option>
+                                    <option value="Socially">Socially</option>
+                                    <option value="Occasional">Occasional</option>
+                                    <option value="Monthly">Monthly</option>
+                                    <option value="Weekly">Weekly</option>
+                                    <option value="Daily">Daily</option>
+                                </select>
+                                    <div class="invalid-feedback">Please indicate your alcohol use.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                                <div class="col-sm-4 form-group">
+                                    <label class="form-label" for="rec_drug">Recreational/Illicit Drug Use<sup class="text-danger ml-1">*</sup></label> <select class="form-control custom-select" id="rec_drug" name="rec_drug" required>
+                                    <option value="">Choose option...</option>
+                                    <option value="None">None</option>
+                                    <option value="Socially">Socially</option>
+                                    <option value="Occasional">Occasional</option>
+                                    <option value="Monthly">Monthly</option>
+                                    <option value="Weekly">Weekly</option>
+                                    <option value="Daily">Daily</option>
+                                </select>
+                                    <div class="invalid-feedback">Please indicate your recreational drug use.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-5 form-group">
+                                    <label class="form-label" for="tobacco">Do You Use Tobacco/Nicotine?<sup class="text-danger ml-1">*</sup></label>
+                                    <select class="form-control custom-select" id="tobacco" name="tobacco" oninput="useTobacco()" required>
+                                        <option value="">Choose option...</option>
+                                        <option value="None">No</option>
+                                        <option value="Yes">Yes</option>
+                                    </select>
+                                    <div class="invalid-feedback">Please indicate tobacco use.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                                <div class="col-sm-4 form-group" id="tobacco-type-select" hidden>
+                                    <label class="form-label" for="tobacco_type">Tobacco Type<sup class="text-danger ml-1">*</sup></label> <select class="form-control custom-select" id="tobacco_type" name="tobacco_type">
+                                    <option value="">Choose option...</option>
+                                    <option value="Cigarettes">Cigarettes</option>
+                                    <option value="Cigars">Cigars</option>
+                                    <option value="Chewing Tobacco">Chewing Tobacco</option>
+                                    <option value="Vape">Vape</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                    <div class="invalid-feedback">Please indicate type of tobacco/nicotine.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                                <div class="col-sm-3 form-group" id="tobacco-you" hidden>
+                                    <label class="form-label" for="tobacco_years">Years of Use<sup class="text-danger ml-1">*</sup></label> <input class="form-control" type="text" id="tobacco_years" placeholder="Years" name="tobacco_years">
+                                </div>
+                            </div>
+                            <h3>Learning Barriers</h3>
+                            <p>Do You Have Any of the Following Barriers to Learning?</p>
+                            <div class="row pl-4">
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input class="custom-control-input" type="checkbox" id="lb_none" name="lb_none" value="None" oninput="noLearningBarriers()"> <label class="custom-control-label" for="lb_none">None</label>
+                                </div>
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input class="custom-control-input" type="checkbox" id="lb_age" name="lb_age" value="Age,"> <label class="custom-control-label" for="lb_age">Age</label>
+                                </div>
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input class="custom-control-input" type="checkbox" id="lb_mental" name="lb_mental" value="Mental Status,"> <label class="custom-control-label" for="lb_mental">Mental Status</label>
+                                </div>
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input class="custom-control-input" type="checkbox" id="lb_language" name="lb_language" value="Language,"> <label class="custom-control-label" for="lb_language">Language</label>
+                                </div>
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input class="custom-control-input" type="checkbox" id="lb_hearing" name="lb_hearing" value="Hearing/Sight,"> <label class="custom-control-label" for="lb_hearing">Hearing/Sight</label>
+                                </div>
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input class="custom-control-input" type="checkbox" id="lb_financial" name="lb_financial" value="Financial,"> <label class="custom-control-label" for="lb_financial">Financial</label>
+                                </div>
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input class="custom-control-input" type="checkbox" id="lb_education" name="lb_education" value="Education"> <label class="custom-control-label" for="lb_education">Education</label>
+                                </div>
+                            </div>
+                            <h3 class="pt-3">Learning Style</h3>
+                            <p>What are your preferred learning styles?</p>
+                            <div class="row pl-4">
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input class="custom-control-input" type="checkbox" id="ls_np" name="ls_np" value="No Preference" oninput="noLearningPreference()"> <label class="custom-control-label" for="ls_np">No Preference</label>
+                                </div>
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input class="custom-control-input" type="checkbox" id="ls_reading" name="ls_reading" value="Reading,"> <label class="custom-control-label" for="ls_reading">Reading</label>
+                                </div>
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input class="custom-control-input" type="checkbox" id="ls_hearing" name="ls_hearing" value="Hearing,"> <label class="custom-control-label" for="ls_hearing">Hearing</label>
+                                </div>
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input class="custom-control-input" type="checkbox" id="ls_seeing" name="ls_seeing" value="Seeing,"> <label class="custom-control-label" for="ls_seeing">Seeing</label>
+                                </div>
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input class="custom-control-input" type="checkbox" id="ls_doing" name="ls_doing" value="Doing"> <label class="custom-control-label" for="ls_doing">Doing</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- NEW PATIENT/NEW INJURY -->
+                    <div class="card mt-5 bg-faded-dark">
+                        <div class="card-body">
+                            <h2 class="card-title">Reason For Your Visit</h2>
+                            <div class="row">
+                                <div class="col-sm-4 form-group">
+                                    <label class="form-label" for="reason_location">Location of Symptoms<sup class="text-danger ml-1">*</sup></label> <select class="form-control custom-select" id="reason_location" name="reason_location" required>
+                                    <option value="">Choose location...</option>
+                                    <option value="Cervical Spine">Neck</option>
+                                    <option value="Thoracic Spine">Mid-Back</option>
+                                    <option value="Lumbar Spine">Low-Back</option>
+                                    <option value="Shoulder">Shoulder</option>
+                                    <option value="Arm">Arm</option>
+                                    <option value="Elbow">Elbow</option>
+                                    <option value="Wrist">Wrist</option>
+                                    <option value="Hand">Hand</option>
+                                    <option value="Finger">Finger</option>
+                                    <option value="Pelvis">Pelvis</option>
+                                    <option value="Femur">Femur</option>
+                                    <option value="Knee">Knee</option>
+                                    <option value="Tibia/Fibula">Tibia/Fibula</option>
+                                    <option value="Ankle">Ankle</option>
+                                    <option value="Foot">Foot</option>
+                                    <option value="Toe">Toe</option>
+                                </select>
+                                    <div class="invalid-feedback">Please indicate the location of your symptoms.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                                <div class="col-sm-4 form-group">
+                                    <label class="form-label" for="reason_lateral">What side of the body?<sup class="text-danger ml-1">*</sup></label> <select class="form-control custom-select" id="reason_lateral" name="reason_lateral" required>
+                                    <option value="">Choose side...</option>
+                                    <option value="Left">Left</option>
+                                    <option value="Right">Right</option>
+                                    <option value="Bilateral">Both Sides</option>
+                                </select>
+                                    <div class="invalid-feedback">Please indicate which side of the body you are experiencing symptoms.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                                <div class="col-sm-4 form-group">
+                                    <label class="form-label" for="reason">What is your primary concern?<sup class="text-danger ml-1">*</sup></label> <select class="form-control custom-select" id="reason" name="reason" required>
+                                    <option value="">Choose concern...</option>
+                                    <option value="Pain">Pain</option>
+                                    <option value="Numbness">Numbness</option>
+                                    <option value="Weakness">Weakness</option>
+                                </select>
+                                    <div class="invalid-feedback">Please indicate your primary concern.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                                <div class="col-sm-7 form-group">
+                                    <label class="form-label" for="symptom_dur">How long have you been experiencing symptoms?<sup class="text-danger ml-1">*</sup></label>
+                                    <select class="form-control custom-select" id="symptom_dur" name="symptom_dur" oninput="symptomDuration()" required>
+                                        <option value="">Choose duration...</option>
+                                        <option value="Days">Days</option>
+                                        <option value="Weeks">Weeks</option>
+                                        <option value="Months">Months</option>
+                                        <option value="Years">Years</option>
+                                    </select>
+                                    <div class="invalid-feedback">Please indicate how long you have been experiencing symptoms.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                                <div class="col-sm-5 form-group" id="symptom_dur_num_input" hidden>
+                                    <label class="form-label" for="symptom_dur_num" id="symptom_dur_num_label"><sup class="text-danger ml-1">*</sup></label>
+                                    <input class="form-control" type="text" id="symptom_dur_num" placeholder="" name="symptom_dur_num">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-7 form-group">
+                                    <label class="form-label" for="reason_cause">What do you believe to be the cause?<sup class="text-danger ml-1">*</sup></label>
+                                    <select class="form-control custom-select" id="reason_cause" name="reason_cause" required oninput="isInjury()">
+                                        <option value="">Choose cause...</option>
+                                        <option value="Specific Injury">Specific Injury</option>
+                                        <option value="Gradual Onset Without Injury">Gradual Onset Without Injury</option>
+                                        <option value="Sudden Onset Without Injury">Sudden Onset Without Injury</option>
+                                        <option value="Injury at Work">Injury at Work</option>
+                                        <option value="Work Related, Without Injury">Work Related, Without Injury</option>
+                                        <option value="Auto Accident">Auto Accident</option>
+                                        <option value="Recurring Injury">Recurring Injury</option>
+                                    </select>
+                                    <div class="invalid-feedback">Please indicate what you believe to be the cause of your symptoms.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                                <div class="col-sm-5 form-group" id="date_of_injury_input" hidden>
+                                    <label class="form-label">Date of Injury<sup class="text-danger ml-1">*</sup></label>
+                                    <div class="input-group-overlay">
+                                        <label for="doi" hidden>Date of Injury</label>
+                                        <input class="form-control appended-form-control cs-date-picker" name="doi" id="doi" type="text" placeholder="Date of Injury" data-datepicker-options='{"altInput": true, "altFormat": "F j, Y", "dateFormat": "m-d-Y"}'>
+                                        <div class="input-group-append-overlay"><span class="input-group-text"><i class="fe-calendar"></i></span></div>
+                                    </div>
+                                    <div class="invalid-feedback">Please indicate the date of your injury.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 form-group">
+                                    <label class="form-label" for="reason_expl">Explanation of your symptoms and/or how your injury occurred.<sup class="text-danger ml-1">*</sup></label>
+                                    <textarea class="form-control" id="reason_expl" rows="6" placeholder="Explanation of symptoms/injury." name="reason_expl" required></textarea>
+                                    <div class="invalid-feedback">Please explain your symptoms and or injury.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4 form-group">
+                                    <label class="form-label" for="severity">How severe is the pain?<sup class="text-danger ml-1">*</sup></label> <select class="form-control custom-select" id="severity" name="severity" required>
+                                    <option value="">Choose severity...</option>
+                                    <option value="0">0 (No Pain)</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10 (Worst Pain I've Ever Experienced)</option>
+                                </select>
+                                    <div class="invalid-feedback">Please indicate the severity of your pain.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                                <div class="col-sm-4 form-group">
+                                    <label class="form-label" for="wake_from_sleep">Does it wake you from sleep?<sup class="text-danger ml-1">*</sup></label>
+                                    <select class="form-control custom-select" id="wake_from_sleep" name="wake_from_sleep" required>
+                                        <option value="">Choose option...</option>
+                                        <option value="No">No</option>
+                                        <option value="Every Night">Every Night</option>
+                                        <option value="Some Nights">Some Nights</option>
+                                        <option value="Rarely">Rarely</option>
+                                    </select>
+                                    <div class="invalid-feedback">Please indicate if your pain wakes you from sleep.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                                <div class="col-sm-4 form-group">
+                                    <label class="form-label" for="pain_timing">What is the timing of the pain?<sup class="text-danger ml-1">*</sup></label> <select class="form-control custom-select" id="pain_timing" name="pain_timing" required>
+                                    <option value="">Choose option...</option>
+                                    <option value="Chronic">Chronic</option>
+                                    <option value="Abrupt">Abrupt</option>
+                                    <option value="Gradual">Gradual</option>
+                                    <option value="Occasional">Occasional</option>
+                                </select>
+                                    <div class="invalid-feedback">Please indicate the timing of your symptoms.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                                <div class="col-sm-6 form-group">
+                                    <label class="form-label" for="radiation_pain">Does your pain radiate?<sup class="text-danger ml-1">*</sup></label>
+                                    <select class="form-control custom-select" id="radiation_pain" name="radiation_pain" required oninput="painRadiates()">
+                                        <option value="">Choose option...</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                    <div class="invalid-feedback">Please indicate if your pain radiates.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                                <div class="col-sm-6 form-group" id="radiation_pain_input" hidden>
+                                    <label class="form-label" for="radiation_pain_location">Where does the pain radiate to?<sup class="text-danger ml-1">*</sup></label>
+                                    <input class="form-control" type="text" id="radiation_pain_location" placeholder="Pain radiation location" name="radiation_pain_location" required>
+                                    <div class="invalid-feedback">Please enter the location of where your pain radiates to.</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <h3>What makes your symptoms worse?</h3>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                        <input class="custom-control-input" type="checkbox" id="worsen_symptom_activity" name="worsen_symptom_activity" value="Activity,">
+                                        <label class="custom-control-label" for="worsen_symptom_activity">Activity</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                        <input class="custom-control-input" type="checkbox" id="worsen_symptom_work" name="worsen_symptom_work" value="Work,"> <label class="custom-control-label" for="worsen_symptom_work">Work</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                        <input class="custom-control-input" type="checkbox" id="worsen_symptom_exercise" name="worsen_symptom_exercise" value="Exercise">
+                                        <label class="custom-control-label" for="worsen_symptom_exercise">Exercise</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <h3>What makes you feel better?</h3>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                        <input class="custom-control-input" type="checkbox" id="allev_symptom_rest" name="allev_symptom_rest" value="Rest,"> <label class="custom-control-label" for="allev_symptom_rest">Rest</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                        <input class="custom-control-input" type="checkbox" id="allev_symptom_heat" name="allev_symptom_heat" value="Heat,"> <label class="custom-control-label" for="allev_symptom_heat">Heat</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                        <input class="custom-control-input" type="checkbox" id="allev_symptom_ice" name="allev_symptom_ice" value="Ice,"> <label class="custom-control-label" for="allev_symptom_ice">Ice</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                        <input class="custom-control-input" type="checkbox" id="allev_symptom_elevation" name="allev_symptom_elevation" value="Elevation">
+                                        <label class="custom-control-label" for="allev_symptom_elevation">Elevation</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row pt-4">
+                                <div class="col-sm-6">
+                                    <h3>Associated Symptoms:</h3>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                        <input class="custom-control-input" type="checkbox" id="assoc_symptom_weakness" name="assoc_symptom_weakness" value="Weakness,"> <label class="custom-control-label" for="assoc_symptom_weakness">Weakness</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                        <input class="custom-control-input" type="checkbox" id="assoc_symptom_numbness" name="assoc_symptom_numbness" value="Numbness,"> <label class="custom-control-label" for="assoc_symptom_numbness">Numbness</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                        <input class="custom-control-input" type="checkbox" id="assoc_symptom_tingling" name="assoc_symptom_tingling" value="Tingling,"> <label class="custom-control-label" for="assoc_symptom_tingling">Tingling</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                        <input class="custom-control-input" type="checkbox" id="assoc_symptom_swelling" name="assoc_symptom_swelling" value="Swelling"> <label class="custom-control-label" for="assoc_symptom_swelling">Swelling</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <h3>Symptom Characteristics:</h3>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                        <input class="custom-control-input" type="checkbox" id="symptom_char_sharp" name="symptom_char_sharp" value="Sharp,"> <label class="custom-control-label" for="symptom_char_sharp">Sharp</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                        <input class="custom-control-input" type="checkbox" id="symptom_char_dull" name="symptom_char_dull" value="Dull,"> <label class="custom-control-label" for="symptom_char_dull">Dull</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                        <input class="custom-control-input" type="checkbox" id="symptom_char_throbbing" name="symptom_char_throbbing" value="Throbbing,">
+                                        <label class="custom-control-label" for="symptom_char_throbbing">Throbbing</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                        <input class="custom-control-input" type="checkbox" id="symptom_char_stabbing" name="symptom_char_stabbing" value="Stabbing,"> <label class="custom-control-label" for="symptom_char_stabbing">Stabbing</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                        <input class="custom-control-input" type="checkbox" id="symptom_char_aching" name="symptom_char_aching" value="Aching,"> <label class="custom-control-label" for="symptom_char_aching">Aching</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                        <input class="custom-control-input" type="checkbox" id="symptom_char_burning" name="symptom_char_burning" value="Burning"> <label class="custom-control-label" for="symptom_char_burning">Burning</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <h3 class="pt-4">Past Treatments</h3>
+
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <div class="custom-control custom-checkbox">
+                                            <label class="custom-control-label text-heading font-weight-medium" for="past_inj">Injection</label> <input class="custom-control-input" type="checkbox" id="past_inj" name="past_inj" value="Yes">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <label for="past_inj_exp" class="sr-only">Past Injection Explanation</label> <input class="form-control" type="text" placeholder="Explanation" name="past_inj_exp" id="past_inj_exp" oninput="injectionHistory()">
+
+                                <label for="past_inj_help" class="sr-only">Was your prior injection helpful?</label> <select class="form-control custom-select" id="past_inj_help" name="past_inj_help" oninput="injectionHistory()">
+                                <option value="">Was it helpful?</option>
+                                <option value="Very Helpful">Very Helpful</option>
+                                <option value="Helpful">Helpful</option>
+                                <option value="No Help">No Help</option>
+                                <option value="Made Worse">Made Worse</option>
+                            </select>
+                            </div>
+
+                            <div class="input-group pt-4">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <div class="custom-control custom-checkbox">
+                                            <input class="custom-control-input" type="checkbox" id="past_brace" name="past_brace" value="Yes"> <label class="custom-control-label text-heading font-weight-medium" for="past_brace">Brace/Cast</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <label for="past_brace_exp" class="sr-only">Past Brace/Cast Explanation</label> <input class="form-control" type="text" placeholder="Explanation" name="past_brace_exp" id="past_brace_exp" oninput="braceHistory()">
+
+                                <label for="past_brace_help" class="sr-only">Was your prior brace/cast helpful?</label> <select class="form-control custom-select" id="past_brace_help" name="past_brace_help" oninput="braceHistory()">
+                                <option value="">Was it helpful?</option>
+                                <option value="Very Helpful">Very Helpful</option>
+                                <option value="Helpful">Helpful</option>
+                                <option value="No Help">No Help</option>
+                                <option value="Made Worse">Made Worse</option>
+                            </select>
+                            </div>
+
+                            <div class="input-group pt-4">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <div class="custom-control custom-checkbox">
+                                            <label class="custom-control-label text-heading font-weight-medium" for="past_nsaid">Anti-Inflammatory Medication</label>
+                                            <input class="custom-control-input" type="checkbox" id="past_nsaid" name="past_nsaid" value="Yes">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <label for="past_nsaid_exp" class="sr-only">Past NSAID Treatment Explanation</label> <input class="form-control" type="text" placeholder="Explanation" name="past_nsaid_exp" id="past_nsaid_exp" oninput="nsaidHistory()">
+
+                                <label for="past_nsaid_help" class="sr-only">Was your prior anti-inflammatory medication treatment helpful?</label>
+                                <select class="form-control custom-select" id="past_nsaid_help" name="past_nsaid_help" oninput="nsaidHistory()">
+                                    <option value="">Was it helpful?</option>
+                                    <option value="Very Helpful">Very Helpful</option>
+                                    <option value="Helpful">Helpful</option>
+                                    <option value="No Help">No Help</option>
+                                    <option value="Made Worse">Made Worse</option>
+                                </select>
+                            </div>
+
+                            <div class="input-group pt-4">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <div class="custom-control custom-checkbox">
+                                            <label class="custom-control-label text-heading font-weight-medium" for="past_narc">Narcotic Medication</label>
+                                            <input class="custom-control-input" type="checkbox" id="past_narc" name="past_narc" value="Yes">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <label for="past_narc_exp" class="sr-only">Past Narcotic Medication Explanation</label>
+                                <input class="form-control" type="text" placeholder="Explanation" name="past_narc_exp" id="past_narc_exp" oninput="narcoticsHistory()">
+
+                                <label for="past_narc_help" class="sr-only">Was your prior narcotics medication helpful?</label> <select class="form-control custom-select" id="past_narc_help" name="past_narc_help" oninput="narcoticsHistory()">
+                                <option value="">Was it helpful?</option>
+                                <option value="Very Helpful">Very Helpful</option>
+                                <option value="Helpful">Helpful</option>
+                                <option value="No Help">No Help</option>
+                                <option value="Made Worse">Made Worse</option>
+                            </select>
+                            </div>
+
+                            <div class="input-group pt-4">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <div class="custom-control custom-checkbox">
+                                            <input class="custom-control-input" type="checkbox" id="past_pt" name="past_pt" value="Yes"> <label class="custom-control-label text-heading font-weight-medium" for="past_pt">Physical Therapy</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <label for="past_pt_exp" class="sr-only">Past physical therapy treatment explanation</label> <input class="form-control" type="text" placeholder="Explanation" name="past_pt_exp" id="past_pt_exp" oninput="ptHistory()">
+
+                                <label for="past_pt_help" class="sr-only">Was your prior physical therapy treatment helpful?</label> <select class="form-control custom-select" id="past_pt_help" name="past_pt_help" oninput="ptHistory()">
+                                <option value="">Was it helpful?</option>
+                                <option value="Very Helpful">Very Helpful</option>
+                                <option value="Helpful">Helpful</option>
+                                <option value="No Help">No Help</option>
+                                <option value="Made Worse">Made Worse</option>
+                            </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- SUBMIT -->
+                    <div class="row justify-content-center pt-4">
+                        <button class="btn btn-primary" type="submit">Submit Onboarding Information</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'vendor/cleave.js/dist/cleave.min.js' %}"></script>
+    <script src="{% static 'vendor/flatpickr/dist/flatpickr.min.js' %}"></script>
+    <script src="{% static 'js/onboarding-validation.js' %}"></script>
+{% endblock %}

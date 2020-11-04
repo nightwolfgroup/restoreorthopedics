@@ -1,0 +1,58 @@
+{% extends 'documentation/base.html' %}{% block content %}{% load static %}
+    <div class="border-bottom pt-5 pb-2 mt-2 mb-5"><h1 class="mt-4 pt-5">Managing Images & Documents</h1></div>
+    <div class="card border-0 box-shadow-lg mt-5">
+        <div class="card-body">
+            <div class="row justify-content-center text-center py-1 px-3"><h2>Image Management</h2></div>
+            <div class="row justify-content-center py-1 px-3">
+                <div class="alert alert-danger text-center" role="alert">
+                    <i class="fe-alert-triangle font-size-xl mt-n1 mr-3"></i>If an image is ever accidentally deleted, contact me and I will pull it from the server for you. A backup copy of all images are stored on the server for situations like this. Deleted images will be saved for six months.
+                </div>
+            </div>
+            <div class="row border-bottom pb-4">
+                <div class="col-2"><img class="rounded my-3" src="{% static 'img/documentation/dashboard-nav.png' %}" alt="Login Screen"/></div>
+                <div class="col-10 justify-content-center pt-7">
+                    <div class="row justify-content-center text-center pt-1"><h3>Click <kbd>Images</kbd> in the Navigation Menu</h3></div>
+                </div>
+            </div>
+            <div class="row border-bottom py-4">
+                <div class="col-12">
+                    <div class="row justify-content-center pt-2"><h3>Image Management Panel</h3></div>
+                    <img class="rounded my-3 mx-auto" src="{% static 'img/documentation/images-panel.png' %}" alt="Users Menu"/>
+                    <div class="row justify-content-center pt-2"><h3>Uploading an Image</h3></div>
+                    <div class="row justify-content-center pt-2"><h4>Click "Add an Image</h4></div>
+                    <div class="row justify-content-center"><img class="rounded my-1 mx-8" src="{% static 'img/documentation/add-image.png' %}" alt="Users Menu"/></div>
+                    <div class="row justify-content-center text-center pt-2 mx-5"><p>You can either click the button, or drag the image you wish to add into the square on the page</p></div>
+                    <img class="rounded my-3 mx-8" src="{% static 'img/documentation/image-edit.png' %}" alt="Users Menu"/>
+                    <div class="row justify-content-center pt-2"><h3>Editing Image Attributes</h3></div>
+                    <div class="row justify-content-center text-center pt-2 mx-5">
+                        <ul class="list-group">
+                            <li class="list-group-item"><b>Title</b>: The title is used as the "alt" attribute on the frontend of the site. If a user is blind or using a screen reader, this is what the screen reader will read to the user.</li>
+                            <li class="list-group-item"><b>File</b>: This is the name of the file as the server has named it. If you click this link it will allow you to download it to your computer. To change the image, click "Choose File" and upload a replacement.</li>
+                            <li class="list-group-item"><b>Tags</b>: Tags are used internally for locating image files. As your image library starts to grow, you will find tags helpful in locating older images. I have tagged the images on your site with the type (i.e. 'icon') and the page it is on (i.e. 'icon').</li>
+                            <li class="list-group-item"><b>Focal Point</b>: There may be occasions where you upload an image, however, upon publishing of the page the image is not positioned appropriately (top/bottom are cut off). Adding a focal point tells your website the most important part of the image, this way it will not cut that part off when the page loads.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card border-0 box-shadow-lg mt-5">
+        <div class="card-body">
+            <div class="row justify-content-center text-center py-1 px-3"><h2>Document Management</h2></div>
+            <div class="row border-bottom pb-4">
+                <div class="col-2"><img class="rounded my-3" src="{% static 'img/documentation/dashboard-nav.png' %}" alt="Login Screen"/></div>
+                <div class="col-10 justify-content-center pt-7">
+                    <div class="row justify-content-center text-center pt-1"><h3>Click <kbd>Documents</kbd> in the Navigation Menu</h3></div>
+                </div>
+            </div>
+            <div class="row border-bottom py-4">
+                <div class="col-12">
+                    <div class="row justify-content-center pt-2 mx-5"><h3>Uploading a Document</h3></div>
+                    <div class="row justify-content-center text-center pt-2 mx-5"><p>Uploading documents follow the same process as uploading a photo, however documents do not require as much information. You still may tag documents to assist you in finding them later.</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

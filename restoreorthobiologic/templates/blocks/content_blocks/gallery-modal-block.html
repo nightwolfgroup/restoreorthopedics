@@ -1,0 +1,37 @@
+<section class="bg-secondary py-5 py-md-6 mt-n4">{% load static wagtailcore_tags wagtailimages_tags %}
+    <div class="container py-2 text-center">
+        <div class="row justify-content-center">{% for item in self.card %}
+            <div class="col-lg-4 col-sm-6 mb-grid-gutter">
+                <a class="card card-hover border-0 box-shadow mx-auto" data-toggle="modal" data-target="#{{ item.title|slugify }}" style="max-width: 400px;">
+                    <picture class="card-img-top">{% image item.image fill-580x692 format-webp as image_webp %}
+                        <source srcset="{{ image_webp.url }}" type="image/webp">{% image item.image fill-580x692 format-png as image_png %}
+                        <source srcset="{{ image_png.url }}" type="image/png">{% image item.image fill-580x692 format-png %}
+                    </picture>
+                    <div class="card-body">
+                        <h3 class="h5 mb-0">{{ item.title }}</h3>
+                    </div>
+                </a>
+            </div>{% endfor %}
+        </div>
+    </div>
+</section>{% for item in self.card %}
+    <div class="modal fade" tabindex="-1" role="dialog" id="{{ item.title|slugify }}">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <picture>{% image item.image original format-webp as image_webp %}
+                        <source srcset="{{ image_webp.url }}" type="image/webp">{% image item.image original format-png as image_png %}
+                        <source srcset="{{ image_png.url }}" type="image/png">{% image item.image original format-png %}
+                    </picture>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>{% endfor %}

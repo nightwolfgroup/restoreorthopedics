@@ -1,0 +1,39 @@
+<section class="jarallax bg-dark py-6 py-md-7" data-jarallax data-type="scale-opacity" data-speed="0.09">{% load static streamforms_tags %}
+    <div class="jarallax-img" style="background-image: url({% static 'img/png/title.png' %});"></div>
+    <div class="container py-md-3">
+        <div class="row">
+            <div class="col-xl-7 col-lg-8 col-md-10">
+                <div class="bg-light rounded-lg box-shadow-lg py-5 px-4">
+                    <form
+                            {% if form.is_multipart %} enctype="multipart/form-data"{% endif %} class="py-sm-2 px-sm-3 needs-validation" action="{{ value.form_action }}" method="post" novalidate>
+                        {% csrf_token %}
+                        <h1 class="text-center mb-4">{{ self.form.title }}</h1>
+                        {% include 'partials/_alerts.html' %}
+                        {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
+                        {% for field in form.visible_fields %}
+                            <div class="form-group">
+                                {{ field.label_tag }} {{ field }}
+                                <div class="valid-feedback">Looks good!</div>
+                                {% if field.help_text %}
+                                    <div class="invalid-feedback">{{ field.help_text }} {{ field.errors }}</div>{% endif %}
+                            </div>
+                        {% endfor %}
+                        <div class="row align-items-center pt-2">
+                            <div class="col-sm-6 mb-4 mb-sm-0">
+                                <a href="tel:{{ settings.core.BusinessSettings.phone }}">
+                                    <i class="fe-phone font-size-xl mr-2"></i>{{ settings.core.BusinessSettings.phone }}
+                                </a>
+                            </div>
+                            <div class="col-sm-6">
+                                <input class="btn btn-primary btn-block" type="submit" value="{{ value.form.submit_button_text }}">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% block extra_js %}
+    <script src="{% static 'js/cleave.min.js' %}"></script>
+{% endblock %}

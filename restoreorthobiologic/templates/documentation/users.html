@@ -1,0 +1,66 @@
+{% extends 'documentation/base.html' %}{% block content %}{% load static %}
+    <div class="border-bottom pt-5 pb-2 mt-2 mb-5">
+        <h1 class="mt-4 pt-5">Add or Remove Users</h1>
+    </div>
+    <div class="card border-0 box-shadow-lg mt-5">
+        <div class="card-header">
+            <h2 class="card-title pt-3">Open the Settings Menu and click "Users"</h2>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-3">
+                    <img class="rounded my-3" src="{% static 'img/documentation/settings-menu.png' %}" alt="Login Screen"/>
+                </div>
+                <div class="col-9 align-items-center">
+                    <div class="row justify-content-center">
+                        <h3>The Users Menu</h3>
+                    </div>
+                    <img class="rounded my-3" src="{% static 'img/documentation/users-menu.png' %}" alt="Users Menu"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card border-0 box-shadow-lg mt-5">
+        <div class="card-header">
+            <h2 class="card-title pt-3">Adding A User</h2>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <ul>
+                    <li>Click "Add A User"</li>
+                </ul>
+            </div>
+            <img class="rounded my-3" src="{% static 'img/documentation/users-menu.png' %}" alt="Users Menu"/>
+            <div class="row">
+                <ul>
+                    <li>Fill in Required Information and click "Roles"</li>
+                </ul>
+            </div>
+            <img class="rounded my-3" src="{% static 'img/documentation/users-add.png' %}" alt="Users Menu"/>
+            <div class="row">
+                <ul>
+                    <li>Apply Appropriate Roles</li>
+                </ul>
+            </div>
+            <img class="rounded my-3" src="{% static 'img/documentation/users-roles.png' %}" alt="Users Menu"/>
+            <div class="row">
+                <ul>
+                    <li>Click Add User</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="card border-0 box-shadow-lg mt-5">
+        <div class="card-header">
+            <h2 class="card-title pt-3">Removing A User</h2>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <ul>
+                    <li>Hover over a users name and click "Delete"</li>
+                </ul>
+            </div>
+            <img class="rounded my-3" src="{% static 'img/documentation/users-delete.png' %}" alt="Users Menu"/>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'documentation/base.html' %}{% block content %}{% load static %}
+    <div class="border-bottom pt-5 pb-2 mt-2 mb-5">
+        <h1 class="mt-4 pt-5">Modifying Your Profile</h1>
+    </div>
+    <div class="card border-0 box-shadow-lg mt-5">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-3">
+                    <img class="rounded my-3" src="{% static 'img/documentation/settings-menu.png' %}" alt="Login Screen"/>
+                </div>
+                <div class="col-9 align-items-center">
+                    <div class="row justify-content-center pt-4">
+                        <h3>Click
+                            <kbd><i class="fe-chevron-up pb-1"></i></kbd> to the right of your name at the bottom of the screen
+                        </h3>
+                        <img class="rounded my-3" src="{% static 'img/documentation/user-nav.png' %}" alt="Users Menu"/>
+                    </div>
+                    <div class="row justify-content-center pt-4">
+                        <h3>Click <kbd><i class="fe-user pb-1"></i> Account settings</kbd> below your name</h3>
+                    </div>
+                    <div class="row justify-content-center pt-4">
+                        <img class="rounded my-3" src="{% static 'img/documentation/user-settings.png' %}" alt="Users Menu"/>
+                    </div>
+                    <img class="rounded my-3" src="{% static 'img/documentation/user-account.png' %}" alt="Users Menu"/>
+                    <div class="row justify-content-center pt-4">
+                        <p>Use each menu button to complete your desired modifications.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

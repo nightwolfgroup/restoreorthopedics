@@ -1,0 +1,44 @@
+{% load cache menu_tags wagtailimages_tags %}{% cache 300 footer %}
+<footer class="cs-footer bg-dark pt-5 pt-md-6">
+    <div class="container pt-3 pt-md-0">
+        <div class="row pb-3">
+            <div class="col-md-4 mt-n2 pb-3 pb-md-0 mb-4">
+                <a class="d-block mb-3" href="/" style="width: 153px;">
+                    <picture>{% image settings.core.BusinessSettings.logo_footer_alt width-153 format-webp as image_webp %}
+                        <source srcset="{{ image_webp.url }}" type="image/webp">
+                        {% image settings.core.BusinessSettings.logo_footer_alt width-153 format-png as image_png %}
+                        <source srcset="{{ image_png.url }}" type="image/png">
+                        {% image settings.core.BusinessSettings.logo_footer_alt width-153 format-png %}
+                    </picture>
+                </a>{% if settings.core.BusinessSettings.street_address %}
+                <p class="font-size-sm text-light opacity-60 pb-0 mb-0">{{ settings.core.BusinessSettings.street_address }}, {{ settings.core.BusinessSettings.city }}, {{ settings.core.BusinessSettings.state }} {{ settings.core.BusinessSettings.zip }}</p>{% endif %}
+                {% if settings.core.BusinessSettings.phone %}
+                    <a href="tel:{{ settings.core.BusinessSettings.phone }}" class="font-size-sm text-light opacity-60 pb-2 pb-sm-3">Phone: {{ settings.core.BusinessSettings.phone }}</a>{% endif %}
+                {% if settings.core.BusinessSettings.fax %}
+                    <br/>
+                    <a href="tel:{{ settings.core.BusinessSettings.fax }}" class="font-size-sm text-light opacity-60 pb-2 pb-sm-3">Fax: {{ settings.core.BusinessSettings.fax }}</a>{% endif %}
+                <p class="font-size-sm text-light opacity-60 pb-2 pb-sm-3">Restore Your Healthy & Active Lifestyle!</p>
+                {% if settings.core.SocialMediaSettings.facebook %}
+                    <a class="social-btn sb-outline sb-facebook sb-light sb-lg mr-2 mb-2" href="{{ settings.core.SocialMediaSettings.facebook }}" target="_blank" rel="noreferrer" aria-label="Facebook"><i class="fe-facebook"></i></a>{% endif %}
+                {% if settings.core.SocialMediaSettings.twitter %}
+                    <a class="social-btn sb-outline sb-twitter sb-light sb-lg mr-2 mb-2" href="{{ settings.core.SocialMediaSettings.twitter }}" target="_blank" rel="noreferrer" aria-label="Twitter"><i class="fe-twitter"></i></a>{% endif %}
+                {% if settings.core.SocialMediaSettings.instagram %}
+                    <a class="social-btn sb-outline sb-instagram sb-light sb-lg mr-2 mb-2" href="{{ settings.core.SocialMediaSettings.instagram }}" target="_blank" rel="noreferrer" aria-label="Instagram"><i class="fe-instagram"></i></a>{% endif %}
+                {% if settings.core.SocialMediaSettings.google %}
+                    <a class="social-btn sb-outline sb-google sb-light sb-lg mr-2 mb-2" href="{{ settings.core.SocialMediaSettings.google }}" target="_blank" rel="noreferrer" aria-label="Google"><i class="fe-google"></i></a>{% endif %}
+                {% if settings.core.SocialMediaSettings.youtube %}
+                    <a class="social-btn sb-outline sb-youtube sb-light sb-lg mr-2 mb-2" href="{{ settings.core.SocialMediaSettings.youtube }}" target="_blank" rel="noreferrer" aria-label="YouTube"><i class="fe-youtube"></i></a>{% endif %}
+            </div>
+            {% flat_menu 'footer-1' template='menus/footer-cat-1.html' max_levels=1 show_menu_heading=True fall_back_to_default_site_menus=True %}
+            {% flat_menu 'footer-2' template='menus/footer-cat-2.html' max_levels=1 show_menu_heading=True fall_back_to_default_site_menus=True %}
+            {% flat_menu 'footer-3' template='menus/footer-cat-3.html' max_levels=1 show_menu_heading=True fall_back_to_default_site_menus=True %}
+        </div>
+        <hr class="border-light">
+        <div class="row align-items-center my-3 pt-4">
+            {% flat_menu 'footer-4' template='menus/footer-cat-4.html' max_levels=1 show_menu_heading=False fall_back_to_default_site_menus=True %}
+            <div class="col-md-6 order-md-1 mb-3">
+                <p class="font-size-sm mb-0"><span class="text-light opacity-50 mr-1">©{% now "Y" %} All rights reserved. Made by</span><a class="nav-link-style nav-link-light" href="https://nightwolfgroup.com/" target="_blank" rel="noopener">Nightwolf Media</a>.</p>
+            </div>
+        </div>
+    </div>
+</footer>{% endcache %}

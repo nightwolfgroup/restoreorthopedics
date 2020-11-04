@@ -1,0 +1,112 @@
+{% extends 'base.html' %}{% load static wagtailimages_tags wagtailcore_tags %}{% block content %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-9 py-4 mb-2 mb-sm-0 pb-sm-5">
+                <div class="pb-4" style="max-width: 38rem;">
+                    {% if self.get_ancestors|length > 1 %}
+                        <nav aria-label="breadcrumb">
+                            <ol class="py-1 my-2 breadcrumb">
+                                <li class="breadcrumb-item"><a href="{% url 'wagtail_serve' '' %}">Home</a></li>
+                                <li class="breadcrumb-item"><a href="{% pageurl page.get_parent %}">Blog</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">{{ self.title }}</li>
+                            </ol>
+                        </nav>
+                    {% endif %}
+                </div>
+                <div class="card card-horizontal mb-grid-gutter">{% image self.image max-510x340 format-png as image_png %}
+                    <div class="card-img-top" style="background-image: url({{ image_png.url }});"></div>
+                    <div class="card-body">
+                        {% for category in self.categories.all %}
+                            <a class="meta-link font-size-sm mb-2 pr-2" href="{{ page.get_parent.url }}category/{{ category.slug }}">{{ category }}</a>
+                        {% endfor %}
+                        <h1 class="h3 text-heading mb-2">{{ self.title }}</h1>
+                        <div class="row ml-1">
+                            <div class="fb-share-button" data-href="{{ self.full_url }}" data-layout="button" data-size="large">
+                                <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a>
+                            </div>
+                            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-via="OrthoSonora" data-hashtags="{{ post.category }}" data-show-count="false">Tweet</a>
+                            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                        </div>
+                        <a class="media meta-link font-size-sm align-items-center pt-3" href="#">
+                            <img class="rounded-circle" width="46" src="{{ self.author.wagtail_userprofile.avatar.url }}" alt="{{ self.author.first_name }} {{ self.author.last_name }}"/>
+                            <div class="media-body pl-2 ml-1 mt-n1">
+                                by<span class="font-weight-semibold ml-1">{{ self.author.first_name }} {{ self.author.last_name }}</span>
+                            </div>
+                        </a>
+                        <div class="mt-3 text-right text-nowrap">
+                            <a class="meta-link font-size-xs" href="#"><i class="fe-calendar mr-1"></i>&nbsp;{{ self.updated_on.date }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% for block in page.content %}{% include_block block %}{% endfor %}
+                <div class="row no-gutters position-relative align-items-center border-top border-bottom my-5">
+                    <div class="col-md-6 py-2 py-dm-3 pr-md-3 text-center text-md-left">
+                        {% for tag in self.tags.all %}
+                            <a class="cs-tag mr-2 my-2 text-lowercase" href="#">#{{ tag }}</a>
+                        {% endfor %}
+                    </div>
+                    <div class="d-none d-md-block position-absolute border-left h-100" style="top: 0; left: 50%; width: 1px;"></div>
+                    <div class="col-md-6 pl-md-3 py-2 py-md-3">
+                        <div class="d-flex align-items-center justify-content-center justify-content-md-end">
+                            <p class="h6 text-nowrap my-2 mr-3">Share post:</p>
+                            <div class="fb-share-button" data-href="{{ self.full_url }}" data-layout="button" data-size="large">
+                                <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a>
+                            </div>
+                            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-via="OrthoSonora" data-hashtags="orthobiologics" data-show-count="false">Tweet</a>
+                            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                        </div>
+                    </div>
+                </div>
+                <nav class="d-flex justify-content-between pb-4 mb-5" aria-label="Entry navigation">
+                    {% if self.get_previous_by_created_on %}
+                        <a class="cs-entry-nav mr-3" href="{{ self.get_previous_by_created_on.url }}">
+                            <h3 class="h5 pb-sm-2">Previous post</h3>
+                            <div class="media">
+                                <div class="cs-entry-nav-thumb d-none d-sm-block">
+                                    <picture>
+                                        {% image self.get_previous_by_created_on.image fill-128x128 format-webp as image_webp %}
+                                        <source srcset="{{ image_webp.url }}" type="image/webp">
+                                        {% image self.get_previous_by_created_on.image fill-128x128 format-png as image_png %}
+                                        <source srcset="{{ image_png.url }}" type="image/png">
+                                        {% image self.get_previous_by_created_on.image fill-128x128 class='rounded' format-png %}
+                                    </picture>
+                                </div>
+                                <div class="media-body pl-sm-3">
+                                    <h4 class="nav-heading font-size-md font-weight-medium mb-0">{{ self.get_previous_by_created_on }}</h4>
+                                    <span class="font-size-xs text-muted">by {{ self.get_previous_by_created_on.author.first_name }} {{ self.get_previous_by_created_on.author.last_name }}</span>
+                                </div>
+                            </div>
+                        </a>
+                    {% else %}
+                        <div class="cs-entry-nav mr-3"></div>
+                    {% endif %}
+                    {% if self.get_next_by_created_on %}
+                        <a class="cs-entry-nav ml-3" href="{{ self.get_next_by_created_on.url }}">
+                            <h3 class="h5 pb-sm-2 text-right">Next post</h3>
+                            <div class="media">
+                                <div class="media-body text-right pr-sm-3">
+                                    <h4 class="nav-heading font-size-md font-weight-medium mb-0">{{ self.get_next_by_created_on }}</h4>
+                                    <span class="font-size-xs text-muted">by {{ self.get_next_by_created_on.author.first_name }} {{ self.get_next_by_created_on.author.last_name }}</span>
+                                </div>
+                                <div class="cs-entry-nav-thumb d-none d-sm-block">
+                                    <picture>
+                                        {% image self.get_next_by_created_on.image fill-128x128 format-webp as image_webp %}
+                                        <source srcset="{{ image_webp.url }}" type="image/webp">
+                                        {% image self.get_next_by_created_on.image fill-128x128 format-png as image_png %}
+                                        <source srcset="{{ image_png.url }}" type="image/png">
+                                        {% image self.get_next_by_created_on.image fill-128x128 class='rounded' format-png %}
+                                    </picture>
+                                </div>
+                            </div>
+                        </a>
+                    {% endif %}
+                </nav>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block facebook_share %}
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v8.0" nonce="m4YQpfg0"></script>
+{% endblock %}

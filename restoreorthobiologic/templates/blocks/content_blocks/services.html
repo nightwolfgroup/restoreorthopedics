@@ -1,0 +1,56 @@
+<section class="jarallax position-relative bg-gradient" data-jarallax data-speed="0.25" style="height: 590px;">{% load static wagtailimages_tags wagtailcore_tags %}
+    <span class="bg-overlay bg-gradient" style="opacity: .8;"></span>{% image self.background_image original format-png as background_image %}
+    <div class="jarallax-img" style="background-image: url({{ background_image.url }});"></div>
+    <div class="cs-shape cs-shape-bottom cs-shape-curve-side bg-body">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 250">
+            <g>
+                <path fill="currentColor" d="M3000,0v250H0v-51c572.7,34.3,1125.3,34.3,1657.8,0C2190.3,164.8,2637.7,98.4,3000,0z"></path>
+            </g>
+        </svg>
+    </div>
+</section>
+<section class="container bg-overlay-content pt-2 pt-md-7 pt-lg-7 pt-xl-7" style="margin-top: -590px;">
+    <h1 class="text-light text-center pt-6 pt-sm-6 pt-md-0 pt-lg-0">{{ page.title }}</h1>{% if self.subtitle %}
+    <p class="text-light text-center">{{ self.subtitle }}</p>{% endif %}
+    <div class="row pt-md-4 pt-lg-5 mt-3">
+        <div class="col-xl-11 pb-5">
+            <div class="cs-carousel">
+                <div class="cs-carousel-inner" data-carousel-options="{&quot;mode&quot;: &quot;gallery&quot;, &quot;nav&quot;: false}">
+                    {% for service in self.service %}
+                        <div>
+                            <div class="pb-3 pb-md-0 pl-md-7 ml-md-3">
+                                {% image service.image original as service_image %}
+                                <div class="bg-size-cover bg-position-center rounded-lg py-7 h-100" style="background-image: url({{ service_image.url }}); min-height:500px;">
+                                    <div class="d-md-flex align-items-center ml-md-n7 text-center text-md-left">
+                                        <div class="card card-body d-none d-md-flex py-grid-gutter px-grid-gutter border-0 box-shadow-lg mr-6 cs-scale-up" style="max-width: 28rem;">
+                                            <picture class="d-inline-block mb-4 mt-2">
+                                                {% image service.icon width-100 format-webp as image_webp %}
+                                                <source srcset="{{ image_webp.url }}" type="image/webp">
+                                                {% image service.icon width-100 format-png as service_icon_png %}
+                                                <source srcset="{{ service_icon_png.url }}" type="image/png">
+                                                {% image service.icon width-100 format-png %}
+                                            </picture>
+                                            <h3>{{ service.name }}</h3>
+                                            <p>{{ service.description }}</p>
+                                            <a class="nav-link" href="{{ service.link.url }}">{{ service.link_text }}
+                                                <i class="fe-chevron-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-md-none mt-n6 px-3 cs-scale-up">
+                                    <div class="card card-body py-grid-gutter px-grid-gutter border-0 box-shadow mx-auto" style="max-width: 28rem;">
+                                        <h3>{{ service.name }}</h3>
+                                        <p>{{ service.description }}</p>
+                                        <a class="nav-link" href="{{ service.link.url }}">{{ service.link_text }}
+                                            <i class="fe-chevron-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>{% block extra_js %}
+    <script src="{% static 'vendor/tiny-slider/dist/min/tiny-slider.js' %}"></script>{% endblock %}

@@ -1,0 +1,8 @@
+{% extends "wagtailadmin/login.html" %}{% load static %}
+
+{% block branding_login %}Content Management System{% endblock %}
+
+{% block login_form %}
+    <img src="{% static 'img/logo/logo-light.svg' %}" alt="Restore Orthopedics" style="max-width: 300px"/>
+    {{ block.super }}
+{% endblock %}

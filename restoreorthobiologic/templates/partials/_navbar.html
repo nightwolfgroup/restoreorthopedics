@@ -1,0 +1,62 @@
+{% load cache wagtailimages_tags menu_tags %}{% cache 300 navbar %}
+<header class="cs-header navbar navbar-expand-lg navbar-light bg-light navbar-sticky navbar-box-shadow" data-scroll-header>
+    <div class="container px-0 px-xl-3">
+        <button class="navbar-toggler ml-n2 mr-2" type="button" data-toggle="offcanvas" data-offcanvas-id="primaryMenu"><span class="navbar-toggler-icon"></span></button>
+        <a class="navbar-brand order-lg-1 mx-auto ml-lg-0 pr-lg-2 mr-lg-4" href="/">
+            <picture class="navbar-floating-logo d-none d-lg-block">
+                {% image settings.core.BusinessSettings.logo_dark width-153 format-webp as image_webp %}
+                <source srcset="{{ image_webp.url }}" type="image/webp">
+                {% image settings.core.BusinessSettings.logo_dark width-153 format-png as image_png %}
+                <source srcset="{{ image_png.url }}" type="image/png">
+                {% image settings.core.BusinessSettings.logo_dark width-153 format-png %}
+            </picture>
+            <picture class="navbar-stuck-logo">
+                {% image settings.core.BusinessSettings.logo_dark width-153 format-webp as image_webp %}
+                <source srcset="{{ image_webp.url }}" type="image/webp">
+                {% image settings.core.BusinessSettings.logo_dark width-153 format-png as image_png %}
+                <source srcset="{{ image_png.url }}" type="image/png">
+                {% image settings.core.BusinessSettings.logo_dark width-153 format-png %}
+            </picture>
+            <picture class="d-lg-none">
+                {% image settings.core.BusinessSettings.logo_icon width-58 format-webp as image_webp %}
+                <source srcset="{{ image_webp.url }}" type="image/webp" media="min-width: 58px">
+                {% image settings.core.BusinessSettings.logo_icon width-58 format-png as image_png %}
+                <source srcset="{{ image_png.url }}" type="image/png" media="min-width: 58px">
+                {% image settings.core.BusinessSettings.logo_icon width-58 format-png %}
+            </picture>
+        </a>
+
+        <div class="d-flex align-items-center order-lg-3 ml-lg-auto">
+            <a class="btn btn-primary" href="tel:{{ settings.core.BusinessSettings.phone }}"><i class="fe-phone-call font-size-lg mr-2"></i>{{ settings.core.BusinessSettings.phone }}</a>
+        </div>
+
+        <div class="cs-offcanvas-collapse order-lg-2" id="primaryMenu">
+            <div class="cs-offcanvas-cap navbar-box-shadow">
+                <h5 class="mt-1 mb-0">Menu</h5><button class="close lead" type="button" data-toggle="offcanvas" data-offcanvas-id="primaryMenu"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="cs-offcanvas-body">
+                <ul class="navbar-nav">
+                    {% for item in menu_items %}
+                        {% if item.sub_menu %}
+                            <li class="nav-item dropdown {{ item.active_class }}">
+                                <a class="nav-link dropdown dropdown-toggle" data-toggle="dropdown" href="{{ item.href }}">{{ item.text }}</a>
+                                <ul class="dropdown-menu">{% for sub_item in item.sub_menu.items %}
+                                    <li>
+                                        <a class="dropdown-item" href="{{ sub_item.href }}">
+                                            <div class="d-flex align-items-center">
+                                                <div><span class="d-block text-heading">{{ sub_item.text }}</span></div>
+                                            </div>
+                                        </a>
+                                    </li>{% if forloop.last %}{% else %}
+                                    <li class="dropdown-divider"></li>{% endif %}{% endfor %}
+                                </ul>
+                        {% else %}
+                            <li class="nav-item {{ item.active_class }}">
+                                <a class="nav-link" href="{{ item.href }}">{{ item.text }}</a>
+                            </li>{% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>{% endcache %}

@@ -1,0 +1,22 @@
+{% load wagtailimages_tags %}{% image self.background_image original as backgound_image %}
+<section class="bg-size-cover overflow-hidden pt-5 pt-md-6 pt-lg-7 {% if not self.cover_image %}pb-lg-7{% endif %} {% if not self.background_image %}bg-gradient{% endif %}" style="max-height: 750px; background-image: url({{ backgound_image.url }});">
+    <div class="container pt-2 pb-4 pb-md-2">
+        <div class="row justify-content-center">
+            <div class="col-xl-6 col-lg-7 col-md-8 text-center">
+                <h1 class="display-4 text-light mb-4">{{ page.title }}</h1>
+                <div class="d-inline-flex align-items-center mx-1 px-3 mb-4">
+                    <i class="fe-calendar h2 mb-0 mr-2 text-light"></i><span class="text-light">{{ page.date|date:'F jS, Y' }}</span>
+                </div>
+                <div class="d-inline-flex align-items-center mx-1 px-3 mb-4">
+                    <i class="fe-map-pin h2 mb-0 mr-2 text-light"></i><span class="text-light">{{ page.location }}, {{ page.location_city }}</span>
+                </div>
+                <div class="pt-2">
+                    <a class="btn btn-success" href="{{ self.button_link }}" target="_blank">{{ self.button_text }}</a>
+                </div>
+            </div>
+        </div>
+    </div>{% if self.cover_image %}
+    <div data-jarallax-element="50" data-disable-parallax-down="md">{% image self.cover_image original as cover_image %}
+        <img class="d-block mx-auto" src="{{ cover_image.url }}" alt="{{ cover_image.alt }}"/>
+    </div>{% endif %}
+</section>

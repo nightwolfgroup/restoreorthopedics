@@ -1,0 +1,67 @@
+<section class="position-relative bg-faded-primary pt-5 pb-5 pb-md-6 pb-lg-6 overflow-hidden">{% load static wagtailimages_tags %}
+    <div class="cs-shape cs-shape-bottom cs-shape-curve bg-body">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 185.4">
+            <path fill="currentColor" d="M3000,0v185.4H0V0c496.4,115.6,996.4,173.4,1500,173.4S2503.6,115.6,3000,0z"></path>
+        </svg>
+    </div>
+    <div class="container pt-4 pt-md-5 pt-lg-0">
+        <div class="row align-items-center">
+            <div class="col-lg-4 text-center text-lg-left">
+                <h1 class="mb-3">{{ self.title }}</h1>{% if self.subtitle %}
+                <p class="font-size-lg text-muted mb-4">{{ self.subtitle }}</p>{% endif %}
+                <a class="btn btn-primary" href="{{ self.button_link.url }}">{{ self.button_text }}</a>
+            </div>
+            <div class="col-xl-7 col-lg-8 offset-xl-1 pt-lg-3">
+                <div class="cs-carousel bg-size-cover mx-auto pt-6 pb-2" style="max-width: 705px; background-image: url({% static 'img/svg/shape.svg' %});">
+                    <div class="position-relative">
+                        <div class="cs-frame-browser-label">
+                            {% for carousel_image in self.carousel_images %}{% if forloop.counter == 1 %}
+                                <div class="cs-carousel-label">
+                                    <i class="{{ carousel_image.icon }}"></i><span>{{ carousel_image.description }}</span>
+                                </div>{% endif %}{% endfor %}
+                        </div>
+                        <div class="cs-frame-browser-body">
+                            <div class="cs-carousel-inner" data-carousel-options="{&quot;mode&quot;: &quot;gallery&quot;, &quot;controls&quot;: false, &quot;nav&quot;: false, &quot;autoplay&quot;: true, &quot;autoplayTimeout&quot;: 6000}">
+                                {% for carousel_image in self.carousel_images %}
+                                    <div data-carousel-label="&lt;i class=&quot;{{ carousel_image.icon }}&quot;&gt;&lt;/i&gt;&lt;span&gt;{{ carousel_image.description }}&lt;/span&gt;">
+                                        <picture class="rounded">
+                                            {% image carousel_image.image fill-1410x882 format-webp as image_webp %}
+                                            <source srcset="{{ image_webp.url }}" type="image/webp">
+                                            {% image carousel_image.image fill-1410x882 format-png as image_png %}
+                                            <source srcset="{{ image_png.url }}" type="image/png">
+                                            {% image carousel_image.image fill-1410x882 format-png %}
+                                        </picture>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cs-carousel-pager pt-4 text-nowrap text-center mt-4">
+                        <button class="active" data-nav data-goto="1"></button>
+                        <button data-nav data-goto="2"></button>
+                        <button data-nav data-goto="3"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="container py-5 py-md-6 py-lg-7">
+    <div class="row pt-2">{% for item in self.info_icons %}
+        <div class="col-sm-4 mb-grid-gutter pb-1">
+            <div class="mx-auto text-center" style="max-width: 278px;">
+                <picture class="d-inline-block mb-3">{% image item.icon width-56 format-webp as image_webp %}
+                    <source srcset="{{ image_webp.url }}" type="image/webp">
+                    {% image item.icon width-56 format-png as image_png %}
+                    <source srcset="{{ image_png.url }}" type="image/png">
+                    {% image item.icon width-56 fill-1410x882 format-png %}
+                </picture>
+                <h3 class="h5">{{ item.text }}</h3>
+                <p class="font-size-sm mb-0">{{ item.subtext }}</p>
+            </div>
+        </div>{% endfor %}
+    </div>
+</section>{% block extra_js %}
+    <script src="{% static 'vendor/tiny-slider/dist/min/tiny-slider.js' %}"></script>
+    <script src="{% static 'vendor/lightgallery.js/dist/js/lightgallery.min.js' %}"></script>
+    <script src="{% static 'vendor/lg-video.js/dist/lg-video.min.js' %}"></script>{% endblock %}

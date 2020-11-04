@@ -1,0 +1,66 @@
+<section class="position-relative">{% load static wagtailcore_tags wagtailimages_tags %}
+    <div class="bg-overlay bg-primary opacity-100"></div>
+    <div class="bg-overlay-content container-fluid">
+        <div class="row align-items-center">
+            <div class="col-lg-7 col-md-7 order-md-2 overflow-hidden">
+                <div class="cs-parallax mr-n7 mr-md-0" style="max-width: 1030px;">
+                    <img class="d-block" src="{% static 'img/svg/lines.svg' %}" alt="Lines"/>
+                    <div class="cs-parallax-layer" style="z-index: 2;" data-depth="0.13">
+                        <picture>
+                            {% image self.image width-1162 format-webp as image_webp %}
+                            <source srcset="{{ image_webp.url }}" type="image/webp">
+                            {% image self.image width-1162 format-png as image_png %}
+                            <source srcset="{{ image_png.url }}" type="image/png">
+                            {% image self.image width-1162 format-png %}
+                        </picture>
+                    </div>
+                    <div class="cs-parallax-layer" style="z-index: 3;" data-depth="0.25">
+                        <img src="{% static 'img/svg/shape-1.svg' %}" alt="Shape"/></div>
+                    <div class="cs-parallax-layer" data-depth="0.2">
+                        <img src="{% static 'img/svg/shape-2.svg' %}" alt="Shape"/></div>
+                    <div class="cs-parallax-layer" style="z-index: 3;" data-depth="0.5">
+                        <img src="{% static 'img/svg/shape-3.svg' %}" alt="Shape"/></div>
+                    <div class="cs-parallax-layer" style="z-index: 3;" data-depth="0.45">
+                        <img src="{% static 'img/svg/shape-4.svg' %}" alt="Shape"/></div>
+                </div>
+            </div>
+            <div class="col-lg-5 col-md-5 pt-4 pb-5 py-md-5">
+                <div class="mx-auto mr-lg-4 pl-xl-3 order-md-1 text-center text-md-left" style="max-width: 420px;">
+                    <h1 class="text-light mb-3">{{ self.title }}</h1>
+                    <div class="align-items-center justify-content-center justify-content-md-start pb-3 pb-xl-5 mb-5">
+                        {% for button in self.buttons %}
+                            <a class="btn btn-light mr-4 my-3 px-3" href="{{ button.button_link.url }}">{{ button.button_text }}</a>
+                        {% endfor %}
+                        <div class="align-items-center">
+                            <i class="fe-phone font-size-xl text-light mr-2"></i>
+                            <a class="text-light text-decoration-none" href="tel:{{ settings.core.BusinessSettings.phone }}">{{ settings.core.BusinessSettings.phone }}</a>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-center justify-content-md-start">
+                        <h2 class="h4 text-light mb-0 mr-3">Dr.<br>Ariana DeMers</h2>
+                        <div class="bg-light opacity-50 mr-4" style="width: 1px; height: 72px;"></div>
+                        <picture class="mr-4">
+                            {% image self.icon_one width-102 format-webp as image_webp %}
+                            <source srcset="{{ image_webp.url }}" type="image/webp">
+                            {% image self.icon_one width-102 format-png as service_icon_png %}
+                            <source srcset="{{ service_icon_png.url }}" type="image/png">
+                            {% image self.icon_one width-102 format-png %}
+                        </picture>
+                        <div>
+                            <picture>
+                                {% image self.icon_two width-72 format-webp as image_webp %}
+                                <source srcset="{{ image_webp.url }}" type="image/webp">
+                                {% image self.icon_two width-72 format-png as service_icon_png %}
+                                <source srcset="{{ service_icon_png.url }}" type="image/png">
+                                {% image self.icon_two width-72 format-png %} {% image self.icon_two width-144 height-72 as icon_two %}
+                            </picture>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% block extra_js %}
+    <script src="{% static 'vendor/parallax-js/dist/parallax.min.js' %}"></script>
+{% endblock %}

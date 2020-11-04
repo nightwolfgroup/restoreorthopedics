@@ -1,0 +1,218 @@
+{% extends 'documentation/base.html' %}{% block content %}{% load static %}
+    <!-- Page title-->
+    <div class="border-bottom pt-5 pb-2 mt-2 mb-5">
+        <h1 class="mt-4 pt-5">Navigating the Content Management System</h1>
+    </div>
+
+    <div class="card border-0 box-shadow-lg">
+        <div class="card-header">
+            <h2 class="card-title pt-3">Logging In</h2>
+        </div>
+        <div class="card-body">
+            <p>Open a web browser (such as Safari or Google Chrome) and navigate to:</p>
+
+            <pre><a href="https://restoreorthobiologic.com/dashboard/" target="_blank"><code>https://restoreorthobiologic.com/dashboard</code></a></pre>
+            <p class="pt-3">Enter your username and password</p>
+            <img class="rounded mt-4" src="{% static 'img/documentation/login.png' %}" alt="Login Screen"/>
+        </div>
+    </div>
+
+    <div class="card border-0 box-shadow-lg mt-5">
+        <div class="card-header">
+            <h2 class="card-title pt-3">Finding Your Way Around</h2>
+        </div>
+        <div class="card-body">
+            <h3>Here is the Home Screen of your CMS Dashboard</h3>
+            <img class="rounded mt-3" src="{% static 'img/documentation/dashboard-home.png' %}" alt="Login Screen"/>
+            <h3 class="mt-5">Navigation</h3>
+            <div class="row">
+                <div class="col-3">
+                    <img class="rounded my-3" src="{% static 'img/documentation/dashboard-nav.png' %}" alt="Login Screen"/>
+                </div>
+                <div class="col-8 align-items-center">
+                    <div class="row">
+                        <h4 class="pt-5">Navigation Items</h4>
+                    </div>
+                    <div class="row">
+                        <ul class="list-group">
+                            <li class="list-group-item">Pages
+                                <p class="alert-info rounded d-inline px-2 ml-2 py-1">You can control the content of all website pages with this menu</p>
+                            </li>
+                            <li class="list-group-item">Messages
+                                <p class="alert-info rounded d-inline px-2 ml-2 py-1">Messages sent from patients on the "Contact Us" page will appear here</p>
+                            </li>
+                            <li class="list-group-item">Appointment Requests
+                                <p class="alert-info rounded d-inline px-2 ml-2 py-1">Appointment Requests will appear here</p>
+                            </li>
+                            <li class="list-group-item">Testimonials
+                                <p class="alert-info rounded d-inline px-2 ml-2 py-1">Each "Testimonial" block on the website populates from this section</p>
+                            </li>
+                            <li class="list-group-item">Job Applicants
+                                <p class="alert-info rounded d-inline px-2 ml-2 py-1">If you have a job posted, all applicants will appear here</p>
+                            </li>
+                            <li class="list-group-item">Images
+                                <p class="alert-info rounded d-inline px-2 ml-2 py-1">Manage all website images from this menu</p>
+                            </li>
+                            <li class="list-group-item">Documents
+                                <p class="alert-info rounded d-inline px-2 ml-2 py-1">Manage documents available on the website. New patient forms live here</p>
+                            </li>
+                            <li class="list-group-item">Snippets
+                                <p class="alert-info rounded d-inline px-2 ml-2 py-1">Snippets are small pieces of information displayed on the website</p>
+                            </li>
+                            <li class="list-group-item">Streamforms
+                                <p class="alert-info rounded d-inline px-2 ml-2 py-1">Streamforms allow you to design a form to be submitted by users</p>
+                            </li>
+                            <li class="list-group-item">Analytics
+                                <p class="alert-info rounded d-inline px-2 ml-2 py-1">Here you will find live website analytics pulled from Google</p>
+                            </li>
+                            <li class="list-group-item">Reports
+                                <p class="alert-info rounded d-inline px-2 ml-2 py-1">Reports may be useful if you would like to see an audit log or locked pages</p>
+                            </li>
+                            <li class="list-group-item">Settings
+                                <p class="alert-info rounded d-inline px-2 ml-2 py-1">Here you may add users, edit business information, and edit the navigation</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <h3 class="mt-5">The Pages Menu</h3>
+            <div class="row">
+                <div class="col-6">
+                    <img class="rounded my-3" src="{% static 'img/documentation/pages-menu.png' %}" alt="Login Screen"/>
+                </div>
+
+                <div class="col-6 align-items-center px-5 pt-3">
+                    <div class="row">
+                        <div class="alert alert-info" role="alert">
+                            <i class="fe-alert-circle font-size-xl mt-n1 mr-3"></i>All pages are nested underneath the "Home Page"
+                        </div>
+                    </div>
+                    <div class="row">
+                        <h4 class="pt-2">Website Structure</h4>
+                    </div>
+                    <div class="row pl-6">
+                        <div class="cs-widget cs-widget-categories">
+                            <ul>
+                                <li>
+                                    <a class="cs-widget-link" href="#">
+                                        About Us
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="cs-widget-link" href="#">
+                                        Our Services
+                                    </a>
+                                    <ul>
+                                        <li>
+                                            <a class="cs-widget-link" href="#">Orthobiologics</a>
+                                            <ul>
+                                                <li>
+                                                    <a class="cs-widget-link" href="#">Stem Cell Treatments</a>
+                                                </li>
+                                                <li>
+                                                    <a class="cs-widget-link" href="#">Platelet Rich Plasma</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                        <li>
+                                            <a class="cs-widget-link" href="#">Orthopedics</a>
+                                            <ul>
+                                                <li>
+                                                    <a class="cs-widget-link" href="#">Sports Medicine</a>
+                                                </li>
+                                                <li>
+                                                    <a class="cs-widget-link" href="#">Total Joint Replacement</a>
+                                                </li>
+                                                <li>
+                                                    <a class="cs-widget-link" href="#">Trauma & Fracture Care</a>
+                                                </li>
+                                                <li>
+                                                    <a class="cs-widget-link" href="#">Orthopedics & Orthopedic Surgery</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a class="cs-widget-link" href="#">
+                                        Patient Resources
+                                    </a>
+                                    <ul>
+                                        <li>
+                                            <a class="cs-widget-link" href="#">New Patient Onboarding</a>
+                                        </li>
+                                        <li>
+                                            <a class="cs-widget-link" href="#">Request an Appointment</a>
+                                        </li>
+                                        <li>
+                                            <a class="cs-widget-link" href="#">Educational Resources</a>
+                                            <ul>
+                                                <li>
+                                                    <a class="cs-widget-link" href="#">Infographics</a>
+                                                </li>
+                                                <li>
+                                                    <a class="cs-widget-link" href="#">eBooks</a>
+                                                </li>
+                                                <li>
+                                                    <a class="cs-widget-link" href="#">Videos</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                        <li>
+                                            <a class="cs-widget-link" href="#">Frequently Asked Questions</a>
+                                            <ul>
+                                                <li>
+                                                    <a class="cs-widget-link" href="#">Orthobiologics FAQ</a>
+                                                </li>
+                                                <li>
+                                                    <a class="cs-widget-link" href="#">Orthopedics FAQ</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a class="cs-widget-link" href="#">
+                                        Testimonials
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="cs-widget-link" href="#">
+                                        Blog
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="cs-widget-link" href="#">
+                                        Contact Us
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="cs-widget-link" href="#">
+                                        Legal/Regulatory
+                                    </a>
+                                    <ul>
+                                        <li>
+                                            <a class="cs-widget-link" href="#">Privacy Policy</a>
+                                        </li>
+                                        <li>
+                                            <a class="cs-widget-link" href="#">Terms & Conditions</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <h4>Click the
+                    <kbd><i class="fe-chevron-right pb-1"></i></kbd> button on the right of the "Home Page" folder to expand the menu
+                </h4><br/>
+                <h4>To edit any page click the
+                    <kbd><i class="fe-edit-2 pb-1"></i></kbd> button to be taken to the editor interface</h4>
+            </div>
+        </div>
+    </div>
+{% endblock %}
