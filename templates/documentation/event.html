@@ -1,0 +1,68 @@
+{% extends 'documentation/base.html' %}{% block content %}{% load static %}
+<div class="border-bottom pt-5 pb-2 mt-2 mb-5">
+        <h1 class="mt-4 pt-5">Posting an Event</h1>
+    </div>
+    <div class="card border-0 box-shadow-lg mt-5">
+        <div class="card-body">
+
+            <div class="row justify-content-center text-center py-1 px-3">
+                <h4>Any page on your website can be password protected. This may be useful in instances where you want to place content behind a pay-wall.</h4>
+            </div>
+
+            <div class="row justify-content-center py-1 px-3">
+                <div class="alert alert-danger text-center" role="alert">
+                    <i class="fe-alert-triangle font-size-xl mt-n1 mr-3"></i>Password protecting a page will also apply that protection to any child pages. For example, if you were to password protect the Home Page, all pages of the website will require the password to access them as all pages on the site are technically children of the home page.
+                </div>
+            </div>
+
+            <div class="row border-bottom pb-4">
+                <div class="col-2">
+                    <img class="rounded my-3" src="{% static 'img/documentation/dashboard-nav.png' %}" alt="Login Screen"/>
+                </div>
+                <div class="col-10 justify-content-center pt-7">
+
+                    <div class="row justify-content-center text-center pt-1">
+                        <h3>Click <kbd>Pages</kbd> in the Navigation Menu then</h3>
+                    </div>
+                    <div class="row justify-content-center text-center pt-1">
+                        <h3>open the editor for the page you would like to add password protection to.</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row border-bottom py-4">
+                <div class="col-12">
+                    <div class="row justify-content-center pt-2">
+                        <h3>Open the "Page Settings Tab"</h3>
+                    </div>
+                    <div class="row justify-content-center pt-2">
+                        <img class="rounded my-3 mx-auto" src="{% static 'img/documentation/page-edit-tabs.png' %}" alt="Users Menu"/>
+                    </div>
+
+                    <div class="row justify-content-center pt-2">
+                        <h3>Click "Set Page Privacy"</h3>
+                    </div>
+
+                    <div class="row justify-content-center pt-2">
+                        <img class="rounded my-3 mx-8" src="{% static 'img/documentation/page-privacy-button.png' %}" alt="Users Menu"/>
+                    </div>
+
+                    <div class="row justify-content-center pt-2">
+                        <h3>Select "Private, accessible with the following password"</h3>
+                    </div>
+
+                    <img class="rounded my-3 mx-8" src="{% static 'img/documentation/page-privacy-settings.png' %}" alt="Users Menu"/>
+
+                    <div class="row justify-content-center pt-2">
+                        <h3>Set the Page Password</h3>
+                    </div>
+
+                    <div class="row justify-content-center pt-2">
+                        <h5>After password protection has been set, the password will be required, even for logged-in users</h5>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

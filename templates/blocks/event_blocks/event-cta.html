@@ -1,0 +1,36 @@
+<section class="bg-secondary">{% load static wagtailimages_tags %}
+    <div class="row no-gutters">
+        <div class="col-md-6 jarallax py-7" data-jarallax data-speed="0.3">
+            <span class="bg-overlay" style="opacity: 40%;"></span>{% image self.image fill-1918x1200 as cta_image %}
+            <div class="jarallax-img" style="background-image: url({{ cta_image.url }});"></div>
+            {% if self.video_url %}
+                <div class="bg-overlay-content d-flex flex-column align-items-center justify-content-center h-100 px-3 py-4 py-lg-7">
+                    <a class="cs-video-btn mb-3" href="{{ self.video_url }}" data-sub-html="&lt;h6 class=&quot;font-size-sm text-light&quot;&gt;{{ page.title }}&lt;/h6&gt;"></a>
+                    <span class="font-weight-medium text-light">Click me to watch video!</span>
+                </div>
+            {% endif %}
+        </div>
+        <div class="col-md-6 px-3 pr-xl-0 pl-lg-5 pl-xl-6 py-2 py-lg-4">
+            <div class="ml-sm-4 py-5 my-sm-0 py-md-6 py-lg-7" style="max-width: 520px;">
+                <h2 class="mb-5">{{ self.title }}</h2>
+                {% for item in self.list_items %}
+                    <div class="{% if not forloop.last %}media mb-grid-gutter{% else %}media{% endif %}">
+                        <picture class="d-block mt-1">
+                            {% image item.icon width-43 format-webp as image_webp %}
+                            <source srcset="{{ image_webp.url }}" type="image/webp">
+                            {% image item.icon width-43 format-png as image_png %}
+                            <source srcset="{{ image_png.url }}" type="image/png">
+                            {% image item.icon width-43 format-png %}
+                        </picture>
+                        <div class="media-body pl-4 ml-2">
+                            <h3 class="h5 mb-1">{{ item.title }}</h3>
+                            <p class="font-size-sm mb-0">{{ item.subtitle }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>{% block extra_js %}
+    <script src="{% static 'vendor/jarallax/dist/jarallax.min.js' %}"></script>
+    <script src="{% static 'vendor/jarallax/dist/jarallax-element.min.js' %}"></script>{% endblock %}

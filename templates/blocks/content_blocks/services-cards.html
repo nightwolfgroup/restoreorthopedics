@@ -1,0 +1,46 @@
+<section class="container py-5 py-md-6 py-lg-7 my-3">{% load static wagtailimages_tags cache %}
+    <div class="row align-items-center">
+        <div class="col-lg-4 col-md-5 text-center text-md-left mb-5 mb-md-0">
+            <h2 class="mb-3">{{ self.title }}</h2>
+            <p class="text-muted mb-4 pb-2">{{ self.subtitle }}</p>
+        </div>
+        <div class="col-lg-8 col-md-7 bg-position-center bg-no-repeat" style="background-image: url({% static 'img/svg/bg-shape.svg' %});">
+            <div class="mx-auto" style="max-width: 610px;">
+                <div class="row align-items-center">
+                    {% cache 604800 service_cards %}
+                        <div class="col-sm-6">
+                            {% for service in self.card|slice:":3" %}
+                                <div class="bg-light box-shadow-lg rounded-lg p-4 mb-grid-gutter text-center text-sm-left">
+                                    <picture class="d-inline-block mb-4 mt-2">
+                                        {% image service.Icon width-100 format-webp as image_webp %}
+                                        <source srcset="{{ image_webp.url }}" type="image/webp">
+                                        {% image service.Icon width-100 format-png as service_icon_png %}
+                                        <source srcset="{{ service_icon_png.url }}" type="image/png">
+                                        {% image service.Icon width-100 format-png %}
+                                    </picture>
+                                    <h3 class="h5 mb-2">{{ service.Title }}</h3>
+                                    <p class="font-size-sm">{{ service.Description }}</p>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-sm-6">
+                            {% for service in self.card|slice:"3:" %}
+                                <div class="bg-light box-shadow-lg rounded-lg p-4 mb-grid-gutter text-center text-sm-left">
+                                    <picture class="d-inline-block mb-4 mt-2">
+                                        {% image service.Icon width-100 format-webp as image_webp %}
+                                        <source srcset="{{ image_webp.url }}" type="image/webp">
+                                        {% image service.Icon width-100 format-png as service_icon_png %}
+                                        <source srcset="{{ service_icon_png.url }}" type="image/png">
+                                        {% image service.Icon width-100 format-png %}
+                                    </picture>
+                                    <h3 class="h5 mb-2">{{ service.Title }}</h3>
+                                    <p class="font-size-sm">{{ service.Description }}</p>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endcache %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

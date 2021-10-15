@@ -1,0 +1,102 @@
+<section class="container py-5 py-md-6 py-lg-7">{% load wagtailimages_tags %}
+    <div class="row py-3">
+        <div class="col-lg-4 col-md-5 mb-5 mb-md-0">
+            <h2 class="mb-3">{{ self.title }}</h2>
+            <p class="font-size-sm mb-5">{{ self.subtitle }}</p>
+            <h3 class="h6">{{ page.location }}</h3>
+            <ul class="list-unstyled mb-5">
+                <li class="mb-0">{{ page.location_address }}</li>
+                <li class="mb-0">{{ page.location_city }}, {{ page.location_state }}</li>
+            </ul>
+            <ul class="list-unstyled mb-5">{% for item in self.amenities %}
+                <li class="d-flex align-items-center {% if not forloop.last %}mb-2{% endif %}">
+                    <i class="fe-check-square font-size-xl mr-2"></i><span class="font-weight-semibold pl-1">{{ item.amenity }}</span>
+                </li>{% endfor %}
+            </ul>
+            {% if self.map_link %}
+                <div class="cs-gallery">
+                    <a class="cs-gallery-item cs-map-popup rounded-circle text-center" href="{{ self.map_link }}" data-iframe="true" data-sub-html="&lt;h6 class=&quot;font-size-sm text-light&quot;&gt;{{ page.location_address }}, {{ page.location_city }}, {{ page.location_state }}&lt;/h6&gt;" style="max-width: 312px;">
+                        {% if self.map_image %}
+                            <picture>
+                                {% image self.map_image width-312 format-webp as image_webp %}
+                                <source srcset="{{ image_webp.url }}" type="image/webp">
+                                {% image self.map_image width-312 format-png as image_png %}
+                                <source srcset="{{ image_png.url }}" type="image/png">
+                                {% image self.map_image width-312 format-png %}
+                            </picture>
+                        {% endif %}
+                        <span class="cs-gallery-caption"><i class="fe-maximize-2 font-size-xl mt-n1 mr-2"></i>Expand the map</span>
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+        <div class="col-xl-6 col-md-7 offset-xl-2 offset-lg-1 px-sm-3">
+            <div class="row mx-n2 mx-sm-n3 cs-gallery">
+                {% for location_image in self.location_images %}
+                    {% if forloop.counter <= 2 %}
+                        {% if forloop.counter == 1 %}
+                            <div class="col-6 px-2 px-md-3">
+                            {% image location_image.image original format-png as gallery_image %}
+                            <a class="cs-gallery-item rounded-lg mb-3 mb-md-0" href="{{ gallery_image.url }}" data-sub-html="&lt;h6 class=&quot;font-size-sm text-light&quot;&gt;{{ location_image.title }}&lt;/h6&gt;">
+                                <picture>
+                                    {% image location_image.image fill-400x575 format-webp as image_webp %}
+                                    <source srcset="{{ image_webp.url }}" type="image/webp">
+                                    {% image location_image.image fill-400x575 format-png as image_png %}
+                                    <source srcset="{{ image_png.url }}" type="image/png">
+                                    {% image location_image.image fill-400x575 format-png %}
+                                </picture>
+                                <span class="cs-gallery-caption">{{ location_image.title }}</span>
+                            </a>
+                        {% endif %}
+                    {% if forloop.counter == 2 %}
+                        <div class="d-none d-md-block mb-grid-gutter"></div>
+                        {% image location_image.image original format-png as gallery_image %}
+                        <a class="cs-gallery-item rounded-lg" href="{{ gallery_image.url }}" data-sub-html="&lt;h6 class=&quot;font-size-sm text-light&quot;&gt;{{ location_image.title }}&lt;/h6&gt;">
+                            <picture>
+                                {% image location_image.image fill-285x232 format-webp as image_webp %}
+                                <source srcset="{{ image_webp.url }}" type="image/webp">
+                                {% image location_image.image fill-285x232 format-png as image_png %}
+                                <source srcset="{{ image_png.url }}" type="image/png">
+                                {% image location_image.image fill-285x232 format-png %}
+                            </picture>
+                            <span class="cs-gallery-caption">{{ location_image.title }}</span>
+                        </a>
+                        </div>
+                    {% endif %}
+                    {% endif %}
+                    {% if forloop.counter >= 3 %}
+                        {% if forloop.counter == 3 %}
+                            <div class="col-6 px-2 px-md-3 pt-md-6">
+                            {% image location_image.image original format-png as gallery_image %}
+                            <a class="cs-gallery-item rounded-lg mb-3 mb-md-0" href="{{ gallery_image.url }}" data-sub-html="&lt;h6 class=&quot;font-size-sm text-light&quot;&gt;{{ location_image.title }}&lt;/h6&gt;">
+                                <picture>
+                                    {% image location_image.image fill-285x232 format-webp as image_webp %}
+                                    <source srcset="{{ image_webp.url }}" type="image/webp">
+                                    {% image location_image.image fill-285x232 format-png as image_png %}
+                                    <source srcset="{{ image_png.url }}" type="image/png">
+                                    {% image location_image.image fill-285x232 format-png %}
+                                </picture>
+                                <span class="cs-gallery-caption">{{ location_image.title }}</span>
+                            </a>
+                        {% endif %}
+                    {% if forloop.counter == 4 %}
+                        <div class="d-none d-md-block mb-grid-gutter"></div>
+                        {% image location_image.image original format-png as gallery_image %}
+                        <a class="cs-gallery-item rounded-lg" href="{{ gallery_image.url }}" data-sub-html="&lt;h6 class=&quot;font-size-sm text-light&quot;&gt;{{ location_image.title }}&lt;/h6&gt;">
+                            <picture>
+                                {% image location_image.image fill-400x575 format-webp as image_webp %}
+                                <source srcset="{{ image_webp.url }}" type="image/webp">
+                                {% image location_image.image fill-400x575 format-png as image_png %}
+                                <source srcset="{{ image_png.url }}" type="image/png">
+                                {% image location_image.image fill-400x575 format-png %}
+                            </picture>
+                            <span class="cs-gallery-caption">{{ location_image.title }}</span>
+                        </a>
+                        </div>
+                    {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>

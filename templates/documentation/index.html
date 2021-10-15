@@ -1,0 +1,27 @@
+{% extends 'documentation/base.html' %}{% block content %}{% load static %}
+    <div class="border-bottom pt-5 pb-2 mt-2 mb-5">
+        <h1 class="mt-4 pt-5">About Your Content Management System</h1>
+    </div>
+    <div class="pb-5">
+        <p class="font-size-lg font-weight-semibold text-dark"> Your website was built with a modern development toolset.</p>
+        <img src="{% static 'img/documentation/technologies.png' %}" alt="Technologies">
+        <div class="my-4">
+            <dl>
+                <dt>Django Web Framework
+                    <a href="https://nodejs.org/en/" target="_blank" rel="noopener">Official website</a></dt>
+                <dd class="pb-3 border-bottom">Django is a high-level Python Web framework that encourages rapid development and clean, pragmatic design. Built by experienced developers, it takes care of much of the hassle of Web development, so you can focus on writing your app without needing to reinvent the wheel. It’s free and open source.</dd>
+
+                <dt>Wagtail CMS
+                    <a href="https://gulpjs.com/" target="_blank" rel="noopener">Official website</a></dt>
+                <dd class="pb-3 border-bottom">Wagtail is an open source content management system (CMS) developed by Torchbox. It is built on the Django framework and designed to be super easy to use for both developers and editors.</dd>
+            </dl>
+        </div>
+        <h2 class="h4 pt-3">Why Django?</h2>
+        <p>
+        <ul>
+            <li>Ridiculously fast - Django was designed to help developers take applications from concept to completion as quickly as possible.</li>
+            <li>Reassuringly secure - Django takes security seriously and helps developers avoid many common security mistakes.</li>
+            <li>Exceedingly scalable - Some of the busiest sites on the Web leverage Django’s ability to quickly and flexibly scale.</li>
+        </ul>
+    </div>
+{% endblock %}

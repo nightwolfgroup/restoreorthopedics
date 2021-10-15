@@ -1,0 +1,13 @@
+<section class="jarallax bg-gradient py-5" data-jarallax data-speed="0.25">{% load wagtailimages_tags static %}
+    <span class="bg-overlay bg-gradient" style="opacity: .85;"></span> {% image self.image original format-png as image_png %}
+    <div class="jarallax-img" style="background-image: url({{ image_png.url }});"></div>
+    <div class="container bg-overlay-content">
+        <div class="row justify-content-center py-md-5">
+            <div class="col-lg-6 col-md-8 text-center">
+                <h1 class="text-light">{{ self.title }}</h1>
+                <p class="font-size-lg text-light pb-3">{{ self.subtitle }}</p>
+            </div>
+        </div>
+    </div>
+</section>{% block extra_js %}
+    <script src="{% static 'vendor/jarallax/dist/jarallax.min.js' %}"></script>{% endblock %}

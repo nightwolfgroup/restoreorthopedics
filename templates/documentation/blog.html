@@ -1,0 +1,77 @@
+{% extends 'documentation/base.html' %}{% block content %}{% load static %}
+<div class="border-bottom pt-5 pb-2 mt-2 mb-5">
+    <h1 class="mt-4 pt-5">Posting to the Blog</h1>
+</div>
+    <div class="card border-0 box-shadow-lg mt-5">
+        <div class="card-body">
+            <div class="row justify-content-center text-center py-1 px-3"><h4>Designing a Blog Post with your new web-application gives you a lot more control and flexibility than was available on prior releases of your site.</h4></div>
+            <div class="row border-bottom pb-4">
+                <div class="col-2">
+                    <img class="rounded my-3" src="{% static 'img/documentation/dashboard-nav.png' %}" alt="Login Screen"/>
+                </div>
+                <div class="col-10 justify-content-center pt-7">
+                    <div class="row justify-content-center text-center pt-1 mx-5"><h3>Click <kbd>Pages</kbd> in the Navigation Menu</h3></div>
+                    <div class="row justify-content-center text-center pt-6 mx-5"><h3>Click <kbd>Home</kbd> to open up the website index</h3></div>
+                </div>
+            </div>
+            <div class="row border-bottom py-4">
+                <div class="col-12">
+                    <div class="row justify-content-center pt-2"><h3>Website Index</h3></div>
+                    <img class="rounded my-3 mx-auto" src="{% static 'img/documentation/site-index.png' %}" alt="Users Menu"/>
+                    <div class="row justify-content-center text-center pt-2 mx-3"><h4>Hover your mouse over the "Blog" parent page, you will see a <i class="fe-plus-circle"></i> icon appear on the right side of the screen</h4></div>
+                    <img class="rounded my-3 mx-auto" src="{% static 'img/documentation/blog-plus.png' %}" alt="Users Menu"/>
+                    <div class="row justify-content-center py-2 border-bottom"><h3>Click the <i class="fe-plus-circle"></i> icon to add a Blog Post</h3></div>
+                    <div class="row justify-content-center pt-4"><h2>Blog Editor Page</h2></div>
+                    <img class="rounded my-3 mx-auto" src="{% static 'img/documentation/blog-editor.png' %}" alt="Users Menu"/>
+                    <div class="row justify-content-center text-center py-2 mx-5">
+                        <ul class="list-group">
+                            <li class="list-group-item"><b>Cover Image</b>: This image will display as the icon above the blog post on the main blog (list) page.</li>
+                            <li class="list-group-item"><b>Author</b>: This selector will display a list of users with accounts on this system. Selecting the author will pull the necessary information (including profile picture) and assign it to the blog post.</li>
+                            <li class="list-group-item"><b>Categories</b>: Categories are added to your blog by navigating to "Snippets" then to "Blog Categories" then "Add Blog Category". You may select multiple categories for a single blog post. When a category is clicked on the blog, it will filter posts by category type.</li>
+                            <li class="list-group-item"><b>Tags</b>: Tags are used on the frontend of the site with blog posts. A "tag cloud" is generated for each tag assigned to the post. If the post is shared by a user to Twitter, the will be appended to their tweet as hashtags.</li>
+                            <li class="list-group-item"><b>Content</b>: This is where this CMS really shines. Each button in the content section can be used multiple times, and re-ordered on the fly. A "Content Block" is a rich text field, allowing you to create links, make text bold, etc. The other two blocks were added to allow you to use them as you wish if you would like to break up your content with a call to action, or provide an interactive map with your post.</li>
+                        </ul>
+                    </div>
+                    <div class="row justify-content-center pt-4 mt-2 border-top"><h3>Using the Content Block</h3></div>
+                    <div class="row justify-content-center pt-4"><p>Click "Content Block" to add.</p></div>
+                    <img class="rounded my-3 mx-auto" src="{% static 'img/documentation/content-block.png' %}" alt="Users Menu"/>
+                    <div class="row justify-content-center pt-4"><p>Write your post content in the "Content Block" as you would using a basic word processor.</p></div>
+                    <div class="row justify-content-center pt-4"><h4>Notice the <i class="fe-plus"></i> icon above and below the "Content Block" </h4></div>
+                    <img class="rounded my-3 mx-auto" src="{% static 'img/documentation/blog-stream.png' %}" alt="Users Menu"/>
+                    <div class="row justify-content-center pt-4 mx-4"><p>This allows you to add different types of content between your text blocks. For example, if you wanted to write a blog post, and have a call to action in the middle of your post. You would generate your first content block then click the <i class="fe-plus"></i> icon, click "Call to Action Block". You can then add the remainder of your post by adding another "Content Block"</p></div>
+                    <div class="row justify-content-center pt-4 mt-2 border-top"><h3>Using the Call to Action Block</h3></div>
+                    <div class="row justify-content-center pt-4"><p>Click "Call to Action Block" to add.</p></div>
+                    <img class="rounded my-3 mx-auto" src="{% static 'img/documentation/cta-block-editor.png' %}" alt="Users Menu"/>
+                    <div class="row justify-content-center pt-4"><p>I have added some defaults for efficiency. Feel free to edit as you see fit.</p></div>
+                    <div class="row justify-content-center text-center pt-4"><h4>Here is the rendered version of what you will get on the frontend</h4></div>
+                    <img class="rounded my-3 mx-auto" src="{% static 'img/documentation/cta-block-fe.png' %}" alt="Users Menu"/>
+                    <div class="row justify-content-center pt-4 mt-2 border-top"><h3>Using the Map Block</h3></div>
+                    <div class="row justify-content-center pt-4"><p>Click "Google Map Block" to add.</p></div>
+                    <img class="rounded my-3 mx-auto" src="{% static 'img/documentation/map-block-editor.png' %}" alt="Users Menu"/>
+                    <div class="alert alert-info text-center" role="alert"><i class="fe-info font-size-xl mt-n1 mr-3"></i>You can get the map link by opening google maps, finding an address and clicking "Share" in the window that appears, click the tab "Embed a map". This is the link you want to place here, exactly as you see it formatted in the pre-populated version.</div>
+                    <div class="row justify-content-center pt-4"><p>I have added some defaults for efficiency. Feel free to edit as you see fit.</p></div>
+                    <div class="row justify-content-center text-center pt-4"><h4>Here is the rendered version of what you will get on the frontend</h4></div>
+                    <img class="rounded my-3 mx-auto" src="{% static 'img/documentation/map-block-fe.png' %}" alt="Users Menu"/>
+                    <div class="row justify-content-center pt-4 mt-2 border-top"><h3>Using the SEO/Menu Tab</h3></div>
+                    <div class="row justify-content-center pt-4"><p>Click "SEO/Menu" at the top of the page.</p></div>
+                    <div class="alert alert-info text-center" role="alert"><i class="fe-info font-size-xl mt-n1 mr-3"></i>This menu is present on virtually every page of the website and allows you to control the URL of the page, the page title (as seen by Google and other search engines), if the page will populate in the navigation bar, the search description (for Google and other search engines) and the search image (what will appear when this page is shared via iMessage, or to other social media sites).</div>
+                    <img class="rounded my-3 mx-auto" src="{% static 'img/documentation/seo-menu-blog.png' %}" alt="Users Menu"/>
+                    <div class="row justify-content-center text-center pt-2 pb-4 mx-5">
+                        <ul class="list-group">
+                            <li class="list-group-item"><b>Slug</b>: This will be the URL for your blog post. It will automatically populate from the title in the "Post Content" however you may change it to whatever you like, just avoid adding spaces (use "-" in the place of a space). The final URL of your post will be: https://restoreorthobiologic.com/(slug) <i class="fe-arrow-left"></i> What you place in this field</li>
+                            <li class="list-group-item"><b>Page Title</b>: The page title for blog pages are what will be seen at the top of your web browser, and what Google will use when placing the blog post on their search results. I generally format it like this: Blog Post Title - Restore Orthopedics & Sports Medicine, but you may title the page as you wish.</li>
+                            <li class="list-group-item"><b>Show In Menu</b>: If you would like your blog post to display in the navigation bar across the website when a user hovers over "Blog" check this box. This can become unruly if you have a lot of posts with this option turned on, just use your discretion.</li>
+                            <li class="list-group-item"><b>Search Description</b>: The search description is what helps search engines decide what your page is about. It is likely best practice to take the first couple sentences of your blog post and place them here. Adding a search description that is completely different from your blog post content could result in Google taking manual action against the site and will cause your SEO ratings to decrease.</li>
+                            <li class="list-group-item"><b>Search Image</b>: This is the image that will display front and center when sharing your post via iMessage, and social media sites. Using the cover image for your post is totally appropriate in this situation.</li>
+                        </ul>
+                    </div>
+                    <div class="row justify-content-center pt-4 mt-2 border-top"><h3>Publishing Your Post</h3></div>
+                    <div class="alert alert-info text-center" role="alert"><i class="fe-info font-size-xl mt-n1 mr-3"></i>If you would like to schedule this post for a future date, see the article I wrote by clicking <a href="{% url 'schedule' %}">here</a>.</div>
+                    <div class="row justify-content-center pt-4"><p>At the bottom of the page you will see a button group that looks like this:</p></div>
+                    <div class="row justify-content-center"><img class="rounded my-3 mx-auto" src="{% static 'img/documentation/publish-panel.png' %}" alt="Users Menu"/></div>
+                    <div class="row justify-content-center pt-4"><p>Click the <i class="fe-chevron-up"></i> icon, then "Publish"</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

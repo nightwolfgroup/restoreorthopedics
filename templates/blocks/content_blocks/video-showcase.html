@@ -1,0 +1,28 @@
+<section class="container py-5 pt-lg-6">{% load static wagtailimages_tags %}
+    <div class="row justify-content-center">
+        {% for item in self.videos %}
+            <div class="col-lg-4 lol-md-6 col-sm-6 col-6 mb-grid-gutter">
+                <div class="card card-curved-body card-hover border-2 box-shadow-lg">
+                    <a class="cs-video-btn card-floating-icon" href="{{ item.link }}" data-sub-html="&lt;h6 class=&quot;font-size-sm text-light&quot;&gt;{{ item.title }}&lt;/h6&gt;"></a>
+                    <div class="card-img-top card-img-gradient">
+                        <picture>
+                            {% image item.thumbnail fill-500x400 format-webp as image_webp %}
+                            <source srcset="{{ image_webp.url }}" type="image/webp">
+                            {% image item.thumbnail fill-500x400 format-png as image_png %}
+                            <source srcset="{{ image_png.url }}" type="image/png">
+                            {% image item.thumbnail fill-500x400 format-png %}
+                        </picture>
+                    </div>
+                    <div class="card-body text-center" style="min-height: 80px">
+                        <h3 class="h6 card-title mb-2">{{ item.title }}</h3>
+                        <p class="font-size-xs text-body mb-0">{{ item.subtitle }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</section>{% block extra_js %}
+    <script src="{% static 'vendor/lightgallery.js/dist/js/lightgallery.min.js' %}"></script>
+    <script src="{% static 'vendor/lg-fullscreen.js/dist/lg-fullscreen.min.js' %}"></script>
+    <script src="{% static 'vendor/lg-zoom.js/dist/lg-zoom.min.js' %}"></script>
+    <script src="{% static 'vendor/lg-video.js/dist/lg-video.min.js' %}"></script>{% endblock %}

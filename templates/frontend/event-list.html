@@ -1,0 +1,64 @@
+{% extends 'base.html' %}{% load static wagtailcore_tags wagtailimages_tags %}{% block content %}
+    <div class="container py-4 mb-2 mb-sm-0 pb-sm-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <nav aria-label="breadcrumb">
+                    <ol class="py-1 my-2 breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'wagtail_serve' '' %}">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Events</li>
+                    </ol>
+                </nav>
+                <h1 class="mb-5">Events</h1>
+                {% for post in posts %}{% if post.date|date:'F jS, Y' > now|date:'F jS, Y' %}
+                    <article class="card card-horizontal card-hover mb-grid-gutter">
+                        <div class="card-body" href="{{ post.url }}">
+                            <h2 class="h3 nav-heading mb-0"><a href="{{ post.url }}">{{ post.title }}</a></h2>
+                            <div class="text-nowrap">
+                                <p class="meta-link text-primary">{{ post.location_address }}</p>
+                                <span class="meta-divider mt-n3"></span>
+                                <p class="meta-link text-primary">{{ post.location_city }}, {{ post.location_state }}</p>
+                            </div>
+                            <div class="text-nowrap text-right mb-0">
+                                <p class="meta-link mb-0">
+                                    <i class="fe-calendar mr-2 text-danger"></i>{{ post.date|date:'F jS, Y' }}</p>
+                                <span class="meta-divider"></span>
+                                <p class="meta-link mb-0" href="{{ post.url }}">
+                                    <i class="fe-clock mr-2 text-danger"></i>{{ post.time|time:'g:i A' }}</p>
+                                <span class="meta-divider"></span>
+                                <div class="cs-countdown meta-link" data-countdown="{{ post.date|date:'m/d/Y' }} {{ post.time|time:'h:i:s A' }}">
+                                    <p class="cs-countdown-days meta-link mb-0">
+                                        <span class="cs-countdown-value">0</span><span class="cs-countdown-label">Days</span>
+                                    </p>
+                                    <div class="cs-countdown-hours meta-link mb-0">
+                                        <span class="cs-countdown-value">0</span><span class="cs-countdown-label">Hours</span>
+                                    </div>
+                                    <div class="cs-countdown-minutes meta-link mb-0">
+                                        <span class="cs-countdown-value">0</span><span class="cs-countdown-label">Mins</span>
+                                    </div>
+                                    <div class="cs-countdown-seconds meta-link mb-0">
+                                        <span class="cs-countdown-value">0</span><span class="cs-countdown-label">Secs</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                {% endif %}
+
+                {% empty %}
+                    <div class="container d-flex flex-column justify-content-center py-5" style="flex: 1 0 auto;">
+                        <div class="row align-items-center pb-2">
+                            <div class="col-xl-5 col-md-6 text-center text-md-left mb-5 mb-md-0">
+                                <h1 class="mb-3">Content coming soon...</h1>
+                                <p class="mb-grid-gutter">We are working hard to create great information for you. Blog
+                                    posts are coming soon!</p>
+                            </div>
+                            <div class="col-md-6 offset-xl-1">
+                                <img class="d-block mx-auto" src="{% static 'img/svg/coming-soon.svg' %}" alt="Illustration"/>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

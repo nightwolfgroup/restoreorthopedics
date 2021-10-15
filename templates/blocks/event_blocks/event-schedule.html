@@ -1,0 +1,43 @@
+<section class="bg-secondary pt-5 pb-3 pt-md-6 pb-md-4 pt-lg-7 pb-lg-5">{% load wagtailimages_tags %}
+    <div class="container pt-3 pt-md-0">
+        <h2 class="text-center mb-5">Schedule</h2>
+        <ul class="nav nav-tabs cs-fancy-tabs mb-5 mx-auto" style="max-width: 50rem;" role="tablist">
+            <li class="nav-item mx-auto">
+                <a class="nav-link active" href="#day" data-toggle="tab" role="tab">
+                    <span class="cs-fancy-tab-text h1 font-weight-normal">{{ page.date|date:'m/d' }}</span><span class="cs-fancy-tab-shape"></span>
+                </a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="day" role="tabpanel">
+                {% for block in self.schedule_blocks %}
+                    <div class="border-top py-4">
+                        <div class="row py-md-2">
+                            <div class="col-lg-2 col-sm-3">
+                                <div class="h6 text-body mb-0 py-3">{{ block.start_time|time:'g:i A' }} - {{ block.end_time|time:'g:i A' }}</div>
+                            </div>
+                            <div class="col-lg-10 col-sm-9">
+                                {% for event in block.events %}
+                                    <div class="media py-3 mb-2">{% if event.speaker_image %}
+                                        <picture class="rounded-circle">{% image event.speaker_image width-75 format-webp as image_webp %}
+                                            <source srcset="{{ image_webp.url }}" type="image/webp">
+                                            {% image event.speaker_image width-75 format-png as image_png %}
+                                            <source srcset="{{ image_png.url }}" type="image/png">
+                                            {% image event.speaker_image width-75 class="rounded-circle" format-png %}
+                                        </picture>{% endif %}
+                                        <div class="media-body {% if not event.speaker_image %}ml-7{% else %}ml-4{% endif %}" style="max-width: 420px;">
+                                            {% if event.speaker_name %}
+                                                <div class="h6 text-body mb-2">{{ event.speaker_name }}</div>{% endif %}
+                                            {% if event.subtitle %}
+                                                <p class="font-size-sm mb-2">{{ event.subtitle }}</p>{% endif %}
+                                            <h3 class="h4 mb-0">{{ event.title }}</h3>
+                                        </div>
+                                    </div>{% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>

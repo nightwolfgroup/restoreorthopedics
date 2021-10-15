@@ -1,0 +1,32 @@
+<section class="bg-gradient pt-6 pb-7">{% load static cache %}
+    <div class="container text-center pb-7">
+        {% if self.title %}<h2 class="text-light mb-5">{{ self.title }}</h2>{% endif %}
+    </div>
+</section>
+<div class="container-fluid bg-overlay-content mb-3 pb-5 mb-sm-0 pb-sm-6 pb-md-7" style="margin-top: -198px;">
+    <div class="cs-carousel">
+        <div class="cs-carousel-inner" data-carousel-options="{&quot;items&quot;: 2, &quot;controls&quot;: false, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1, &quot;gutter&quot;: 16}, &quot;520&quot;:{&quot;items&quot;:2, &quot;gutter&quot;: 12}, &quot;860&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 23}, &quot;1080&quot;:{&quot;items&quot;:4, &quot;gutter&quot;: 23}, &quot;1380&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 23}, &quot;1600&quot;:{&quot;items&quot;:6, &quot;gutter&quot;: 23}}}">
+            {% for testimonial in testimonials %}
+                {% cache 604800 testimonial_card testimonial.id %}
+                    <div class="py-2">
+                        <div class="card h-100 border-0 box-shadow mx-1">
+                            <div class="card-body">
+                                <blockquote class="blockquote font-size-sm">
+                                    <p class="mb-0">{{ testimonial.quote }}</p>
+                                </blockquote>
+                            </div>
+                            <footer class="font-size-sm px-4 pb-4">
+                                <div class="media align-items-center border-top mb-n2 pt-3">
+                                    <div class="media-body text-heading font-weight-medium pl-2 ml-1 mt-n1">{{ testimonial.name }}</div>
+                                </div>
+                            </footer>
+                        </div>
+                    </div>
+                {% endcache %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% block extra_js %}
+    <script src="{% static 'vendor/tiny-slider/dist/min/tiny-slider.js' %}"></script>
+{% endblock %}

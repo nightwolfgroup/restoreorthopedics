@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "rosm-website",
+  "private_key_id": "742d6412bac5173647461c93a942b38963d43c45",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCjDCFwufwQzkkc\nDDoejy4IAfcisNdARd0QYjCphNfZm+222zZqeo4B8R/+WgL7OvxQdc1BZDYK9fiJ\n4LDCkJlJEJAHQBCB92wa8Aa3p29EKC2Z27ynnPXguPgstFm129jW535UC+RJRFU2\nuGRTCSjW/7E95QbcvnmgSixUyU3CX41CJgEDjKhBOTKcrOwv1t0K0rdB79wl/F2v\n2kXCVDvFcLT++Hz7MCxC4phFhF7943jNDvSj3RVuGIWbkZEJh9EHfNGWmpNsGYf8\nVzLXERIOXlFf186fJubdTzRPfTAF5TnektdsOWlzzRtwL7AyAyXxWZTwDD60at84\nFwO8IA/3AgMBAAECggEAD9MtawxUx5QgqsJnC7CYO6URMFfwnxIzfr5rpwW35ize\nWXPqUqhayxvKSqdq3akfycwSjr5kCRP5j6GewQDu18AYnT4zEUzgkba/4tMIl268\n36Tg/nWwtE3Poesj6o+QJWo/gSHMV5jJxS9dZrp0sSANEGBVFldoZPh+AqwCdOh7\nRha2i7wSebqivlcn/myAhVFR2QbenEftrrnk0cqxEDjsWTvEGzT8CB28nOd3LjfF\nR1+JkevY0+XmGYfjgTzRGP22DUj4JcflASDQLF55G9y57kFZqL4lhrmq5BJaazVI\nfvK0efGcmRIEm/xHc7zGTBgBEFP8s4MTF8GPU5aYPQKBgQDOLrWIraBHHNub5ajv\nt+Y7ieFgfW+vMNhsi2BQLIiN7Ts8Clg5M92IjZile8vh5D+SZAcas+zPwxXNDXPW\neDYlTtf5Ih63xJEV3pLd1Pb9AmDDwHLh2RdyExG9F+duFnq/Fi+wr7vqZ+uAI15y\n18uhZDB5wSGvUm7F/gjQI5bXewKBgQDKcVPo7vf0iejC9AhyYVeCZNLdpwuJS/GC\nE5wxlASDP1BQXGISD+WK0z+Fp4qr61os+DwBj7g++HZUGLRo1DxVXf15DSMeHin5\n6b/MhpLJ2LdyHyo476ETnR92z86J7F6ErI487s7WzYdEP0dpeaBuiQenuS/jzl0Y\nOIGtowRCtQKBgQCCO9bGwoUe5geBbYtL/+kZanpFrHXDPyM1TMRFYBvRKivkPNSF\nLVGdU3M78/pQcRAGs9AY+dV3Vk6K+xhUPBJXdnnND9Q/V5YdLj2uiTqJjdr5SrJG\nHg5FK+5kdpjkXKaj1KvC+v3Djmiew7iA6fXht5s3DNruFy+JOHDwp8o7yQKBgEUk\nBYOFslvrifqjfAsMoeWf58DaH3+J13cUmYD5S71Dr3tywe/nS/9o/MX6Hctvu0Gm\nml/yJPwkwc0hDuTKr7x8OGjSis7rgGyhX+dLgvC7OpQYfsQpW3sma6uZd7H1b6ai\nhIXdDfmhAnTVo98rMhbuaBXpkqicP4FZMzkJdxgNAoGBAMRJPRhd69aiHLu319U3\nros+StlTfNPJ0ZStTzBs/MuLo9pvx/KIOoB+CAGBp2zJSlNqrcfwHDdtdfq2qDPk\nsXf3wWKhL+t1UusQ01ReD3tes+aXObs+IX8y6bzfDem64WinvMwbGUE+3ydUcwRu\nQ/qW3lBuaxOgmeyDtvM9bQyb\n-----END PRIVATE KEY-----\n",
+  "client_email": "analytics@rosm-website.iam.gserviceaccount.com",
+  "client_id": "116507272240491691015",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/analytics%40rosm-website.iam.gserviceaccount.com"
+}

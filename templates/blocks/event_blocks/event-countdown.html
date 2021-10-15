@@ -1,0 +1,25 @@
+<section class="bg-secondary py-5 py-md-6">
+    <div class="container py-2 py-md-0">
+        <div class="row align-items-center">
+            <div class="col-xl-4 text-center text-xl-left">
+                <h2 class="mb-4 mb-xl-0">{{ self.countdown_title }}</h2>
+            </div>
+            <div class="col-xl-8">
+                <div class="cs-countdown h2 display-2 justify-content-center justify-content-xl-start" data-countdown="{{ page.date|date:'m/d/Y' }} {{ page.time|time:'h:i:s A' }}">
+                    <div class="cs-countdown-days mb-0 mt-3 mr-0 px-4 border-right">
+                        <span class="cs-countdown-value font-weight-normal px-4">0</span><span class="cs-countdown-label font-size-lg text-body">Days</span>
+                    </div>
+                    <div class="cs-countdown-hours mb-0 mt-3 mr-0 px-4 border-right">
+                        <span class="cs-countdown-value font-weight-normal px-4">0</span><span class="cs-countdown-label font-size-lg text-body">Hours</span>
+                    </div>
+                    <div class="cs-countdown-minutes mb-0 mt-3 mr-0 px-4 border-right">
+                        <span class="cs-countdown-value font-weight-normal px-4">0</span><span class="cs-countdown-label font-size-lg text-body">Mins</span>
+                    </div>
+                    <div class="cs-countdown-seconds mb-0 mt-3 mr-0 px-4">
+                        <span class="cs-countdown-value font-weight-normal px-4">0</span><span class="cs-countdown-label font-size-lg text-body">Secs</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

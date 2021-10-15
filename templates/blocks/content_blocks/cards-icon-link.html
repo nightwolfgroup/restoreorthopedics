@@ -1,0 +1,17 @@
+<section class="container mt-4 pt-5 mt-md-0 pt-md-7 pb-5">
+    {% if self.title %}<h2 class="mb-5 text-center">{{ self.title }}</h2>{% endif %}
+    <div class="row justify-content-center">
+        {% for item in self.cards %}
+            <div class="col-lg-4 col-sm-6 mb-grid-gutter">
+                <a class="card h-100 border-0 box-shadow card-hover" href="{{ item.button_link.url }}">
+                    <div class="card-body pl-grid-gutter pr-grid-gutter text-center">
+                        <i class="{{ item.icon }} h2 text-primary mt-2 mb-4"></i>
+                        <h3 class="h5">{{ item.title }}</h3>
+                        <p class="font-size-sm text-body">{{ item.text }}</p>
+                        <div class="btn btn-translucent-primary btn-sm mb-2">{{ item.button_text }}</div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</section>

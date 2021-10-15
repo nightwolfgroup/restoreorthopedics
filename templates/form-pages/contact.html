@@ -1,0 +1,124 @@
+{% extends 'base.html' %}{% load cache static wagtailcore_tags wagtailimages_tags wagtailmetadata_tags %}{% block content %}
+    <section class="jarallax position-relative bg-gradient" data-jarallax data-speed="0.25" style="height: 590px;">
+        <span class="bg-overlay bg-gradient" style="opacity: .8;"></span>{% image self.background_image max-1220x380 format-jpeg as background_image %}
+        <div class="jarallax-img" style="background-image: url({{ background_image.url }});"></div>
+        <div class="cs-shape cs-shape-bottom cs-shape-curve-side bg-body">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 250">
+                <g>
+                    <path fill="currentColor" d="M3000,0v250H0v-51c572.7,34.3,1125.3,34.3,1657.8,0C2190.3,164.8,2637.7,98.4,3000,0z"></path>
+                </g>
+            </svg>
+        </div>
+    </section>
+    <section class="container bg-overlay-content pt-2 pt-md-7 pt-lg-7 pt-xl-7" style="margin-top: -590px;">{% cache 43200 contact_page_info %}
+        <div class="row pt-md-4 pt-lg-5 mt-3">
+            <div class="col-lg-4 col-md-5 offset-lg-1">
+                <h1 class="text-light mb-3 pb-4 pt-sm-3">{{ self.title }}</h1>
+                <div class="d-flex mb-4"><i class="fe-map-pin h3 mb-2 text-light mt-1"></i>
+                    <div class="pl-3">
+                        <p class="text-light mb-2">{{ settings.core.BusinessSettings.street_address }},<br>{{ settings.core.BusinessSettings.city }}, {{ settings.core.BusinessSettings.state }} {{ settings.core.BusinessSettings.zip }}
+                        </p>
+                        <a class="cs-fancy-link text-light font-size-sm" href="#map" data-scroll>See on the map</a>
+                    </div>
+                </div>
+                <div class="d-flex mb-4">
+                    <i class="fe-mail h3 mb-2 text-light"></i>
+                    <div class="pl-3">
+                        <a class="d-inline-block text-light text-decoration-none mb-2" href="mailto:{{ settings.core.BusinessSettings.email }}">{{ settings.core.BusinessSettings.email }}</a>
+                    </div>
+                </div>
+                <div class="d-flex mb-4">
+                    <i class="fe-phone h3 mb-2 text-light"></i>
+                    <div class="pl-3">
+                        <a class="d-inline-block text-light text-decoration-none mb-2" href="tel:{{ settings.core.BusinessSettings.phone }}">{{ settings.core.BusinessSettings.phone }}</a>
+                    </div>
+                </div>
+            </div>{% endcache %}
+            <div class="col-xl-6 col-md-7">
+                <div class="card border-0 box-shadow-lg">
+                    <div class="card-body py-5 px-3 px-sm-4">
+                        <h2 class="h3 text-center">{{ self.title }}</h2>
+                        <p class="font-size-sm text-muted text-center">{{ self.subtitle }}</p>
+                        <form class="needs-validation pt-2 px-md-3" novalidate method="POST" action="{% slugurl 'contact-us' %}">
+                            {% csrf_token %} {% include 'partials/_alerts.html' %}
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <label class="form-label" for="id_first_name">First name<sup class="text-danger ml-1">*</sup></label> {{ form.first_name }}
+                                    <div class="invalid-feedback">Please enter your first name!</div>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label class="form-label" for="id_last_name">Last name<sup class="text-danger ml-1">*</sup></label> {{ form.last_name }}
+                                    <div class="invalid-feedback">Please enter your last name!</div>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label class="form-label" for="id_email">Email address<sup class="text-danger ml-1">*</sup></label> {{ form.email }}
+                                    <div class="invalid-feedback">Please enter a valid email address!</div>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label class="form-label" for="id_phone_number">Phone number<sup class="text-danger ml-1">*</sup></label> {{ form.phone_number }}
+                                    <div class="invalid-feedback">Please enter a valid phone number!</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="id_message">Message<sup class="text-danger ml-1">*</sup></label> {{ form.message }}
+                                <div class="invalid-feedback">Please write a message!</div>
+                            </div>
+                            <div class="text-center pt-2">
+                                {{ form.captcha }}
+                                <button class="btn btn-primary" type="submit">Send Message</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="container py-5 py-md-6 py-lg-7" id="location">
+        <div class="row py-sm-3">
+            <div class="col-md-7">
+                <div class="cs-gallery" id="map">{% image self.map_image fill-703x450 format-png as map_image %}
+                    <a class="cs-gallery-item cs-map-popup bg-position-center bg-no-repeat py-7 text-center border rounded-lg" href="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3145.0021611401357!2d-120.34119544822403!3d37.9770788796236!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8090c528b63b1ba3%3A0xb75939887ae2279d!2sRestore%20Orthopedics%20and%20Sports%20Medicine%3A%20Ariana%20DeMers%2C%20D.O.!5e0!3m2!1sen!2sus!4v1594873054045!5m2!1sen!2sus" data-iframe="true" data-sub-html="&lt;h6 class=&quot;font-size-sm text-light&quot;&gt;{{ settings.core.BusinessSettings.name }}&lt;/h6&gt;" style="background-image: url({{ map_image.url }});">
+                        <span class="cs-gallery-caption"><i class="fe-maximize-2 font-size-xl mt-n1 mr-2"></i>Expand the map</span>
+                        <div class="d-inline-block py-4 py-sm-7">
+                            <img width="48" src="{% static 'img/svg/marker.svg' %}" alt="Map marker"/></div>
+                    </a>
+                </div>
+            </div>{% cache 43200 contact_page_location %}
+            <div class="col-md-4 offset-md-1 pt-4">
+                <h2 class="h4 pb-3">Our Location</h2>
+                <h3 class="h5">Address</h3>
+                <ul class="list-unstyled font-size-sm mb-4 pb-2">
+                    <li>{{ settings.core.BusinessSettings.street_address }}</li>
+                    <li>{{ settings.core.BusinessSettings.city }}, {{ settings.core.BusinessSettings.state }} {{ settings.core.BusinessSettings.zip }}</li>
+                </ul>
+                <h2 class="h4 pb-2">Working hours</h2>
+                <ul class="list-unstyled font-size-sm">
+                    <li>
+                        <span class="text-heading font-size-base mr-1">Sunday: </span><span class="text-danger">{{ settings.core.BusinessSettings.sunday_hours }}</span>
+                    </li>
+                    <li>
+                        <span class="text-heading font-size-base mr-1">Monday: </span>{{ settings.core.BusinessSettings.monday_hours }}
+                    </li>
+                    <li>
+                        <span class="text-heading font-size-base mr-1">Tuesday: </span>{{ settings.core.BusinessSettings.tuesday_hours }}
+                    </li>
+                    <li>
+                        <span class="text-heading font-size-base mr-1">Wednesday: </span>{{ settings.core.BusinessSettings.wednesday_hours }}
+                    </li>
+                    <li>
+                        <span class="text-heading font-size-base mr-1">Thursday: </span>{{ settings.core.BusinessSettings.thursday_hours }}
+                    </li>
+                    <li>
+                        <span class="text-heading font-size-base mr-1">Friday: </span>{{ settings.core.BusinessSettings.friday_hours }}
+                    </li>
+                    <li>
+                        <span class="text-heading font-size-base mr-1">Saturday: </span><span class="text-danger">{{ settings.core.BusinessSettings.saturday_hours }}</span>
+                    </li>
+                </ul>
+            </div>{% endcache %}
+        </div>
+    </section>
+{% endblock %}{% block extra_js %}
+    <script src="{% static 'vendor/cleave.js/dist/cleave.min.js' %}"></script>
+    <script src="{% static 'vendor/jarallax/dist/jarallax.min.js' %}"></script>
+    <script src="{% static 'vendor/lightgallery.js/dist/js/lightgallery.min.js' %}"></script>{% endblock %}

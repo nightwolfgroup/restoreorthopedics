@@ -1,0 +1,18 @@
+{% load static cache%}{% cache 43200 logo_cta %}
+<section class="bg-{{ self.background_color }}">
+    <div class="container pb-5 pb-md-0">
+        <div class="row align-items-center pb-3 pb-md-0">
+            <div class="col-md-6 col-lg-7 pb-5 pb-md-0">
+                <div class="mx-auto mx-md-0" style="max-width: 495px;">
+                    <img src="{% static 'img/svg/cta.svg' %}" alt="Restore Orthopedics"/>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 text-center">
+                <h2>{{ self.title }}</h2>
+                <p class="font-size-sm text-muted pb-2">{{ self.subtitle }}</p>
+                <a class="btn btn-primary" href="{{ self.button_link.url }}">{{ self.button_text }}</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endcache %}

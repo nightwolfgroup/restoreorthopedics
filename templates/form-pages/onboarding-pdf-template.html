@@ -1,0 +1,891 @@
+<html>
+<head>
+    <style>
+        @page {
+            size: letter portrait;
+            margin: 0.2in
+        }
+
+        div, h1, h2, h3, h4, h5, h6, p, table, th, tr, td, hr {
+            padding: 0;
+            margin: 0;
+            font-weight: normal;
+        }
+
+        th, td {
+            padding-top: 5px;
+            padding-bottom: 2px;
+        }
+
+        th {
+            font-weight: bold;
+        }
+
+        td {
+            font-family: Courier;
+            font-size: 14px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-left {
+            text-align: start;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .page-title {
+            font-weight: bold;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .page-text p {
+            font-size: 14px;
+            border-bottom: 0.5px solid black;
+            margin-bottom: 3px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .section-subhead {
+            font-size: 13px;
+        }
+
+        .pr-10 {
+            padding-right: 10px;
+        }
+
+        .pt-30 {
+            padding-top: 30px;
+        }
+
+        .pt-15 {
+            padding-top: 15px;
+        }
+
+        .first-row {
+            border-top: 1.5px solid black;
+        }
+
+        .middle-row {
+            border-bottom: 0.5px solid black;
+        }
+
+        .last-row {
+            border-bottom: 1.5px solid black;
+        }
+
+        .box {
+            border-top: 1px solid black;
+            border-bottom: 1px solid black;
+        }
+
+        .footer-text {
+            text-align: center;
+            font-size: 12px;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+<!-- START PATIENT DEMOGRAPHICS -->
+<h3 class="page-title">Patient Demographics</h3>
+<p>Continuum is a direct Health & Wellness consortium. Continuum provides shared space for several different healthcare providers with different specialties. Your practitioner may refer you to another provider within Continuum. Each practitioner acts
+    independently and is not responsible for the actions and care delivered by the accepting practitioner. I understand that treatment may include a recommendation that I seek other types of treatment from other health professionals wo are not
+    formally affiliated with the practice, even if they occupy the same building or adjacent offices. I understand that the practice does not supervise these professionals and is not clinically or legally responsible for them. I understand that they
+    are not the practice's employees and that they will bill separately for their services. The foregoing also applies to other professionals who may rent the same office space as the practice at different periods of time.</p>
+<h3 class="section-title pt-15">Patient Information</h3>
+<table>
+    <tr class="first-row middle-row">
+        <th class="text-left"><b>Last Name</b></th>
+        <td class="text-left">{{ data.last_name.upper }}</td>
+        <th class="text-center"><b>Middle Name</b></th>
+        <td class="text-center">{{ data.middle_name.upper }}</td>
+        <th class="text-center"><b>First Name</b></th>
+        <td class="text-center">{{ data.first_name.upper }}</td>
+        <th class="text-right"><b>Date of Birth</b></th>
+        <td class="text-center">{{ data.date_of_birth }}</td>
+    </tr>
+</table>
+<table>
+    <tr class="middle-row">
+        <th colspan="2" class="text-left"><b>Mailing Address</b></th>
+        <td colspan="3" class="text-left">{{ data.mailing_address.upper }}</td>
+        <th class="text-center"><b>City</b></th>
+        <td colspan="2" class="text-center">{{ data.mailing_city.upper }}</td>
+        <th class="text-right"><b>State</b></th>
+        <td class="text-center">{{ data.mailing_state }}</td>
+        <th class="text-right"><b>ZIP Code</b></th>
+        <td class="text-center">{{ data.mailing_zip }}</td>
+    </tr>
+    <tr class="middle-row">
+        <th colspan="2" class="text-left"><b>Street Address</b></th>
+        <td colspan="3" class="text-left">{{ data.street_address.upper }}</td>
+        <th class="text-center"><b>City</b></th>
+        <td colspan="2" class="text-center">{{ data.street_city.upper }}</td>
+        <th class="text-right"><b>State</b></th>
+        <td class="text-center">{{ data.street_state }}</td>
+        <th class="text-right"><b>ZIP Code</b></th>
+        <td class="text-center">{{ data.street_zip }}</td>
+    </tr>
+</table>
+<table>
+    <tr class="middle-row">
+        <th class="text-left"><b>Primary Phone</b></th>
+        <td colspan="2" class="text-center">{{ data.cell_phone }}</td>
+        <th class="text-center"><b>Voicemail?</b></th>
+        <td class="text-center">{{ data.cell_vmail.upper }}</td>
+        <th class="text-center"><b>Secondary Phone</b></th>
+        <td colspan="2" class="text-center">{{ data.home_phone }}</td>
+        <th class="text-right"><b>Voicemail?</b></th>
+        <td class="text-center">{{ data.home_phone_vmail.upper }}</td>
+    </tr>
+    <tr class="middle-row">
+        <th class="text-left"><b>Email Address</b></th>
+        <td colspan="4" class="text-right">{{ data.email.upper }}</td>
+        <th colspan="2" class="text-right"><b>Primary Care Provider</b></th>
+        <td colspan="4" class="text-center">{{ data.primary_care.upper }}</td>
+    </tr>
+</table>
+<table>
+    <tr class="last-row">
+        <th class="text-left"><b>Gender</b></th>
+        <td class="text-center">{{ data.gender.upper }}</td>
+        <th class="text-center"><b>Race</b></th>
+        <td class="text-center">{{ data.race.upper }}</td>
+        <th class="text-center"><b>Ethnicity</b></th>
+        <td colspan="2" class="text-center">{{ data.ethnicity.upper }}</td>
+        <th class="text-right"><b>Marital Status</b></th>
+        <td class="text-center">{{ data.marital_status.upper }}</td>
+    </tr>
+</table>
+<h3 class="section-title pt-30">Insurance Information</h3>
+<table>
+    <tr>
+        <th colspan="8" class="first-row middle-row text-left section-subhead"><b>Person Responsible for Bill</b></th>
+    </tr>
+</table>
+<table>
+    <tr class="middle-row">
+        <th class="text-left"><b>Name</b></th>
+        <td colspan="2" class="text-left">{{ data.resp_pty_name.upper }}</td>
+        <th class="text-left"><b>Date of Birth</b></th>
+        <td colspan="2" class="text-center">{{ data.resp_pty_dob }}</td>
+        <th class="text-center"><b>Home Phone</b></th>
+        <td colspan="2" class="text-center">{{ data.resp_pty_home_ph }}</td>
+        <th class="text-right"><b>Cell Phone</b></th>
+        <td colspan="2" class="text-center">{{ data.resp_pty_cell_ph }}</td>
+    </tr>
+</table>
+<table>
+    <tr class="middle-row">
+        <th colspan="3" class="text-center"><b>Address <i>(if different)</i></b></th>
+        <td colspan="5" class="text-center">{{ data.resp_pty_address.upper }}</td>
+    </tr>
+    <tr>
+        <th colspan="8" class="first-row middle-row text-left section-subhead"><b>Primary Insurance</b></th>
+    </tr>
+</table>
+<table>
+    <tr class="middle-row">
+        <th colspan="2" class="text-left"><b>Carrier Name</b></th>
+        <td colspan="4" class="text-left">{{ data.p_ins_name.upper }}</td>
+        <th class="text-left"><b>Policy #</b></th>
+        <td colspan="3" class="text-left">{{ data.p_ins_policy.upper }}</td>
+        <th class="text-right"><b>Group #</b></th>
+        <td colspan="2" class="text-right">{{ data.p_ins_group_number.upper }}</td>
+        <th colspan="2" class="text-right"><b>Group Name</b></th>
+        <td colspan="3" class="text-center">{{ data.p_ins_group_name.upper }}</td>
+    </tr>
+</table>
+<table>
+    <tr class="last-row">
+        <th colspan="2" class="text-left"><b>Subscriber Name</b></th>
+        <td colspan="4" class="text-center">{{ data.p_ins_sub_name.upper }}</td>
+        <th colspan="3" class="text-right pr-10"><b>Subscriber DOB</b></th>
+        <td colspan="2" class="text-left">{{ data.p_ins_sub_dob }}</td>
+        <th colspan="3" class="text-right"><b>Relation to Patient</b></th>
+        <td colspan="3" class="text-center">{{ data.p_ins_sub_relation.upper }}</td>
+    </tr>
+</table>
+<table>
+    <tr>
+        <th colspan="8" class="middle-row text-left section-subhead"><b>Secondary Insurance</b></th>
+    </tr>
+</table>
+<table>
+    <tr class="middle-row">
+        <th colspan="2" class="text-left"><b>Carrier Name</b></th>
+        <td colspan="3" class="text-left">{{ data.s_ins_name.upper }}</td>
+        <th class="text-center"><b>Policy #</b></th>
+        <td colspan="2" class="text-left">{{ data.s_ins_policy.upper }}</td>
+        <th class="text-right"><b>Group #</b></th>
+        <td colspan="2" class="text-right">{{ data.s_ins_group_number.upper }}</td>
+        <th colspan="2" class="text-right"><b>Group Name</b></th>
+        <td colspan="2" class="text-center">{{ data.s_ins_group_name.upper }}</td>
+    </tr>
+</table>
+<table>
+    <tr class="last-row">
+        <th colspan="2" class="text-left"><b>Subscriber Name</b></th>
+        <td colspan="4" class="text-center">{{ data.s_ins_sub_name.upper }}</td>
+        <th colspan="3" class="text-right pr-10"><b>Subscriber DOB</b></th>
+        <td colspan="2" class="text-left">{{ data.s_ins_sub_dob }}</td>
+        <th colspan="3" class="text-right"><b>Relation to Patient</b></th>
+        <td colspan="3" class="text-center">{{ data.s_ins_sub_relation.upper }}</td>
+    </tr>
+</table>
+<h3 class="section-title pt-30">Emergency Contact</h3>
+<table>
+    <tr class="first-row last-row">
+        <th colspan="1" class="text-left"><b>Name</b></th>
+        <td colspan="5" class="text-center">{{ data.emer_contact_firstname.upper }} {{ data.emer_contact_lastname.upper }}</td>
+        <th colspan="2" class="text-center"><b>Home Phone</b></th>
+        <td colspan="4" class="text-center">{{ data.emer_contact_home_ph }}</td>
+        <th colspan="2" class="text-center"><b>Cell Phone</b></th>
+        <td colspan="4" class="text-center">{{ data.emer_contact_cell_ph }}</td>
+        <th colspan="2" class="text-right"><b>Relation</b></th>
+        <td colspan="4" class="text-center">{{ data.emer_contact_relation.upper }}</td>
+    </tr>
+</table>
+<h3 class="section-title pt-30">Preferred Pharmacy</h3>
+<table>
+    <tr class="first-row last-row">
+        <th class="text-left"><b>Pharmacy Name</b></th>
+        <td class="text-left">{{ data.rx_name.upper }}</td>
+    </tr>
+</table>
+
+<p class="footer-text">Electronically Submitted by: {{ data.first_name.capitalize }} {{ data.middle_name.0.upper }}. {{ data.last_name.capitalize }} on {% now "l, F jS, Y" %} at {% now "H:i:s T" %}</p>
+<!-- END DEMOGRAPHICS -->
+<pdf:nextframe></pdf:nextframe>
+<!-- START MEDICAL HISTORY -->
+<h3 class="page-title"><u>Patient Medical History</u></h3>
+<table>
+    <tr class="middle-row">
+        <th class="text-left"><b>Patient Name</b></th>
+        <td colspan="3" class="text-center">{{ data.first_name.upper }} {{ data.middle_name.0.upper }}. {{ data.last_name.upper }}</td>
+        <th class="text-center"><b>Date of Birth:</b></th>
+        <td colspan="2" class="text-center">{{ data.date_of_birth }}</td>
+        <th class="text-center"><b>Age</b></th>
+        <td class="text-center">{{ data.age }}</td>
+        <th class="text-right"><b>Date</b></th>
+        <td colspan="2" class="text-center">{% now "m/d/Y" %}</td>
+    </tr>
+</table>
+<table>
+    <tr class="first-row middle-row">
+        <th class="text-left"><b>Medications</b></th>
+        <td colspan="8" class="text-left">{{ data.med_list }}</td>
+    </tr>
+</table>
+<table>
+    <tr class="last-row">
+        <th class="text-left"><b>Allergies</b></th>
+        <td colspan="8" class="text-left">{{ data.alg_list }}</td>
+    </tr>
+</table>
+<table>
+    <tr class="middle-row">
+        <th class="text-left pt-15 section-subhead"><b>Family History</b></th>
+    </tr>
+</table>
+<table>
+    <tr class="middle-row">
+        <th class="text-left">Blood Clots</th>
+        <td colspan="2" class="text-center">{{ data.fam_hx_bc }}</td>
+        <th class="text-right">Thyroid Problems</th>
+        <td colspan="2" class="text-center">{{ data.fam_hx_tp }}</td>
+    </tr>
+    <tr class="middle-row">
+        <th class="text-left">High Blood Pressure</th>
+        <td colspan="2" class="text-center">{{ data.fam_hx_htn }}</td>
+        <th class="text-right">Heart Problems</th>
+        <td colspan="2" class="text-center">{{ data.fam_hx_hp }}</td>
+    </tr>
+    <tr class="middle-row">
+        <th class="text-left">Stroke</th>
+        <td colspan="2" class="text-center">{{ data.fam_hx_cva }}</td>
+        <th class="text-right">Lung Problems</th>
+        <td colspan="2" class="text-center">{{ data.fam_hx_lp }}</td>
+    </tr>
+    <tr class="middle-row">
+        <th class="text-left">Diabetes</th>
+        <td colspan="2" class="text-center">{{ data.fam_hx_dm }}</td>
+        <th class="text-right">Osteoarthritis</th>
+        <td colspan="2" class="text-center">{{ data.fam_hx_oa }}</td>
+    </tr>
+    <tr class="middle-row">
+        <th class="text-left">Circulation Problems</th>
+        <td colspan="2" class="text-center">{{ data.fam_hx_cp }}</td>
+        <th class="text-right">Arthritis</th>
+        <td colspan="2" class="text-center">{{ data.fam_hx_arth }}</td>
+    </tr>
+    <tr class="last-row">
+        <th class="text-left">Cancer</th>
+        <td colspan="2" class="text-center">{{ data.fam_hx_cx }}</td>
+        <th class="text-right">Other</th>
+        <td colspan="2" class="text-center">{{ data.fam_hx_oth }}</td>
+    </tr>
+</table>
+<table>
+    <tr class="middle-row">
+        <th class="text-left pt-15 section-subhead"><b>Social History</b></th>
+    </tr>
+</table>
+<table>
+    <tr class="middle-row">
+        <th colspan="2" class="text-left"><b>Marital Status</b></th>
+        <td colspan="2" class="text-left">{{ data.marital_status.upper }}</td>
+        <th colspan="3" class="text-center"><b>Living Arrangements</b></th>
+        <td colspan="3" class="text-left">{{ data.living_arr.upper }}</td>
+        <th colspan="1" class="text-left"><b>Home</b></th>
+        <td colspan="2" class="text-left">{{ data.home_level.upper }}</td>
+        <th colspan="3" class="text-right"><b>Hand Dominance</b></th>
+        <td colspan="2" class="text-center">{{ data.hand_dominance.upper }}</td>
+    </tr>
+</table>
+<table>
+    <tr class="middle-row">
+        <th colspan="2" class="text-left"><b>Employment Status</b></th>
+        <td colspan="5" class="text-left">{{ data.employment_status.upper }}</td>
+        <th colspan="2" class="text-right"><b>Occupation</b></th>
+        <td colspan="5" class="text-center">{{ data.occupation.upper }}</td>
+    </tr>
+</table>
+<table>
+    <tr class="middle-row">
+        <th class="text-left"><b>Exercise Level</b></th>
+        <td colspan="2" class="text-left">{{ data.exercise_level.upper }}</td>
+        <th class="text-left"><b>Caffeine Use</b></th>
+        <td colspan="2" class="text-left">{{ data.caffeine.upper }}</td>
+        <th class="text-left"><b>Alcohol Use</b></th>
+        <td colspan="2" class="text-left">{{ data.alcohol.upper }}</td>
+    </tr>
+</table>
+<table>
+    <tr class="middle-row">
+        <th colspan="2" class="text-left"><b>Recreational Drug Use</b></th>
+        <td class="text-left">{{ data.rec_drug.upper }}</td>
+        <th class="text-left"><b>Tobacco Use</b></th>
+        <td class="text-left">{{ data.tobacco.upper }}</td>
+        <th class="text-left"><b>Tobacco Type</b></th>
+        <td colspan="2" class="text-left">{{ data.tobacco_type.upper }}</td>
+        <th class="text-left"><b>Years of Use</b></th>
+        <td class="text-left">{{ data.tobacco_years.upper }}</td>
+    </tr>
+</table>
+<table>
+    <tr class="last-row">
+        <th class="text-left"><b>Learning Barriers</b></th>
+        <td colspan="2" class="text-left">{{ data.lb_none.upper }} {{ data.lb_age }} {{ data.lb_mental }} {{ data.lb_language }} {{ data.lb_hearing }} {{ data.lb_financial }} {{ data.lb_education }}</td>
+        <th class="text-left"><b>Learning Style</b></th>
+        <td colspan="2" class="text-left">{{ data.ls_np.upper }} {{ data.ls_reading }} {{ data.ls_hearing }} {{ data.ls_seeing }} {{ data.ls_doing }}</td>
+    </tr>
+</table>
+<table>
+    <tr class="first-row middle-row">
+        <th colspan="2" class="text-left pt-15 section-subhead"><b>Past Medical History</b></th>
+        <td colspan="8" class="text-left pt-15">
+            {{ data.pmh_anemia }}
+            {{ data.pmh_anxiety }}
+            {{ data.pmh_arthritis }}
+            {{ data.pmh_asthma }}
+            {{ data.pmh_bleeding_disorder }}
+            {{ data.pmh_blood_clots }}
+            {{ data.pmh_cancer }}
+            {{ data.pmh_cad }}
+            {{ data.pmh_depression }}
+            {{ data.pmh_diabetes }}
+            {{ data.pmh_gerd }}
+            {{ data.pmh_gout }}
+            {{ data.pmh_hiv }}
+            {{ data.pmh_ami }}
+            {{ data.pmh_hp }}
+            {{ data.pmh_hep }}
+            {{ data.pmh_hernia }}
+            {{ data.pmh_hl }}
+            {{ data.pmh_ht }}
+            {{ data.pmh_kd }}
+            {{ data.pmh_lf_ulcer }}
+            {{ data.pmh_liver_disease }}
+            {{ data.pmh_lung_disease }}
+            {{ data.pmh_migraines }}
+            {{ data.pmh_op }}
+            {{ data.pmh_pacemaker }}
+            {{ data.pmh_pvd }}
+            {{ data.pmh_pe }}
+            {{ data.pmh_ra }}
+            {{ data.pmh_se }}
+            {{ data.pmh_cva }}
+            {{ data.pmh_tp }}
+            {{ data.pmh_tub }}
+            {{ data.pmh_ulcer }}
+            {{ data.pmh_uti }}
+        </td>
+    </tr>
+</table>
+<table>
+    <tr class="first-row last-row">
+        <th colspan="2" class="text-left pt-15 section-subhead"><b>Surgical History</b></th>
+        <td colspan="8" class="text-left pt-15">{{ data.srg_list }}</td>
+    </tr>
+</table>
+<p class="footer-text">Electronically Submitted by: {{ data.first_name.capitalize }} {{ data.middle_name.0.upper }}. {{ data.last_name.capitalize }} on {% now "l, F jS, Y" %} at {% now "H:i:s T" %}</p>
+<!-- END MEDICAL HISTORY -->
+<pdf:nextframe></pdf:nextframe>
+<!-- START NEW PATIENT/NEW INJURY -->
+<h3 class="page-title"><u>New Patient/New Injury</u></h3>
+<table class="box">
+    <tr>
+        <th>Height (in)</th>
+        <td></td>
+        <th>Weight (lbs)</th>
+        <td></td>
+        <th>Pulse (bpm)</th>
+        <td></td>
+        <th colspan="2">Oxygen Saturation (%)</th>
+        <td></td>
+        <th colspan="2">Blood Pressure (mmHg)</th>
+        <td></td>
+    </tr>
+</table>
+<table>
+    <tr class="first-row middle-row">
+        <th class="text-left"><b>Patient Name</b></th>
+        <td colspan="2" class="text-left">{{ data.first_name.upper }} {{ data.middle_name.0.upper }}. {{ data.last_name.upper}}</td>
+        <th class="text-left"><b>Date of Birth</b></th>
+        <td colspan="2" class="text-left">{{ data.date_of_birth }}</td>
+        <th class="text-left"><b>Age</b></th>
+        <td class="text-left">{{ data.age }}</td>
+        <th class="text-left"><b>Gender</b></th>
+        <td class="text-left">{{ data.gender.upper }}</td>
+    </tr>
+</table>
+<table>
+    <tr class="middle-row last-row">
+        <th class="text-left"><b>Primary Care Provider</b></th>
+        <td colspan="2" class="text-left">{{ data.primary_care.upper }}</td>
+        <th class="text-left"><b>Referring Provider</b></th>
+        <td colspan="2" class="text-left">{{ data.ref_provider.upper }}</td>
+    </tr>
+</table>
+<table>
+    <tr class="first-row middle-row">
+        <th colspan="2" class="text-left"><b>Reason for Visit</b></th>
+        <td colspan="4" class="text-left">{{ data.reason_lateral.upper }} {{ data.reason_location.upper }} {{ data.reason.upper }}</td>
+        <td colspan="3"></td>
+        <th colspan="2" class="text-left"><b>Symptom Duration</b></th>
+        <td colspan="3" class="text-left">{{ data.symptom_dur_num }} {{ data.symptom_dur.upper }}</td>
+    </tr>
+</table>
+<table>
+    <tr class="middle-row">
+        <th class="text-left"><b>Cause</b></th>
+        <td colspan="4" class="text-left">{{ data.reason_cause.upper }}</td>
+        <td colspan="2"></td>
+        <th class="text-left"><b>Date of Injury</b></th>
+        <td colspan="2" class="text-center">{{ data.doi }}</td>
+    </tr>
+</table>
+<table>
+    <tr class="middle-row last-row">
+        <th class="text-left"><b>Explanation</b></th>
+        <td colspan="7" class="text-left">{{ data.reason_expl }}</td>
+    </tr>
+</table>
+<table>
+    <tr class="middle-row">
+        <th colspan="2" class="text-left"><b>Severity of Pain</b></th>
+        <td class="text-left">{{ data.severity }}/10</td>
+        <th colspan="2" class="text-left"><b>Radiation of Pain</b></th>
+        <td class="text-left">{{ data.radiation_pain.upper }}</td>
+        <th colspan="2" class="text-left"><b>Radiates to</b></th>
+        <td colspan="2" class="text-left">{{ data.radiation_pain_location.upper }}</td>
+        <th colspan="2" class="text-right"><b>Wakes From Sleep</b></th>
+        <td colspan="2" class="text-center">{{ data.wake_from_sleep.upper }}</td>
+    </tr>
+</table>
+<table>
+    <tr class="middle-row">
+        <th colspan="2" class="text-left"><b>Characteristics</b></th>
+        <td colspan="4" class="text-left">{{ data.symptom_char_sharp.upper }} {{ data.symptom_char_dull.upper }} {{ data.symptom_char_throbbing.upper }} {{ data.symptom_char_stabbing.upper }} {{ data.symptom_char_aching.upper }} {{ data.symptom_char_burning.upper }}</td>
+        <th colspan="3" class="text-left"><b>Associated Symptoms</b></th>
+        <td colspan="4" class="text-left">{{ data.assoc_symptom_weakness.upper }} {{ data.assoc_symptom_numbness.upper }} {{ data.assoc_symptom_tingling.upper }} {{ data.assoc_symptom_swelling.upper }}</td>
+        <th class="text-left"><b>Timing</b></th>
+        <td colspan="4" class="text-left">{{ data.pain_timing.upper }}</td>
+    </tr>
+</table>
+<table>
+    <tr class="middle-row">
+        <th colspan="2" class="text-left"><b>Worsens Symptoms</b></th>
+        <td colspan="4" class="text-left">{{ data.worsen_symptom_activity.upper }} {{ data.worsen_symptom_work.upper }} {{ data.worsen_symptom_exercise.upper }}</td>
+        <th colspan="2" class="text-center"><b>Alleviates Symptoms</b></th>
+        <td colspan="4" class="text-left">{{ data.allev_symptom_rest.upper }} {{ data.allev_symptom_ice.upper }} {{ data.allev_symptom_heat.upper }} {{ data.allev_symptom_elevation.upper }}</td>
+    </tr>
+</table>
+<table>
+    <tr class="first-row">
+        <th class="text-left section-title"><b>Past Treatments</b></th>
+    </tr>
+</table>
+<table>
+    <tr class="middle-row">
+        <th class="text-left"><b>Injection</b></th>
+        <td colspan="2" class="text-left">{{ data.past_inj.upper }}</td>
+        <th class="text-left"><b>Explanation</b></th>
+        <td colspan="3" class="text-left">{{ data.past_inj_exp.upper }}</td>
+        <th class="text-right"><b>Helpful?</b></th>
+        <td colspan="2" class="text-center">{{ data.past_inj_help.upper }}</td>
+    </tr>
+    <tr class="middle-row">
+        <th class="text-left"><b>Brace/Cast</b></th>
+        <td colspan="2" class="text-left">{{ data.past_brace.upper }}</td>
+        <th class="text-left"><b>Explanation</b></th>
+        <td colspan="3" class="text-left">{{ data.past_brace_exp.upper }}</td>
+        <th class="text-right"><b>Helpful?</b></th>
+        <td colspan="2" class="text-center">{{ data.past_brace_help.upper }}</td>
+    </tr>
+    <tr class="middle-row">
+        <th class="text-left"><b>NSAIDs</b></th>
+        <td colspan="2" class="text-left">{{ data.past_nsaid.upper }}</td>
+        <th class="text-left"><b>Explanation</b></th>
+        <td colspan="3" class="text-left">{{ data.past_nsaid_exp.upper }}</td>
+        <th class="text-right"><b>Helpful?</b></th>
+        <td colspan="2" class="text-center">{{ data.past_nsaid_help.upper }}</td>
+    </tr>
+    <tr class="middle-row">
+        <th class="text-left"><b>Narcotics</b></th>
+        <td colspan="2" class="text-left">{{ data.past_narc.upper }}</td>
+        <th class="text-left"><b>Explanation</b></th>
+        <td colspan="3" class="text-left">{{ data.past_narc_exp.upper }}</td>
+        <th class="text-right"><b>Helpful?</b></th>
+        <td colspan="2" class="text-center">{{ data.past_narc_help.upper }}</td>
+    </tr>
+    <tr class="last-row">
+        <th class="text-left"><b>Physical Therapy</b></th>
+        <td colspan="2" class="text-left">{{ data.past_pt.upper }}</td>
+        <th class="text-left"><b>Explanation</b></th>
+        <td colspan="3" class="text-left">{{ data.past_pt_exp.upper }}</td>
+        <th class="text-right"><b>Helpful?</b></th>
+        <td colspan="2" class="text-center">{{ data.past_pt_help.upper }}</td>
+    </tr>
+</table>
+<table>
+    <tr class="first-row">
+        <th class="text-left section-title"><b>Review of Systems</b></th>
+    </tr>
+</table>
+<table>
+    <tr class="middle-row">
+        <th class="text-left"><b>General</b></th>
+        <td colspan="3" class="text-left">{{ data.ros_general }}</td>
+        <th class="text-left"><b>Explanation</b></th>
+        <td colspan="3" class="text-left">{{ data.ros_general_exp }}</td>
+    </tr>
+    <tr class="middle-row">
+        <th class="text-left"><b>Eye</b></th>
+        <td colspan="3" class="text-left">{{ data.ros_eye }}</td>
+        <th class="text-left"><b>Explanation</b></th>
+        <td colspan="3" class="text-left">{{ data.ros_eye_exp }}</td>
+    </tr>
+    <tr class="middle-row">
+        <th class="text-left"><b>HEENT</b></th>
+        <td colspan="3" class="text-left">{{ data.ros_heent }}</td>
+        <th class="text-left"><b>Explanation</b></th>
+        <td colspan="3" class="text-left">{{ data.ros_heent_exp }}</td>
+    </tr>
+    <tr class="middle-row">
+        <th class="text-left"><b>Cardiovascular</b></th>
+        <td colspan="3" class="text-left">{{ data.ros_cv }}</td>
+        <th class="text-left"><b>Explanation</b></th>
+        <td colspan="3" class="text-left">{{ data.ros_cv_exp }}</td>
+    </tr>
+    <tr class="middle-row">
+        <th class="text-left"><b>Pulmonary</b></th>
+        <td colspan="3" class="text-left">{{ data.ros_pul }}</td>
+        <th class="text-left"><b>Explanation</b></th>
+        <td colspan="3" class="text-left">{{ data.ros_pul_exp }}</td>
+    </tr>
+    <tr class="middle-row">
+        <th class="text-left"><b>Gastrointestinal</b></th>
+        <td colspan="3" class="text-left">{{ data.ros_gi }}</td>
+        <th class="text-left"><b>Explanation</b></th>
+        <td colspan="3" class="text-left">{{ data.ros_gi_exp }}</td>
+    </tr>
+    <tr class="middle-row">
+        <th class="text-left"><b>Genitourinary</b></th>
+        <td colspan="3" class="text-left">{{ data.ros_gu }}</td>
+        <th class="text-left"><b>Explanation</b></th>
+        <td colspan="3" class="text-left">{{ data.ros_gu_exp }}</td>
+    </tr>
+    <tr class="middle-row">
+        <th class="text-left"><b>Integument</b></th>
+        <td colspan="3" class="text-left">{{ data.ros_integ }}</td>
+        <th class="text-left"><b>Explanation</b></th>
+        <td colspan="3" class="text-left">{{ data.ros_integ_exp }}</td>
+    </tr>
+    <tr class="last-row">
+        <th class="text-left"><b>Neurologic</b></th>
+        <td colspan="3" class="text-left">{{ data.ros_neu }}</td>
+        <th class="text-left"><b>Explanation</b></th>
+        <td colspan="3" class="text-left">{{ data.ros_neu_exp }}</td>
+    </tr>
+</table>
+<p class="footer-text">Electronically Submitted by: {{ data.first_name.capitalize }} {{ data.middle_name.0.upper }}. {{ data.last_name.capitalize }} on {% now "l, F jS, Y" %} at {% now "H:i:s T" %}</p>
+<!-- END NEW PATIENT/NEW INJURY -->
+<pdf:nextframe></pdf:nextframe>
+<!-- START FINANCIAL AGREEMENT -->
+<h3 class="page-title"><u>Financial Agreement</u></h3>
+<div class="page-text">
+    <p>Payment is due at the time of service unless otherwise negotiated. If you need to make alternate payment arrangements, please talk to us regarding your needs. Alternate payment arrangements need to be finalized in writing prior to the service
+        date, otherwise, our default financial policy will be enforced.</p>
+    <p><b>Credit Card "on file":</b> your credit card will be securely captured at your appointment check-in or at the time of your payment. For your convenience, we have instituted a secure method through our practice management software, which
+        enables us to keep encrypted card information on-file for recurring billing and balances due. Please note that families are welcome to keep a single card on file for their convenience.</p>
+    <p>We require 24 hours cancellation notice. We will charge a $50 fee per appointment that is missed or canceled within 24 hours.</p>
+    <p><b>First Session Deposit:</b> We require a $50 deposit to hold your initial evaluation for medical services. This will be applied to the cost of your session at the time of service. Should a late cancellation or no show occur, this will be
+        applied to the associated charge.</p>
+    <p><b>There is a $20 fee on all returned checks.</b></p>
+    <p>Any balance left unpaid over 60 days from the original date of service will be sent to a third-party collections company.</p>
+    <p><b>Private Insurance:</b> We are an out-of-network/non-participating provider with all private insurance companies. With certain qualifications, you can notify front desk personnel in advance of your appointment to request a superbill to
+        submit to your insurance company for reimbursement.</p>
+    <p><b>Medicare:</b> Restore Orthopedics & Sports Medicine and Continuum Family Health are participating providers with Medicare and will submit a bill on your behalf prior to requesting patient payment. Peak Performance Care, Physical Therapy,
+        Inc. has no relationship with Medicare, and therefore Medicare beneficiaries must pay, in full, at the time of service. By signing below, I acknowledge this statement and voluntarily waive my right to submit a claim to my insurance (primary
+        or secondary).</p>
+    <p><b>Social Security Number:</b> For those who prefer not to provide their social security number, we require the appointment to be paid in full prior to the start of the session.</p>
+    <p><b>Unpaid Balances:</b> if your account remains unpaid after 10 days of being notified, the credit card information on file will be charged for the full amount. Please contact our billing department at (209) 533-5371 should you need to make
+        other payment arrangements or have any questions.</p>
+    <p>My signature below indicates that I have read the Financial Agreement, and I understand and agree to its contents.</p>
+    <p>I understand that payment is due at the time of service unless otherwise arranged in advance.</p>
+    <p>If I have not paid the charges that are deemed my responsibility within 30 days of being notified, I authorize the appropriate business entity within Continuum (Restore Orthopedics & Sports Medicine, Continuum Family Health, Peak Performance
+        Care Physical Therapy Inc), to charge my credit or debit card for that amount in full.</p>
+    <p>I understand that my payment information will be kept in a secured, encrypted location separate from my medical records.</p>
+    <table>
+        <tr class="middle-row">
+            <th colspan="2" class="text-left"><b>Patient's Printed Name</b></th>
+            <td colspan="7" class="text-left">{{ data.first_name.upper }} {{ data.middle_name.0.upper }}. {{ data.last_name.upper}}</td>
+        </tr>
+    </table>
+    <table>
+        <tr class="last-row">
+            <th class="text-left"><b>Patient's Signature</b></th>
+            <td class="text-left"></td>
+            <td class="text-center">Date: {% now "D, F jS, Y" %}</td>
+        </tr>
+    </table>
+</div>
+<!-- END FINANCIAL AGREEMENT -->
+<pdf:nextframe></pdf:nextframe>
+<!-- START PRIVACY PRACTICES -->
+<h3 class="page-title"><u>Notice of Privacy Practices</u></h3>
+<div class="page-text">
+    <p>In general, the HIPAA privacy rule gives individuals the right to request a restriction on uses and disclosures of their protected health information (PHI). The individual is also provided the right to request confidential communications of
+        PHI be made by alternative means, such as sending correspondence to the individual's office instead of the individual's home.</p>
+    <p>I consent to receive communication in all of the following methods unless otherwise stated on the line below: Cell Phone, Home Phone, Work Phone, Email, and Written Communication (mailing address)</p>
+    <p><b>Privacy Practices:</b> We strive to protect any and all personal medical information and value your privacy. This form indicates how and when your medical information may be shared with another party. As a patient, you also have certain
+        rights and responsibilities regarding the use and disclosure of your medical information.</p>
+    <p><b>The Law:</b> Keep all individually identifiable health information private, notify you of our legal duties and privacy practices, notify you of any changes in our privacy practices.</p>
+    <p><b>Use & Disclosure:</b> your medical and/or personal information will only be disclosed as follows. Unless we receive written and specific authorization from you, we will only use, disclose, or request the minimum amount of protected health
+        information to accomplish the intended purpose.<br/> <u>Treatment</u> - as needed, your medical information can be shared with doctors, nurses, technicians or others directly involved in your care including your current healthcare
+        providers.<br/> <u>Payment</u> - while we may not be directly billing your insurance, should your insurance request information about your care, we can use and disclose your medical information for processing payment. This can also relate to
+        any necessary discussions with attorneys and consulting physicians.<br/> <u>Communication</u> - you have the option of communicating with your practitioner and/or the front desk staff via email. Individual practices or practitioners may also
+        use email to communicate with your referring provider and/or other practitioners involved in your care. There are inherent benefits and risks to allowing email communication to occur. By signing below, you acknowledge that you have been
+        informed about this communication practice and are aware of your rights. If you do not want email to be used please let us know. </p>
+    <p>Patient Rights: You may request restrictions on the use/disclosure of your protected health information; however, the practice/practitioner is not required to agree to all restrictions in accordance with federal law. You have the right to
+        access any communications of PHI. You have the right to amend PHI as needed. You have the right to receive an accounting of disclosures of your PHI. You have the right to complain to Health and Human Services (HHS) and to us if you believe
+        that your privacy rights have been violated. You can complain to us by emailing Continuum at info@continuumforhealth.com</p>
+    <p>Your signature below indicates you give the practice permission to contact you via email and accept electronic delivery of superbills via email when applicable. If you do not grant this permission, please write "I do not give permission" on
+        the line below and your superbills will be mailed to you when applicable.</p>
+    <p class="text-center">If you have any questions about the above statements, please feel free to speak with any practice employee.</p>
+    <p class="text-center"><i>A signature below indicates that you understand and will comply with the above privacy practices.</i></p>
+</div>
+<table>
+    <tr class="middle-row">
+        <th colspan="2" class="text-left"><b>Patient's Printed Name</b></th>
+        <td colspan="7" class="text-left">{{ data.first_name.upper }} {{ data.middle_name.0.upper }}. {{ data.last_name.upper}}</td>
+    </tr>
+</table>
+<table>
+    <tr class="last-row">
+        <th class="text-left"><b>Patient's Signature</b></th>
+        <td class="text-left"></td>
+        <td class="text-center">Date: {% now "D, F jS, Y" %}</td>
+    </tr>
+</table>
+<!-- END PRIVACY PRACTICES -->
+<pdf:nextframe></pdf:nextframe>
+<!-- START PATIENT RIGHTS -->
+<h3 class="page-title"><u>Patient Rights</u></h3>
+<div class="page-text">
+    <p class="text-center">As a Patient of a Practitioner at the Continuum Consortium, <b>you have the right:</b></p>
+    <p>To be treated with courtesy and respect.</p>
+    <p>To have your privacy protected and to receive our notice of privacy practices.</p>
+    <p>To have your questions answered promptly.</p>
+    <p>To know the name, role and qualifications of your practitioner.</p>
+    <p>To know what services are available, including translators.</p>
+    <p>To know what rules, apply to you.</p>
+    <p>To have information about your diagnosis, choices, risks and benefits of treatment so you can assist in developing your plan of care, including the management of pain.</p>
+    <p>To refuse treatment except as otherwise provided by law.</p>
+    <p>To be given, on request, information and counseling on available financial resources.</p>
+    <p>To know, on request and before treatment, weather Medicare assignment is accepted.</p>
+    <p>To receive, on request and prior to treatment, a reasonable estimate of charges for care and, on request, an itemized bill with charges explained.</p>
+    <p>To receive treatment regardless of race, national origin, religion, physical handicaps, or sources payment and to expect the appropriate management of pain.</p>
+    <p>To receive treatment for any emergency medical condition that may get worse if not treated.</p>
+    <p>To know if medical treatment is for research and to either consent or refuse.</p>
+    <p>To have the right to make advance directives.</p>
+    <p>To be free from restraint and seclusion which are not medically necessary.</p>
+    <p>To the confidentiality of your medical record and the right to access information from it.</p>
+    <p>To have a family member or representative and/or physician notified promptly of admission to the hospital.</p>
+    <p class="text-center">As a Patient of a Practitioner at the Continuum Consortium, <b>you are responsible:</b></p>
+    <p>To give your practitioner correct, complete information about your present medical condition, past illnesses, hospitalizations, medications, including over the counter drugs/herbal supplements, and other health matters.</p>
+    <p>To report changes in your condition and report perceived safety concerns in your care.</p>
+    <p>To tell your practitioner if you understand the plan of treatment and what is expected of you, including pain relief options and ask questions if you do not understand.</p>
+    <p>To follow the treatment plan recommended by your healthcare provider.</p>
+    <p>To keep appointments or notify the practitioner or facility if you cannot.</p>
+    <p>To accept responsibility for your actions if you refuse treatment or do not follow the healthcare providers instructions.</p>
+    <p>To meet your healthcare financial obligations promptly.</p>
+    <p>To follow rules and regulations on patient care.</p>
+    <p>To be considerate of the Consortium's personnel and property.</p>
+</div>
+<table>
+    <tr class="middle-row">
+        <th colspan="2" class="text-left"><b>Patient's Printed Name</b></th>
+        <td colspan="7" class="text-left">{{ data.first_name.upper }} {{ data.middle_name.0.upper }}. {{ data.last_name.upper}}</td>
+    </tr>
+</table>
+<table>
+    <tr class="last-row">
+        <th class="text-left"><b>Patient's Signature</b></th>
+        <td class="text-left"></td>
+        <td class="text-center">Date: {% now "D, F jS, Y" %}</td>
+    </tr>
+</table>
+<!-- END PATIENT RIGHTS -->
+<pdf:nextframe></pdf:nextframe>
+<!-- START RELEASE OF INFORMATION -->
+<h3 class="page-title"><u>Authorization for Release of Medical Information</u></h3>
+<table>
+    <tr class="last-row">
+        <th colspan="2" class="text-left"><b>Patient Name</b></th>
+        <td colspan="6" class="text-left">{{ data.first_name.upper }} {{ data.middle_name.0.upper }}. {{ data.last_name.upper}}</td>
+        <th colspan="4" class="text-right"><b>Date of Birth</b></th>
+        <td colspan="6" class="text-center">{{ data.date_of_birth }}</td>
+    </tr>
+</table>
+<div class="page-text">
+    <p class="text-center pt-15">I authorize Continuum and its affiliates to use and/or disclose the Protected Health Information (PHI) described below to/from:</p>
+</div>
+<table>
+    <tr class="middle-row">
+        <th colspan="2" class="text-left"><b>Name: Adventist Health Sonora</b></th>
+        <th colspan="3" class="text-left">Relationship: Hosptial</th>
+        <th colspan="2" class="text-left">Phone: (209) 536-5000</th>
+    </tr>
+    <tr class="middle-row">
+        <th colspan="2" class="text-left"><b>Name: Restore Orthopedics</b></th>
+        <th colspan="3" class="text-left">Relationship: Physician</th>
+        <th colspan="2" class="text-left">Phone: (209) 533-5371</th>
+    </tr>
+    <tr class="middle-row">
+        <th colspan="2" class="text-left"><b>Name: Peak Performance Care</b></th>
+        <th colspan="3" class="text-left">Relationship: Physical Therapist</th>
+        <th colspan="2" class="text-left">Phone: (209) 533-5371</th>
+    </tr>
+    <tr class="middle-row">
+        <th colspan="2" class="text-left"><b>Name:</b></th>
+        <th colspan="3" class="text-left">Relationship:</th>
+        <th colspan="2" class="text-left">Phone:</th>
+    </tr>
+    <tr class="middle-row">
+        <th colspan="2" class="text-left"><b>Name:</b></th>
+        <th colspan="3" class="text-left">Relationship:</th>
+        <th colspan="2" class="text-left">Phone:</th>
+    </tr>
+    <tr class="middle-row">
+        <th colspan="2" class="text-left"><b>Name:</b></th>
+        <th colspan="3" class="text-left">Relationship:</th>
+        <th colspan="2" class="text-left">Phone:</th>
+    </tr>
+</table>
+<div class="page-text">
+    <p class="text-center pt-15">I hereby authorize release of my personal medical record information covering all past, present, and future periods, unless otherwise specified below:</p>
+</div>
+<table>
+    <tr class="last-row">
+        <th class="text-left"><b>From (date):</b></th>
+        <th class="text-left"><b>to (date):</b></th>
+    </tr>
+</table>
+<div class="page-text">
+    <p class="text-center pt-15"><i>I hereby authorize the release of my complete health record (excluding records relating to mental healthcare, communicable diseases, HIV/AIDS, and treatment of alcohol/drug abuse)</i></p>
+    <p>This medical information may be used by the persons I authorize to receive this information for medical treatment or consultation, billing, or claims payment, or other purposes as I may direct.</p>
+    <p class="pt-15">This authorization shall be in force and effect until (9) months after my death or on: _______________ (date) at which time this authorization expires.</p>
+    <p>I understand that my treatment, payment, enrollment, or eligibility for benefits will not be conditioned on whether I sign this authorization.</p>
+    <p>I understand that information used or disclosed pursuant to this authorization may be disclosed by the recipient and may no longer be protected by federal or state law.</p>
+    <p>By signing below, I acknowledge that I have received a copy of the Notice of Privacy practices and authorize the release of protected health information as described above.</p>
+</div>
+<table>
+    <tr class="middle-row">
+        <th class="text-left"><b>Requested Records:</b></th>
+    </tr>
+</table>
+<table>
+    <th class="middle-row pt-30"> </th>
+    <td class="middle-row pt-30"> </td>
+</table>
+<table>
+    <tr class="middle-row pt-30">
+        <th colspan="2" class="text-left"><b>Patient's Printed Name</b></th>
+        <td colspan="7" class="text-left">{{ data.first_name.upper }} {{ data.middle_name.0.upper }}. {{ data.last_name.upper}}</td>
+    </tr>
+</table>
+<table>
+    <tr class="last-row">
+        <th class="text-left"><b>Patient's Signature</b></th>
+        <td class="text-left"></td>
+        <td class="text-center">Date: {% now "D, F jS, Y" %}</td>
+    </tr>
+</table>
+<!-- END RELEASE OF INFORMATION -->
+<pdf:nextframe></pdf:nextframe>
+<!-- START START CONSENT FOR TREATMENT -->
+<h3 class="page-title"><u>Consent for Treatment</u></h3>
+<div class="page-text">
+    <p><b>I, the undersigned, hereby consent to the following treatment:</b></p>
+    <p>Administration and performance of all treatments.</p>
+    <p>Administration of intra-articular and/or extra-articular injections with medication including but not limited to: steroids, anesthetics, gadolinium, iodine, normal saline, platelet rich plasma (PRP), mesenchymal stem cells (MSC), and placental mesenchymal stem cells, with or without image guidance or oral sedation, as deemed medically necessary by the physician or their assigned designees.</p>
+    <p>Performance of venipuncture for treatments as deemed medically necessary by the physician or their assigned designees.</p>
+    <p>Administration of any necessary anesthetics.</p>
+    <p>Performance of such procedures as may be deemed necessary or advisable in the treatment of this patient.</p>
+    <p>Use of prescribed medication.</p>
+    <p>Performance of diagnostic procedures, x-rays, and cultures.</p>
+    <p>Performance of any other medically accepted laboratory tests that may be considered medically necessary or advisable based on the judgement of the attending physician or their assigned designees.</p>
+    <p>I fully understand that this is given in advance of any specific diagnosis or treatment.</p>
+    <p>I intend this consent to be continuing in nature even after a specific diagnosis has been made and treatment recommended. The consent will remain in full force until revoked in writing.</p>
+    <p>I certify that I have read and fully understand the above statements and consent fully and voluntarily to its contents.</p>
+</div>
+<table>
+    <tr class="middle-row">
+        <th colspan="2" class="text-left"><b>Patient's Printed Name</b></th>
+        <td colspan="7" class="text-left">{{ data.first_name.upper }} {{ data.middle_name.0.upper }}. {{ data.last_name.upper}}</td>
+    </tr>
+</table>
+<table>
+    <tr class="last-row">
+        <th class="text-left"><b>Patient's Signature</b></th>
+        <td class="text-left"></td>
+        <td class="text-center">Date: {% now "D, F jS, Y" %}</td>
+    </tr>
+</table>
+</body>
+</html>

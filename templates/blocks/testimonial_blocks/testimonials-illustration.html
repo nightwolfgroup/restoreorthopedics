@@ -1,0 +1,25 @@
+<section class="container pb-5 pt-6 mb-md-4 pb-md-7">{% load static %}
+    <div class="row align-items-center">
+        <div class="col-md-6 offset-lg-1 order-md-2">
+            <img class="d-block mx-auto" src="{% static 'img/svg/testimonial-drawing.svg' %}" alt="Illustration"/>
+        </div>
+        <div class="col-md-6 col-lg-5 order-md-1 pt-4 pt-md-0">
+            <h2 class="mt-4 mb-5 text-center text-md-left">{{ self.title }}</h2>
+            <div class="cs-carousel">
+                <div class="cs-carousel-inner" data-carousel-options="{&quot;nav&quot;: false, &quot;gutter&quot;: 20}">
+                    {% for testimonial in testimonials %}
+                        <div class="pt-3">
+                            <blockquote class="blockquote mx-1">
+                                <p>{{ testimonial.quote }}</p>
+                                <footer class="blockquote-footer">{{ testimonial.name }}</footer>
+                            </blockquote>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% block extra_js %}
+    <script src="{% static 'vendor/tiny-slider/dist/min/tiny-slider.js' %}"></script>
+{% endblock %}

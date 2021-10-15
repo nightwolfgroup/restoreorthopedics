@@ -1,0 +1,58 @@
+<section class="container bg-overlay-content pt-md-2">{% load static wagtailimages_tags wagtailcore_tags %}
+    <h2 class="text-center pt-2 pt-md-0 mb-5">Patient Resources</h2>
+    <div class="row">
+        {% for card in self.card %}
+            <div class="col-sm-6 mb-grid-gutter">
+                <div class="bg-light box-shadow rounded-lg py-5 px-4">
+                    <div class="media d-block d-xl-flex align-items-center px-lg-3 py-xl-2 text-center text-sm-left">
+                        <picture class="d-inline-block mb-3 mb-xl-0">
+                            {% image card.icon width-140 format-webp as image_webp %}
+                            <source srcset="{{ image_webp.url }}" type="image/webp">
+                            {% image card.icon width-140 format-png as service_icon_png %}
+                            <source srcset="{{ service_icon_png.url }}" type="image/png">
+                            {% image card.icon width-140 format-png %}
+                        </picture>
+                        <div class="media-body pl-xl-3 ml-xl-3">
+                            <h3 class="h4 text-primary pb-1">{{ card.title }}</h3>
+                            <p>{{ card.subtitle }}</p>
+                            <a class="nav-link-style text-md-nowrap" href="{{ card.link.url }}">{{ card.link_text }}<i class="fe-chevron-right font-size-xl ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+<section class="position-relative bg-secondary py-5 py-md-6 py-lg-7" style="margin-top: -200px;">
+    <div style="height: 200px;"></div>
+    <div class="cs-shape cs-shape-top cs-shape-curve bg-body">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 185.4">
+            <path fill="currentColor" d="M3000,185.4V0H0v185.4C496.4,69.8,996.4,12,1500,12S2503.6,69.8,3000,185.4z"></path>
+        </svg>
+    </div>
+    <div class="container mt-n4 py-3 py-md-2">
+        <h2 class="text-center mb-5">Frequently Asked Questions</h2>
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-9">
+                <div class="accordion accordion-alt" id="faq">
+                    {% for faq in self.faq %}
+                        <div class="card border-0 box-shadow">
+                            <div class="card-header">
+                                <h3 class="accordion-heading">
+                                    <a class="collapsed" href="#faq-{{ faq.question_number }}" role="button" data-toggle="collapse" aria-expanded="true" aria-controls="faq-{{ faq.question_number }}">{{ faq.question }}<span class="accordion-indicator"></span>
+                                    </a>
+                                </h3>
+                            </div>
+                            <div class="collapse" id="faq-{{ faq.question_number }}" data-parent="#faq">
+                                <div class="card-body font-size-sm">
+                                    {{ faq.answer|richtext }}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

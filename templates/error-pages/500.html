@@ -1,0 +1,41 @@
+<!DOCTYPE html>{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Internal Server Error | Restore Orthopedics & Sports Medicine</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'img/favicon/apple-touch-icon.png' %}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/favicon/favicon-32x32.png' %}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/favicon/favicon-16x16.png' %}">
+        <link rel="mask-icon" color="#5bbad5" href="{% static 'img/favicon/safari-pinned-tab.svg' %}">
+        {% include 'partials/_page-loading.html' %}
+        <link rel="stylesheet" type="text/css" media="screen" href="{% static 'vendor/simplebar/dist/simplebar.min.css' %}"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/theme.min.css' %}">
+    </head>
+    <body>
+        <div class="cs-page-loading active">
+            <div class="cs-page-loading-inner">
+                <div class="cs-page-spinner"></div>
+                <span>Loading...</span>
+            </div>
+        </div>
+        <main class="cs-page-wrapper d-flex flex-column">
+            <div class="container d-flex flex-column justify-content-center pt-5 mt-n6" style="flex: 1 0 auto;">
+                <div class="pt-7 pb-5">
+                    <div class="text-center mb-2 pb-4">
+                        <h1 class="mb-5">
+                            <img class="d-inline-block" src="{% static 'img/svg/errors/500-text.svg' %}" alt="Error 500"/><span class="sr-only">Error 500</span>
+                        </h1>
+                        <h2>Internal Server Error</h2>
+                        <p class="pb-2">Sorry, we had some technical problems during your last operation.</p>
+                        <a class="btn btn-translucent-primary mr-3" href="/">Go to homepage</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <script src="{% static 'vendor/jquery/dist/jquery.slim.min.js' %}"></script>
+        <script src="{% static 'vendor/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js' %}"></script>
+        <script src="{% static 'js/theme.min.js' %}"></script>
+    </body>
+</html>

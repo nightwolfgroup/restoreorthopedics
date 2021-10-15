@@ -1,0 +1,33 @@
+<section class="container py-5 py-md-6 py-lg-7">
+    <div class="card border-0 box-shadow">
+        <div class="card-img-top overflow-hidden">
+            <iframe title="map" src="{{ self.map_link }}" width="600" height="450" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+        </div>
+        <div class="card-body">
+            <h2 class="h5">{{ self.title }}</h2>
+            <ul class="list-unstyled mb-0">
+                <li class="media pb-3 border-bottom">
+                    <i class="fe-map-pin font-size-lg mt-2 mb-0 text-primary"></i>
+                    <div class="media-body pl-3">
+                        <span class="font-size-ms text-muted">Find us</span>
+                        <a href="{{ settings.core.SocialMediaSettings.google }}" target="_blank" rel="noreferrer" class="d-block nav-link-style font-size-sm" SameSite=None>{{ self.address }}</a>
+                    </div>
+                </li>
+                <li class="media pt-2 pb-3 border-bottom">
+                    <i class="fe-phone font-size-lg mt-2 mb-0 text-primary"></i>
+                    <div class="media-body pl-3">
+                        <span class="font-size-ms text-muted">Call us</span>
+                        <a href="tel:{{ self.phone_number }}" class="d-block nav-link-style font-size-sm">{{ self.phone_number }}</a>
+                    </div>
+                </li>
+                <li class="media pt-2m">
+                    <i class="fe-mail font-size-lg mt-2 mb-0 text-primary"></i>
+                    <div class="media-body pl-3">
+                        <span class="font-size-ms text-muted">Write us</span>
+                        <a href="mailto:{{ self.email }}" class="d-block nav-link-style font-size-sm">{{ self.email }}</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>

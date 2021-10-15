@@ -1,0 +1,16 @@
+<section class="bg-secondary px-3 py-6 py-md-7">{% load static wagtailimages_tags wagtailcore_tags %}
+    <h2 class="h1 text-center pb-5">{{ self.title }}</h2>
+    <div class="cs-hotspots mx-auto" id="hotspots-container" style="max-width: 45rem;">
+        {% image self.image original as hotspot_image %}
+        <picture>
+            {% image self.image fill-1054x1070 format-webp as image_webp %}
+            <source srcset="{{ image_webp.url }}" type="image/webp">
+            {% image self.image fill-1054x1070 format-png as image_png %}
+            <source srcset="{{ image_png.url }}" type="image/png">
+            {% image self.image fill-1054x1070 format-png %}
+        </picture>
+        {% for item in self.hotspots %}
+            <span class="cs-hotspot" style="top:{{ item.y_axis }}%; right:{{ item.x_axis }}%;" data-container="#hotspots-container" data-toggle="popover" data-placement="{{ item.card_placement }}" data-trigger="hover" title="{{ item.card_title }}" data-content="{{ item.card_text }}"></span>
+        {% endfor %}
+    </div>
+</section>

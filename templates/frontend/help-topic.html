@@ -1,0 +1,67 @@
+{% extends 'base.html' %}{% load wagtailcore_tags wagtailimages_tags static %}{% block content %}
+    <div class="cs-sidebar-enabled">
+        <div class="container">
+          <div class="row">
+            <!-- Sidebar-->
+            <div class="cs-sidebar col-lg-3 pt-lg-5">
+              <div class="cs-offcanvas-collapse" id="help-sidebar">
+                <div class="cs-offcanvas-cap navbar-box-shadow px-4 mb-3">
+                  <h5 class="mt-1 mb-0">Sidebar</h5>
+                  <button class="close lead" type="button" data-toggle="offcanvas" data-offcanvas-id="help-sidebar"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="cs-offcanvas-body px-4 pt-3 pt-lg-0 pl-lg-0 pr-lg-2 pr-xl-4" data-simplebar>
+                  <!-- Search widget-->
+                  <div class="cs-widget mb-5">
+                    <h3 class="cs-widget-title">Search help</h3>
+                    <div class="input-group-overlay">
+                      <div class="input-group-prepend-overlay"><span class="input-group-text"><i class="fe-search"></i></span></div>
+                      <input class="form-control prepended-form-control" type="text" placeholder="Search">
+                    </div>
+                  </div>
+                  <!-- Related articles-->
+                  <div class="cs-widget mb-5">
+                    <h3 class="cs-widget-title">Related articles</h3>
+                    <ul>
+                      <li class="d-flex"><i class="fe-book text-muted mt-2 mr-2"></i><a class="cs-widget-link" href="#">How long will delivery take?</a></li>
+                      <li class="d-flex"><i class="fe-book text-muted mt-2 mr-2"></i><a class="cs-widget-link" href="#">What payment methods do you accept?</a></li>
+                      <li class="d-flex"><i class="fe-book text-muted mt-2 mr-2"></i><a class="cs-widget-link" href="#">Do you ship internationally?</a></li>
+                      <li class="d-flex"><i class="fe-book text-muted mt-2 mr-2"></i><a class="cs-widget-link" href="#">Do I need an account to place an order?</a></li>
+                      <li class="d-flex"><i class="fe-book text-muted mt-2 mr-2"></i><a class="cs-widget-link" href="#">How can I track my order?</a></li>
+                      <li class="d-flex"><i class="fe-book text-muted mt-2 mr-2"></i><a class="cs-widget-link" href="#">What are the product refund conditions?</a></li>
+                      <li class="d-flex"><i class="fe-book text-muted mt-2 mr-2"></i><a class="cs-widget-link" href="#">Do you have discounts for returning customers?</a></li>
+                      <li class="d-flex"><i class="fe-book text-muted mt-2 mr-2"></i><a class="cs-widget-link" href="#">How do your referral program work?</a></li>
+                      <li class="d-flex"><i class="fe-book text-muted mt-2 mr-2"></i><a class="cs-widget-link" href="#">Where I can view and download invoices for my orders?</a></li>
+                      <li class="d-flex"><i class="fe-book text-muted mt-2 mr-2"></i><a class="cs-widget-link" href="#">Do you provide technical support after the purchase?</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-9 cs-content py-4">
+              <nav aria-label="breadcrumb">
+                <ol class="py-1 my-2 breadcrumb">
+                  <li class="breadcrumb-item"><a href="/">Home</a></li>
+                  <li class="breadcrumb-item"><a href="{{ page.get_parent.url }}">Legal & Regulatory Information</a>
+                  </li>
+                  <li class="breadcrumb-item active" aria-current="page">{{ self.title }}</li>
+                </ol>
+              </nav>
+              <!-- Page title-->
+              <div class="d-md-flex justify-content-between pb-2 mb-4">
+                <h1 class="mr-3" style="max-width: 38rem;">{{ self.title }}</h1><span class="font-size-sm text-muted text-md-nowrap pt-2">Posted on {{ self.created_on|date:"F j, Y" }}</span>
+              </div>
+              <!-- Content-->
+                {{ self.page_content|richtext }}
+                Last updated: {{ self.updated_on|date:"F j, Y" }}
+              <!-- Rate article-->
+              <div class="d-flex align-items-center border-top mt-5 py-4"></div>
+              <!-- Submit request-->
+              <div class="text-center pt-3 pb-5 pb-md-6">
+                <h2 class="h3 pb-2 mb-4">Haven't found the answer? We can help.</h2><i class="fe-life-buoy d-block h2 pb-2 mb-4 text-primary"></i><a class="btn btn-primary mb-4" href="help-submit-request.html">Send us a Message</a>
+                <p class="font-size-sm mb-0">Contact us and we’ll get back to you as soon as possible.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+{% endblock %}

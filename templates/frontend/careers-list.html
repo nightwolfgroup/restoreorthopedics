@@ -1,0 +1,99 @@
+{% extends 'base.html' %}{% load static wagtailcore_tags wagtailimages_tags %}{% block content %}
+    <section class="jarallax bg-gradient pt-5 pb-7 pt-md-7" data-jarallax data-speed="0.25">
+        <span class="bg-overlay bg-gradient" style="opacity: .8;"></span>{% image self.title_image width-1920 as title_background %}
+        <div class="jarallax-img" style="background-image: url({{ title_background.url }});"></div>
+        <div class="cs-shape cs-shape-bottom cs-shape-slant bg-body">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 260"><polygon fill="currentColor" points="0,257 0,260 3000,260 3000,0"></polygon></svg>
+        </div>
+        <div class="container bg-overlay-content pt-3 pb-7 pt-md-0">
+            <div class="row justify-content-center pb-7">
+                <div class="col-lg-10">
+                    <h1 class="text-light">{{ page.title }}</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="py-1 my-2 breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="{% url 'wagtail_serve' '' %}" class="text-light">Home</a></li>
+                            <li class="breadcrumb-item active text-light" aria-current="page">{{ page.title }}</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="container bg-overlay-content pb-5">
+        <div class="row">
+            <div class="col-12 pb-2 mb-5" style="margin-top: -260px;">
+                <div class="container py-4 mb-2 mb-sm-0 pb-sm-5">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-9">
+                            {% if accepting_applications %}
+                                <div class="card mb-grid-gutter box-shadow">
+                                    <div class="card-body">
+                                        <h2>Accepting Applications:</h2>
+                                        {% for post in accepting_applications %}
+                                            <article class="card card-horizontal card-hover mb-grid-gutter bg-faded-dark">
+                                                <a class="card-body card-link" href="{{ post.url }}">
+                                                    <h2 class="h4 nav-heading">{{ post.title }}</h2>
+                                                    <p class="px-0 py-0 my-0 text-primary">Restore Orthopedics & Sports Medicine<span class="text-body">- Sonora, CA 95370</span></p>
+                                                    <p class="text-body">{{ post.position_type }}</p>
+                                                    <div class="text-right text-nowrap">
+                                                        <p class="meta-link font-size-sm my-0"><i class="fe-alert-circle mr-1"></i>&nbsp;Status:<b class="text-primary"> {{ post.status }}</b></p>
+                                                        <span class="meta-divider"></span>
+                                                        <p class="meta-link font-size-sm my-0"><i class="fe-calendar mr-1 mt-n1"></i>&nbsp;{{ post.updated_on.date }}</p>
+                                                    </div>
+                                                </a>
+                                            </article>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if interviewing %}
+                                <div class="card mb-grid-gutter box-shadow">
+                                    <div class="card-body">
+                                        <h2 class="text-dark">Interviewing Applicants:</h2>
+                                        {% for post in interviewing %}
+                                            <article class="card card-horizontal card-hover mb-grid-gutter bg-faded-dark">
+                                                <a class="card-body card-link" href="{{ post.url }}">
+                                                    <h2 class="h4 nav-heading">{{ post.title }}</h2>
+                                                    <p class="px-0 py-0 my-0 text-primary">Restore Orthopedics & Sports Medicine<span class="text-body">- Sonora, CA 95370</span></p>
+                                                    <p class="text-body">{{ post.position_type }}</p>
+                                                    <div class="text-right text-nowrap">
+                                                        <p class="meta-link font-size-sm my-0"><i class="fe-alert-circle mr-1"></i>&nbsp;Status:<b class="text-primary"> {{ post.status }}</b></p>
+                                                        <span class="meta-divider"></span>
+                                                        <p class="meta-link font-size-sm my-0"><i class="fe-calendar mr-1 mt-n1"></i>&nbsp;{{ post.updated_on.date }}</p>
+                                                    </div>
+                                                </a>
+                                            </article>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if position_filled %}
+                                <div class="card mb-grid-gutter box-shadow">
+                                    <div class="card-body">
+                                        <h2 class="text-dark">Filled Positions:</h2>
+                                        {% for post in position_filled %}
+                                                <article class="card card-horizontal mb-grid-gutter bg-dark box-shadow">
+                                                <div class="card-body">
+                                                    <h2 class="h4 text-light">{{ post.title }}</h2>
+                                                    <p class="my-0 text-light opacity-80">Restore Orthopedics & Sports Medicine - Sonora, CA 95370</p>
+                                                    <p class="text-light opacity-75">{{ post.position_type }}</p>
+                                                    <div class="text-right text-nowrap">
+                                                        <p class="meta-link font-size-sm my-0 text-light opacity-75"><i class="fe-alert-circle mr-1"></i>&nbsp;Status: {{ post.status }}</p>
+                                                        <span class="meta-divider"></span>
+                                                        <p class="meta-link font-size-sm my-0 text-light opacity-75"><i class="fe-calendar mr-1"></i>&nbsp;{{ post.updated_on.date }}</p>
+                                                    </div>
+                                                </div>
+                                            </article>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}{% block extra_js %}
+    <script src="{% static 'vendor/jarallax/dist/jarallax.min.js' %}"></script>{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'documentation/base.html' %}{% block content %}{% load static %}
+    <div class="border-bottom pt-5 pb-2 mt-2 mb-5">
+        <h1 class="mt-4 pt-5">Modifying Business Settings</h1>
+    </div>
+    <div class="card border-0 box-shadow-lg mt-5">
+        <div class="card-header">
+            <h2 class="card-title pt-3">Updating Business Hours, Address, Contact Information, and Logo</h2>
+        </div>
+        <div class="card-body">
+            <div class="row border-bottom pb-4">
+                <div class="col-2">
+                    <img class="rounded my-3" src="{% static 'img/documentation/dashboard-nav.png' %}" alt="Login Screen"/>
+                </div>
+                <div class="col-10 align-items-center pt-7">
+                    <div class="alert alert-danger text-center" role="alert">
+                        <i class="fe-alert-triangle font-size-xl mt-n1 mr-3"></i>Settings changed in this area will update across the entire website. Any information on the site that contains this information is referenced from this area.
+                    </div>
+                    <div class="row justify-content-center pt-1">
+                        <h3>Click <kbd>Settings</kbd> in the Navigation Menu then</h3>
+                    </div>
+                    <div class="row justify-content-center pt-1">
+                        <h3>click <kbd>Business Settings</kbd> in the Settings Menu</h3>
+                    </div>
+
+                    <div class="row justify-content-center pt-4">
+                        <p>All available fields will appear in the following menu:</p>
+                    </div>
+                </div>
+            </div>
+            <img class="rounded my-3" src="{% static 'img/documentation/business-settings.png' %}" alt="Users Menu"/>
+        </div>
+    </div>
+{% endblock %}

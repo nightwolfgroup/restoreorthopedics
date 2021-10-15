@@ -1,0 +1,29 @@
+<section class="bg-secondary mt-7">{% load static wagtailimages_tags wagtailcore_tags %}
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-4 mt-3 mt-md-0 py-5 py-md-0">
+                <h2 class="text-lg-nowrap pb-2 text-center text-md-left">{{ self.title }}</h2>
+                <p class="pb-2 text-center text-md-left">{{ self.text }}</p>
+                <ul class="list-unstyled font-size-sm pb-1 d-table mx-auto mx-md-0">{% for item in self.qualifications %}
+                    <li class="d-flex mb-2">
+                        <i class="fe-check-circle text-success font-size-lg mt-1 mr-3"></i><span>{{ item.qualification }}</span>
+                    </li>{% endfor %}
+                </ul>
+            </div>
+            <div class="col-md-8">
+                <div class="cs-parallax ml-auto" style="max-width: 757px;">
+                    <img class="d-block" src="{% static 'img/png/lines.png' %}" alt="Lines"/>{% image self.image original as doctor_image %}
+                    <div class="cs-parallax-layer" style="z-index: 2;" data-depth="0.15">
+                        <img src="{{ doctor_image.url }}" alt="{{ doctor_image.alt }}"/></div>
+                    <div class="cs-parallax-layer" style="z-index: 3;" data-depth="0.3">
+                        <img src="{% static 'img/png/badge.png' %}" alt="Badge"/>
+                    </div>
+                    <div class="cs-parallax-layer" data-depth="0.25">
+                        <img src="{% static 'img/png/shape.png' %}" alt="Shape"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>{% block extra_js %}
+    <script src="{% static 'vendor/parallax-js/dist/parallax.min.js' %}"></script>{% endblock %}

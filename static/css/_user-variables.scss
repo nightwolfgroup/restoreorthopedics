@@ -1,0 +1,46 @@
+// 
+// user-variables.scss
+// Use this to override Bootstrap and Around variables
+//
+
+// Example of a variable override to change Around background color
+// Remove the "//" to comment it in and see it in action!
+// $body-bg: #12263F;
+
+.cta-link a:hover {
+  font-weight: bold !important;
+  text-decoration: none !important;
+}
+
+.toast-fade-in {
+  right: 500px;
+  -webkit-animation: slideIn 900ms forwards;
+  -moz-animation: slideIn 900ms forwards;
+  animation: slideIn 900ms forwards;
+}
+@-webkit-keyframes slideIn {
+  0% {
+    transform: translateX(-800px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@-moz-keyframes slideIn {
+  0% {
+    transform: translateX(-800px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@keyframes slideIn {
+  0% {
+    transform: translateX(-800px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+

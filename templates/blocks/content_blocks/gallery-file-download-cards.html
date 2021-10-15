@@ -1,0 +1,20 @@
+<section class="bg-secondary py-5 py-md-6 mt-n4">{% load wagtailimages_tags wagtailcore_tags %}
+    <div class="container py-2">
+        <div class="row justify-content-center">
+            {% for item in self.card %}
+                <div class="col-lg-4 col-sm-6 mb-grid-gutter">
+                    <a class="card card-hover border-0 box-shadow mx-auto" href="{{ item.file.url }}" target="_blank" rel="noreferrer" style="max-width: 400px;">
+                        <picture class="card-img-top">{% image item.thumbnail fill-580x692 format-webp as image_webp %}
+                            <source srcset="{{ image_webp.url }}" type="image/webp">{% image item.thumbnail fill-580x692 format-png as image_png %}
+                            <source srcset="{{ image_png.url }}" type="image/png">{% image item.thumbnail fill-580x692 format-png %}
+                        </picture>
+                        <div class="card-body">
+                            <h3 class="h5 mb-0">{{ item.title }}</h3>
+                            <p class="text-muted mb-0">{{ item.subtitle }}</p>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>

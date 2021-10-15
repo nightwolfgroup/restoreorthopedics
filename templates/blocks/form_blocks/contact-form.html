@@ -1,0 +1,58 @@
+<section class="position-relative bg-gradient" style="height: 590px;">
+    <div class="cs-shape cs-shape-bottom cs-shape-curve-side bg-body">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 250">
+            <g>
+                <path fill="currentColor" d="M3000,0v250H0v-51c572.7,34.3,1125.3,34.3,1657.8,0C2190.3,164.8,2637.7,98.4,3000,0z"></path>
+            </g>
+        </svg>
+    </div>
+</section>
+<section class="container bg-overlay-content pt-7" style="margin-top: -590px;">
+    <div class="row pt-md-4 pt-lg-5 mt-3">
+        <div class="col-lg-4 col-md-5 offset-lg-1">
+            <h1 class="text-light mb-3 pb-4 pt-sm-3">{{ self.form.title }}</h1>
+            <div class="d-flex mb-4"><i class="fe-map-pin h3 mb-2 text-light mt-1"></i>
+                <div class="pl-3">
+                    <p class="text-light mb-2">13949 Mono Way,<br>Sonora CA 95370, USA</p>
+                    <a class="cs-fancy-link text-light font-size-sm" href="#map" data-scroll>See on the map</a>
+                </div>
+            </div>
+            <div class="d-flex mb-4"><i class="fe-mail h3 mb-2 text-light"></i>
+                <div class="pl-3">
+                    <a class="d-inline-block text-light text-decoration-none mb-2" href="mailto:{{ settings.core.BusinessSettings.email }}">{{ settings.core.BusinessSettings.email }}</a>
+                </div>
+            </div>
+            <div class="d-flex mb-4"><i class="fe-phone h3 mb-2 text-light"></i>
+                <div class="pl-3">
+                    <a class="d-inline-block text-light text-decoration-none mb-2" href="tel:{{ settings.core.BusinessSettings.phone }}">{{ settings.core.BusinessSettings.phone }}</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6 col-md-7">
+            <div class="card border-0 box-shadow-lg">
+                <div class="card-body py-5 px-3 px-sm-4">
+                    <h2 class="h3 text-center">{{ self.form.title }}</h2>
+                    <p class="font-size-sm text-muted text-center">We will get back to you as soon as possible!</p>
+                    <form
+                            {% if form.is_multipart %} enctype="multipart/form-data"{% endif %} class="needs-validation pt-2 px-md-3" action="{{ value.form_action }}" method="POST" novalidate>
+                        {% csrf_token %} {% include 'partials/_alerts.html' %}
+                        {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
+                        <div class="row">
+                            {% for field in form.visible_fields %}
+                                <div class="form-group">
+                                    {{ field.label_tag }} {{ field }}
+                                    <div class="valid-feedback">Looks good!</div>
+                                    {% if field.help_text %}
+                                        <div class="invalid-feedback">{{ field.help_text }} {{ field.errors }}</div>{% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="text-center pt-2">
+                            <input class="btn btn-primary" type="submit" value="{{ value.form.submit_button_text }}">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
